@@ -56,15 +56,15 @@
 **อธิบายการทำงานโดยใช้ Process, Methods และ Tools**
 ===================================================
 
-- Process
-1. เก็บ Requirements
-1. การจัดทำ Report และการระบุข้อมูลใน Report
-1. การประชุม Retrospective
-- Methods
+## Process
+- เก็บ Requirements
+- การจัดทำ Report และการระบุข้อมูลใน Report
+- การประชุม Retrospective
+## Methods
 1. เก็บ Requirements โดยสังเกตจากเว็บรีวิวหนังสืออื่น ๆ 
 1. จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้
 1. ประชุม Retrospective โดยการนั่งคุยกันและอัดคลิปวิดีโอ
-- Tools
+## Tools
 1. เก็บ Requirements โดยสังเกตจากเว็บรีวิวอื่น ๆ โดยใช้ Google
 1. จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้คือ Microsoft Word โดยแชร์ผ่าน OneDrive
 1. ประชุม Retrospective โดยใช้กล้องมือถืออัดคลิป โดยเผยแพร่วิดีโอการประชุมผ่านทาง YouTube
