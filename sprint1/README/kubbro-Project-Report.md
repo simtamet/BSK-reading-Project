@@ -79,21 +79,43 @@
 ·      ปัญหาด้านการทำงานเอกสาร เนื่องจากในบางครั้งมีการเข้าไปทำงานในเอกสารที่แชร์กัน แต่ไม่ได้อัพเดทความคืบหน้ากับสมาชิกคนอื่น ทำให้เกิดความสับสนในการทำงาน
 ·      ใน Phase ถัดไปก็คิดว่าจะพัฒนาเรื่องการสื่อสารกันให้บ่อยขึ้น เพื่อให้การทำงานเป็นไปอย่างลื่นไหล และสมาชิกทุกคนรู้ถึงความคืบหน้าของงานไปพร้อม ๆ กัน
 
-# **ภาคผนวก**
-       
+**ภาคผนวก**
+===========
 
 Screenshot and explanation
---------------------------
+*   Product Backlog
+    *   Work Items ที่มีการใช้ Epic (Optional) และ Issue (User Story) ประกอบไปด้วย  
+    
 
-### ·      Product Backlog
+        *   Epic การจัดทำ Report และ Requirements 
+    
 
-o  Work Items ที่มีการใช้ Epic (Optional) และ Issue (User Story) ประกอบไปด้วย
--        Epic การจัดทำ Report และ Requirements
--        Issue การระบุข้อมูลของการทำโครงงาน และ การประชุม Retrospective 1
-![Picture1.png](/.attachments/Picture1-c7b8ec0f-93d9-45f1-96ba-b2e32e8147cf.png)
-ภาพประกอบที่ 1 Work Items ที่มีการใช้ Epic และ Issue
+        *   Issue การระบุข้อมูลของการทำโครงงาน และ การประชุม Retrospective 1
 
-##### o  Detail ของ Work Items ชนิด Epic (Optional)
-![Picture2.png](/.attachments/Picture2-bc53cd44-363a-4713-af1b-da4ed57c2c9b.png)
+![==image_0==.png](/.attachments/==image_0==-f1242440-1817-4ce5-bfe5-b21bee2d26da.png) 
 
-ภาพประกอบที่ 2 Detail ของ Work Items ชนิด Epic (Optional)
+
+
+
+                   ภาพประกอบที่ 1 Work Items ที่มีการใช้ Epic และ Issue
+
+  
+-    * Detail ของ Work Items ชนิด Epic (Optional)
+
+![==image_0==.png](/.attachments/==image_0==-d5a86cee-c92b-42a6-8155-32bfd31aad67.png) 
+       
+              ภาพประกอบที่ 2 Detail ของ Work Items ชนิด Epic (Optional)
+
+   
+
+
+- *   Detail ของ Work Items ชนิด Issue (User Story) 
+    
+
+![==image_0==.png](/.attachments/==image_0==-ade2c6ee-17ee-442d-8605-d4cbd1a8b904.png) 
+
+*   Sprint Backlog มีการกำหนดเวลาและวางแผนสำหรับ sprint 1 ซึ่งเป็นการระบุข้อมูลของการทำโครงงานและการประชุมเพื่อทำคลิป Retrospective 1
+
+![==image_0==.png](/.attachments/==image_0==-85b87a3d-6d1c-49d3-99bd-6210545e599f.png) 
+                           
+                            ภาพประกอบที่ 4 Sprint Backlog
