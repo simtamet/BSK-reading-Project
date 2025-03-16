@@ -7,3 +7,26 @@ git status
 git config --list
 git clone https://werayuth@dev.azure.com/werayuth/taskdemo/_git/taskdemo
 code .
+git clone https://amylouisbrown@dev.azure.com/amylouisbrown/kubbro/_git/kubbro
+ls
+cd taskdemo/
+cd ..
+git add .
+git status
+git commit -m "clone project"
+git push origin main
+git push origin master
+git branch
+git push origin master
+git add .
+git commit -m "clone project"
+git push origin master
+git branch -m master main
+git branch
+git add .
+git commit -m "clone project"
+git push origin main
+git remote -v
+git remote add origin https://amylouisbrown@dev.azure.com/amylouisbrown/kubbro/_git/kubbro
+git remote -v
+git push -u origin main
