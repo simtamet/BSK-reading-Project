@@ -30,3 +30,17 @@ git remote -v
 git remote add origin https://amylouisbrown@dev.azure.com/amylouisbrown/kubbro/_git/kubbro
 git remote -v
 git push -u origin main
+git remote -v
+git statue
+git status
+ls
+git add .
+git commit -m "clone project"
+git push origin main
+git pull origin main
+git add .
+git push origin main
+git pull origin main
+git add .
+git commit -m "clone project"
+git push origin main
