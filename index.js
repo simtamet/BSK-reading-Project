@@ -24,7 +24,7 @@ app.use(
 );
 
 // Routes
-app.get('/', ratingController.showRatingPage);
+app.get('/', authController.showLoginPage);
 app.get('/view/:name', taskController.viewTask);
 app.get('/logout', authController.logout);
 app.get('/sort', authController.authenticate, taskController.sortTasksByPriority);
