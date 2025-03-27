@@ -14,46 +14,238 @@
             padding: 20px;
             min-height: 100vh;
             flex-direction: column;
-            padding-bottom: 50px;
+
         }
 
         .navbar {
-            width: 100%;
             background-color: #FFB703;
-            padding: 15px 30px;
+            padding: 10px 20px;
+            /* ช่องว่างรอบๆ */
+            display: flex;
+            /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+            justify-content: space-between;
+            /* จัดให้ฝั่งซ้ายและขวาอยู่ห่างกัน */
+            align-items: center;
+            /* จัดให้ทุกองค์ประกอบอยู่ในแนวกลางตามแกน Y */
             position: fixed;
+            /* ทำให้ navbar อยู่ที่ตำแหน่งคงที่ */
             top: 0;
             left: 0;
+            width: 100%;
             z-index: 1000;
+            /* ทำให้ navbar อยู่เหนือ sidebar */
+        }
+
+        .left-section {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            /* จัดให้เมนูและโลโก้อยู่ในแนวเดียวกัน */
         }
 
-        .navbar a {
-            color: white;
+        .Logo {
+            width: 50px;
+            /* ขนาดของโลโก้ */
+            height: auto;
+        }
+
+        .right-section {
+            display: flex;
+            align-items: center;
+            /* จัดให้ปุ่ม Add Friend, ช่องค้นหา, และไอคอนผู้ใช้อยู่ในแถวเดียวกัน */
+            justify-content: flex-end;
+            /* จัดให้อยู่ทางขวาสุด */
+            gap: 10px;
+            /* ระยะห่างระหว่างปุ่มและช่องค้นหา */
+        }
+
+        .add-friend-btn {
+            padding: 6px 8px;
+            /* ปรับขนาด padding ให้ปุ่มใหญ่ขึ้นและมนขึ้น */
+            background-color: #FFB703;
+            color: #023047;
+            border: none;
+            cursor: pointer;
+            margin-right: 0px;
+            /* ช่องว่างระหว่างปุ่ม Add Friend กับช่องค้นหา */
+            border-radius: 20px;
+            /* ทำให้มุมปุ่มมน ๆ */
+            font-size: 14px;
+            /* ขนาดฟอนต์ให้เหมาะสม */
+        }
+
+        .add-friend-btn:hover {
+            background-color: #ffffff;
+            /* สีที่เปลี่ยนเมื่อ hover */
+        }
+
+        .search-bar-container {
+            position: relative;
+            width: 180px;
+            /* กำหนดความกว้างของ search bar */
+
+        }
+
+        .search-bar {
+            padding: 5px 1px;
+            width: 100%;
+            /* ทำให้ search bar ใช้ความกว้างเต็ม */
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 3px;
+            /* วางไอคอนอยู่ที่ขวาสุด */
+            top: 50%;
+            transform: translateY(-50%);
+            /* จัดให้อยู่กลางแนวแกน Y */
+            cursor: pointer;
+        }
+
+        .search-icon img {
+            width: 17px;
+            height: 17px;
+        }
+
+
+        .user-icon img {
+            width: 30px;
+            /* ขนาดของไอคอนผู้ใช้ */
+            height: 30px;
+            object-fit: cover;
+            /* ป้องกันไม่ให้ไอคอนยืดหรือบิดเบี้ยว */
+            border-radius: 50%;
+            /* ทำให้เป็นวงกลม */
+        }
+
+        .user-icon:hover img {
+            transform: scale(1.2);
+            /* ขยายขนาดไอคอนขึ้น 1.2 เท่า */
+            background-color: #ffffff;
+            /* เปลี่ยนสีพื้นหลัง */
+            padding: 5px;
+            /* เพิ่มพื้นที่รอบ ๆ ไอคอน */
+        }
+
+        .menu-btn {
+            cursor: pointer;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        /* Sidebar Menu */
+        .menu {
+            position: absolute;
+            top: 60px;
+            /* เพิ่มให้ sidebar เริ่มต้นจากด้านล่าง navbar */
+            left: -250px;
+            width: 200px;
+            background-color: #ffffff;
+            padding: 15px;
+            transition: 0.3s ease-in-out;
+            z-index: 999;
+            /* ทำให้ menu อยู่หลัง navbar */
+        }
+
+        .menu a {
+            display: block;
+            color: #023047;
+            padding: 10px;
             text-decoration: none;
-            font-size: 1.5rem;
-            padding: 12px 20px;
-            transition: background-color 0.3s;
         }
 
-        .navbar a:hover {
-            background-color: #2b617e;
-            border-radius: 4px;
+        .menu a:hover {
+            background-color: #FFB703;
         }
 
-        .navbar .logo {
+        .menu.active {
+            left: 0;
+            /* แสดง menu เมื่อ class active ถูกเพิ่ม */
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            color: #023047;
+            padding: 10px;
+        }
+
+        .navbar .right-section {
+            margin-right: 40px;
+            /* ระยะห่างจากขอบขวาของ navbar */
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150pt;
+        }
+
+        .profile-picture {
+            width: 200px;
+            /* ขนาดของวงกลม */
+            height: 200px;
+            /* ขนาดของวงกลม */
+            border-radius: 50%;
+            /* ทำให้เป็นวงกลม */
+            overflow: hidden;
+            /* ซ่อนส่วนที่เกินจากกรอบวงกลม */
+            border: 4px solid #023047;
+            /* ขอบวงกลม */
+            position: relative;
+            display: flex;
+            /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+            justify-content: center;
+            /* จัดให้อยู่กลางตามแกน X */
+            align-items: center;
+            /* จัดให้อยู่กลางตามแกน Y */
+        }
+
+        .profile-picture img {
+            width: 100%;
+            /* กำหนดขนาดของไอคอนให้เล็ก ๆ อยู่กลาง */
+            height: 100%;
+            /* กำหนดขนาดของไอคอนให้เล็ก ๆ อยู่กลาง */
+            object-fit: cover;
+            /* ทำให้รูปไม่บิดเบี้ยว */
+        }
+
+
+
+        .homepage-text {
+            font-size: 3rem;
+            /* ขนาดตัวอักษรที่ใหญ่ */
             font-weight: bold;
-            font-size: 2rem;
+            /* ตัวหนา */
+            text-align: center;
+            /* จัดกลาง */
+            color: #023047;
+            /* สีที่ตัดกับพื้นหลัง */
+            margin-top: 80px;
+            /* ให้ข้อความอยู่ห่างจาก navbar */
+        }
+
+        .profile-text {
+            font-size: 1rem;
+            /* ขนาดตัวอักษรที่ใหญ่ */
+            font-weight: bold;
+            /* ตัวหนา */
+            text-align: center;
+            /* จัดกลาง */
+            color: #023047;
+            /* สีที่ตัดกับพื้นหลัง */
+            margin-top: 120px;
+            /* ให้ข้อความอยู่ห่างจาก navbar */
         }
 
         .header {
-            margin-top: 60px;
+            margin-top: -60px;
             text-align: center;
             font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+
         }
 
         .container {
@@ -63,7 +255,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .form-row {
@@ -71,7 +263,7 @@
             justify-content: space-between;
             align-items: stretch;
             margin-bottom: 20px;
-            gap: 20px;
+            gap: 30px;
         }
 
         .image-upload {
@@ -194,6 +386,7 @@
             cursor: pointer;
             width: 50%;
             font-size: 1rem;
+            align-self: center;
         }
 
         .button:hover {
@@ -251,16 +444,75 @@
             font-size: 1rem;
         }
 
+        .menu-btn {
+            cursor: pointer;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        /* Sidebar Menu (กลับมาเป็นแบบเก่า) */
+        .menu {
+            position: absolute;
+            left: -250px;
+            top: 50px;
+            width: 200px;
+            background-color: #ffffff;
+            padding: 15px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .menu a {
+            display: block;
+            color: #023047;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background-color: #FFB703;
+        }
+
+        .menu.active {
+            left: 0;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            color: #023047;
+            padding: 10px;
+        }
     </style>
 </head>
 
 <body>
     <div class="navbar">
-        <div class="logo">Book Reviews</div>
-        <div>
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
+        <div class="left-section">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span>
+            <img src="public\images\logo.png" alt="Logo" class="Logo">
+        </div>
+        <div class="right-section">
+            <button class="add-friend-btn">Add Friend</button>
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="  Search...">
+                <span class="search-icon">
+                    <img src="public\images\search-icon1.svg" alt="Search Icon">
+                </span>
+            </div>
+            <a href="user_profile.html">
+                <span class="user-icon"><img src="public\images\user-icon.svg" alt="User Icon"></span>
+            </a>
+        </div>
+    </div>
+    <!-- Sidebar Menu -->
+    <div class="menu" id="menu">
+        <a href="#">Tracking</a>
+        <a href="streak_page.html">Streak</a>
+        <a href="/ratingPage">Rating Books</a>
+        <a href="book_list_page.html">Book List</a>
+        <div class="dark-mode-toggle">
+            <label>
+                <input type="checkbox"> Dark Mode
+            </label>
         </div>
     </div>
 
@@ -311,7 +563,7 @@
                     </div>
                 </div>
 
-                <button class="button" >Confirm</button>
+                <button class="button" onclick="showPopup()">Confirm</button>
             </div>
         </div>
     </div>
@@ -339,19 +591,19 @@
                 reader.readAsDataURL(file);
             }
         }
-        
+
         function deleteImage(event) {
             event.stopPropagation();
             const imageContainer = document.getElementById('uploaded-image-container');
             const image = document.getElementById('uploaded-image');
             const fileInput = document.getElementById('book-cover');
-        
+
             fileInput.value = '';
             image.src = '';
             image.style.display = 'none';
             imageContainer.style.display = 'none';
         }
-        
+
         const radios = document.querySelectorAll('input[type="radio"]');
         radios.forEach((radio) => {
             radio.addEventListener('change', () => {
@@ -360,11 +612,24 @@
                     label.style.color = '#ffffff';
                 });
                 for (let i = 0; i < value; i++) {
-                    document.querySelectorAll('.rating label')[i].style.color = '#023047'; 
+                    document.querySelectorAll('.rating label')[i].style.color = '#023047';
                 }
             });
         });
-        </script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("active");
+
+        }
+        function showPopup() {
+            alert("Your rating has been recorded!");
+            window.location.href = '/reviewPage'; // ไปที่หน้า reviewPage หลังจากกด OK
+        }
+
+
+
+
+    </script>
 </body>
 
 </html>
