@@ -14,7 +14,7 @@ const credentials = {
     if (req.session.user) {
       next();
     } else {
-      res.redirect('/login');
+      res.redirect('/signin');
     }
   };
 
@@ -22,15 +22,15 @@ const credentials = {
   // Handle logout
   exports.logout = (req, res) => {
     req.session.destroy(() => {
-      res.redirect('/login');
+      res.redirect('/signin');
     });
   };
   
 
 // Show login page
-exports.showLoginPage = (req, res) => {
+exports.showSignInPage = (req, res) => {
   // Pass unsanitized error message from query parameters
-  res.render('login', { error: req.query.error || null });
+  res.render('signin', { error: req.query.error || null });
 };
 
 

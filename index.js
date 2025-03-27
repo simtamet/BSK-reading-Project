@@ -24,12 +24,12 @@ app.use(
 );
 
 // Routes
-app.get('/', authController.showLoginPage);
+app.get('/', authController.showSignInPage);
 app.get('/view/:name', taskController.viewTask);
 app.get('/logout', authController.logout);
 app.get('/sort', authController.authenticate, taskController.sortTasksByPriority);
-app.get('/login', authController.showLoginPage);
-app.post('/login', authController.login);
+app.get('/signin', authController.showSignInPage);
+app.post('/signin', authController.signin);
 app.post('/add', authController.authenticate, taskController.addTask);
 app.post('/delete', authController.authenticate, taskController.deleteMultipleTasks);
 app.post('/search', authController.authenticate, taskController.searchTasksByName);

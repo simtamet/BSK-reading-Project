@@ -311,14 +311,11 @@
                     </div>
                 </div>
 
-                <button class="button">Confirm</button>
+                <button class="button" >Confirm</button>
             </div>
         </div>
     </div>
 
-    
-
-    <!-- Footer -->
     <footer>
         <p>© 2025 Book Reviews | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         <div class="social-icons">
@@ -360,10 +357,10 @@
             radio.addEventListener('change', () => {
                 const value = radio.value;
                 document.querySelectorAll('.rating label').forEach(label => {
-                    label.style.color = '#ffffff'; // Reset star colors
+                    label.style.color = '#ffffff';
                 });
                 for (let i = 0; i < value; i++) {
-                    document.querySelectorAll('.rating label')[i].style.color = '#023047'; // Highlight selected stars
+                    document.querySelectorAll('.rating label')[i].style.color = '#023047'; 
                 }
             });
         });
