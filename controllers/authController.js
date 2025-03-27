@@ -36,7 +36,7 @@ exports.showSignInPage = (req, res) => {
 
 
 // Handle login
-exports.login = (req, res) => {
+exports.signin = (req, res) => {
   const { username, password } = req.body;
   secret = util.encrypt(password);
   if (username === credentials.username && secret === credentials.password) {
@@ -47,7 +47,7 @@ exports.login = (req, res) => {
     // Reflect the unsanitized username in the error message
     const error = `Invalid credentials for username: ${username}`;
     console.log("username or password is not correct");
-    res.render('login', { error });
+    res.render('signin', { error });
   }
 };
 
