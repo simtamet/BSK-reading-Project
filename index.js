@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const session = require('express-session');
 //const taskController = require('./controllers/taskController');
-const authController = require('./controllers/authController'); 
+const authController = require('./controllers/authController');
 const ratingController = require('./controllers/ratingController');
 
 // Initialize Express app
@@ -21,6 +21,9 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Routes
 app.get('/', authController.showSignInPage);
