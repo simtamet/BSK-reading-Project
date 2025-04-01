@@ -1,13 +1,11 @@
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
-//const taskController = require('./controllers/taskController');
-const authController = require('./controllers/authController');
-const ratingController = require('./controllers/ratingController');
+const signupController = require('./controllers/signUpController');
+const signinController = require('./controllers/signInController');
+//const logoutController = require('./controllers/logOutController');
 
-// Initialize Express app
 const app = express();
-
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -24,17 +22,16 @@ app.use(
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // Routes
-app.get('/', authController.showSignInPage);
-app.get('/signin', authController.showSignInPage);
-app.post('/signin', authController.signin);
-app.get('/signup', authController.showSignUpPage);
-app.post('/signup', authController.signup);
-app.get('/homePage', authController.showHomePage);
+app.get('/', signinController.showSignInPage);  // เปลี่ยนจาก signInController เป็น signinController
+app.get('/signin', signinController.showSignInPage);  // เปลี่ยนจาก signInController เป็น signinController
+app.post('/signin', signinController.signin);
+// ตรวจสอบว่า /signup เชื่อมโยงกับ controller ที่ถูกต้อง
+app.get('/signup', signupController.showSignUpPage);
+app.post('/signup', signupController.signup);
 
-app.get('/ratingPage', ratingController.showRatingPage);
-app.get('/logout', authController.logout);
+app.get('/homePage', signinController.showHomePage);
+//app.get('/logout', logoutController.logout);
 
 // Start server
 const PORT = process.env.PORT || 3000;

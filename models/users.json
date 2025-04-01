@@ -1,0 +1,14 @@
+[
+  {
+    "email": "123@gmail.com",
+    "password": "$2b$10$Uxhw2/yJIDgF4iCbr.NoKuY3VuXHBh/3DpxX/aJCn/tq3z9BRlMJe"
+  },
+  {
+    "email": "abc@gmail.com",
+    "password": "$2b$10$fM.rdrv76yBM8QpfaLk1YOYfnR2sxqgh7bHluIRSrlMw0kjOOmowy"
+  },
+  {
+    "email": "amy@gmail.com",
+    "password": "$2b$10$AI.ZEoq3BN9Gol3EbLsXeO243K/XI4Z0RoVeOIP8ODffpU56UeuB6"
+  }
+]
