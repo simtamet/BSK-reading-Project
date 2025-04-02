@@ -6,7 +6,308 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSK Reading</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="style3.css">
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #8ECAE6;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #FFB703;
+    padding: 10px 20px; /* ช่องว่างรอบๆ */
+    display: flex; /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+    justify-content: space-between; /* จัดให้ฝั่งซ้ายและขวาอยู่ห่างกัน */
+    align-items: center; /* จัดให้ทุกองค์ประกอบอยู่ในแนวกลางตามแกน Y */
+    position: fixed; /* ทำให้ navbar อยู่ที่ตำแหน่งคงที่ */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* ทำให้ navbar อยู่เหนือ sidebar */
+}
+
+.left-section {
+    display: flex;
+    align-items: center; /* จัดให้เมนูและโลโก้อยู่ในแนวเดียวกัน */
+}
+
+.Logo {
+    width: 50px; /* ขนาดของโลโก้ */
+    height: auto;
+}
+
+.right-section {
+    display: flex;
+    align-items: center; /* จัดให้ปุ่ม Add Friend, ช่องค้นหา, และไอคอนผู้ใช้อยู่ในแถวเดียวกัน */
+    justify-content: flex-end; /* จัดให้อยู่ทางขวาสุด */
+    gap: 10px; /* ระยะห่างระหว่างปุ่มและช่องค้นหา */
+}
+
+.add-friend-btn {
+    padding: 6px 8px; /* ปรับขนาด padding ให้ปุ่มใหญ่ขึ้นและมนขึ้น */
+    background-color: #FFB703;
+    color: #023047;
+    border: none;
+    cursor: pointer;
+    margin-right: 0px; /* ช่องว่างระหว่างปุ่ม Add Friend กับช่องค้นหา */
+    border-radius: 20px; /* ทำให้มุมปุ่มมน ๆ */
+    font-size: 14px; /* ขนาดฟอนต์ให้เหมาะสม */
+}
+
+.add-friend-btn:hover {
+    background-color: #ffffff; /* สีที่เปลี่ยนเมื่อ hover */
+}
+
+.search-bar-container {
+    position: relative;
+    width: 180px; /* กำหนดความกว้างของ search bar */
+    
+}
+
+.search-bar {
+    padding: 5px 1px;
+    width: 100%; /* ทำให้ search bar ใช้ความกว้างเต็ม */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 3px; /* วางไอคอนอยู่ที่ขวาสุด */
+    top: 50%;
+    transform: translateY(-50%); /* จัดให้อยู่กลางแนวแกน Y */
+    cursor: pointer;
+}
+
+.search-icon img {
+    width: 17px;
+    height: 17px;
+}
+
+
+.user-icon img {
+    width: 30px; /* ขนาดของไอคอนผู้ใช้ */
+    height: 30px;
+    object-fit: cover; /* ป้องกันไม่ให้ไอคอนยืดหรือบิดเบี้ยว */
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+}
+
+.user-icon:hover img {
+    transform: scale(1.2); /* ขยายขนาดไอคอนขึ้น 1.2 เท่า */
+    background-color: #ffffff; /* เปลี่ยนสีพื้นหลัง */
+    padding: 5px; /* เพิ่มพื้นที่รอบ ๆ ไอคอน */
+}
+
+.menu-btn {
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* Sidebar Menu */
+.menu {
+    position: absolute;
+    top: 60px; /* เพิ่มให้ sidebar เริ่มต้นจากด้านล่าง navbar */
+    left: -250px;
+    width: 200px;
+    background-color: #ffffff;
+    padding: 15px;
+    transition: 0.3s ease-in-out;
+    z-index: 999; /* ทำให้ menu อยู่หลัง navbar */
+}
+
+.menu a {
+    display: block;
+    color: #023047;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    background-color: #FFB703;
+}
+
+.menu.active {
+    left: 0; /* แสดง menu เมื่อ class active ถูกเพิ่ม */
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    color: #023047;
+    padding: 10px;
+}
+
+.navbar .right-section {
+    margin-right: 40px; /* ระยะห่างจากขอบขวาของ navbar */
+}
+
+.book-list {
+    margin-top: 110px;
+}
+.book-list h1 {
+    color: #023047;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.book-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+.book {
+    width: 180px;
+    text-align: center;
+}
+.book img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+
+.add-book {
+    width: 180px;
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 5px;
+    color: #023047;
+    font-size: 18px;
+    cursor: pointer;
+}
+.add-book {
+    display: flex;
+    flex-direction: column; /* จัดให้ไอคอนอยู่บน และข้อความอยู่ล่าง */
+    align-items: center; /* จัดให้อยู่กึ่งกลาง */
+    gap: 5px; /* ระยะห่างระหว่างไอคอนกับข้อความ */
+    cursor: pointer;
+    text-align: center;
+}
+
+.add-book .icon {
+    width: 30px; /* ปรับขนาดไอคอน */
+    height: 30px;
+}
+
+
+
+.popup {
+    display: none; /* ซ่อน pop-up เริ่มต้น */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+
+.popup-content {
+    background-color: white;
+    width: 600px;
+    max-width: 90%;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.popup-body {
+    display: flex;
+    gap: 20px;
+}
+
+/* ส่วนอัพโหลดรูป */
+.book-cover-upload {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-area {
+    width: 150px;
+    height: 220px;
+    border: 2px dashed #023047;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-area img {
+    width: 50px;
+    height: 50px;
+}
+
+#bookImage {
+    display: none; /* ซ่อน input file */
+}
+
+.book-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* ลดระยะห่างระหว่างช่อง */
+    max-width: 300px; /* กำหนดความกว้างสูงสุดให้ช่องกรอกข้อมูล */
+}
+
+.book-info input {
+    width: 90%; /* ปรับให้ไม่กว้างเต็มพื้นที่ */
+    padding: 8px; /* ลดขนาด padding */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px; /* ลดขนาดตัวอักษรเล็กน้อย */
+}
+
+
+.add-book-btn {
+    background-color: #023047;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-book-btn:hover {
+    background-color: #024668;
+}
+
+/* Bottom bar style */
+.bottom-bar {
+    background-color: #FFB703;
+    color: #023047;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+    width: 100%;
+    margin-top: auto; /* ให้บาร์เลื่อนลงไปอยู่ล่างสุด */
+}
+    </style>
 </head>
 
 <body>
