@@ -283,7 +283,7 @@
         }
 
         .image-upload img {
-           width: 100px;
+            width: 100px;
         }
 
         .image-upload:hover {
@@ -556,52 +556,55 @@
     </div>
 
     <div class="container">
-        <div class="form-row">
-            <div class="image-upload" onclick="document.getElementById('book-cover').click();">
-                <span><img src="/images/upload.png"></span>
-                <span>Please Upload Book Cover</span>
-                <input type="file" id="book-cover" name="book-cover" onchange="displayImage(event)">
-                <div class="uploaded-image-container" id="uploaded-image-container">
-                    <button class="delete-button" onclick="deleteImage(event)">×</button>
-                    <img id="uploaded-image" src="" alt="Book Cover" />
-                </div>
-            </div>
-            <div class="form-content">
-                <div class="form-group">
-                    <label for="book-name">Book Name</label>
-                    <input type="text" id="book-name" name="book-name">
-                </div>
-
-                <div class="form-group">
-                    <label for="author">Author</label>
-                    <input type="text" id="author" name="author">
-                </div>
-
-                <div class="form-group">
-                    <label for="review">Review</label>
-                    <textarea id="review" name="review" placeholder="Write your review here..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Rating</label>
-                    <div class="rating">
-                        <input type="radio" id="star1" name="rating" value="1">
-                        <label for="star1">★</label>
-                        <input type="radio" id="star2" name="rating" value="2">
-                        <label for="star2">★</label>
-                        <input type="radio" id="star3" name="rating" value="3">
-                        <label for="star3">★</label>
-                        <input type="radio" id="star4" name="rating" value="4">
-                        <label for="star4">★</label>
-                        <input type="radio" id="star5" name="rating" value="5">
-                        <label for="star5">★</label>
+        <form id="rating-form" onsubmit="submitForm(event)">
+            <div class="form-row">
+                <div class="image-upload" onclick="document.getElementById('book-cover').click();">
+                    <span><img src="/images/upload.png"></span>
+                    <span>Please Upload Book Cover</span>
+                    <input type="file" id="book-cover" name="book-cover" onchange="displayImage(event)">
+                    <div class="uploaded-image-container" id="uploaded-image-container" style="display: none;">
+                        <button type="button" class="delete-button" onclick="deleteImage(event)">×</button>
+                        <img id="uploaded-image" src="" alt="Book Cover" />
                     </div>
                 </div>
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="book-name">Book Name</label>
+                        <input type="text" id="book-name" name="book-name" required>
+                    </div>
 
-                <button class="button" onclick="showPopup()">Confirm</button>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="review">Review</label>
+                        <textarea id="review" name="review" placeholder="Write your review here..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div class="rating">
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5">★</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="button">Confirm</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
+
 
     <footer>
         <p>© 2025 bookwormsenpaikawaii | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
@@ -612,57 +615,101 @@
         </div>
     </footer>
     <script>
-        function displayImage(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const image = document.getElementById('uploaded-image');
-                    const imageContainer = document.getElementById('uploaded-image-container');
-                    image.src = e.target.result;
-                    image.style.display = 'block';
-                    imageContainer.style.display = 'flex';
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("rating-form");
+
+            // ฟังก์ชันแสดงภาพที่อัปโหลด
+            window.displayImage = (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const image = document.getElementById("uploaded-image");
+                        const imageContainer = document.getElementById("uploaded-image-container");
+                        image.src = e.target.result;
+                        image.style.display = "block";
+                        imageContainer.style.display = "flex";
+                    };
+                    reader.readAsDataURL(file);
                 }
-                reader.readAsDataURL(file);
-            }
-        }
+            };
 
-        function deleteImage(event) {
-            event.stopPropagation();
-            const imageContainer = document.getElementById('uploaded-image-container');
-            const image = document.getElementById('uploaded-image');
-            const fileInput = document.getElementById('book-cover');
+            // ฟังก์ชันลบภาพ
+            window.deleteImage = (event) => {
+                event.stopPropagation();
+                const fileInput = document.getElementById("book-cover");
+                const image = document.getElementById("uploaded-image");
+                const imageContainer = document.getElementById("uploaded-image-container");
 
-            fileInput.value = '';
-            image.src = '';
-            image.style.display = 'none';
-            imageContainer.style.display = 'none';
-        }
+                fileInput.value = "";
+                image.src = "";
+                image.style.display = "none";
+                imageContainer.style.display = "none";
+            };
 
-        const radios = document.querySelectorAll('input[type="radio"]');
-        radios.forEach((radio) => {
-            radio.addEventListener('change', () => {
-                const value = radio.value;
-                document.querySelectorAll('.rating label').forEach(label => {
-                    label.style.color = '#ffffff';
+            // ฟังก์ชันกดดาวให้เปลี่ยนสี
+            document.querySelectorAll('input[name="rating"]').forEach((radio) => {
+                radio.addEventListener("change", () => {
+                    const value = radio.value;
+                    document.querySelectorAll(".rating label").forEach((label, index) => {
+                        label.style.color = index < value ? "#FFD700" : "#FFFFFF"; // เปลี่ยนเป็นสีทองเมื่อเลือก
+                    });
                 });
-                for (let i = 0; i < value; i++) {
-                    document.querySelectorAll('.rating label')[i].style.color = '#023047';
+            });
+
+            // ฟังก์ชันเปิด/ปิดเมนู
+            window.toggleMenu = () => {
+                document.getElementById("menu").classList.toggle("active");
+            };
+
+            // ฟังก์ชันบันทึกข้อมูลหนังสือ
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                // ดึงค่าจากฟอร์ม
+                const bookName = document.getElementById("book-name").value;
+                const author = document.getElementById("author").value;
+                const review = document.getElementById("review").value;
+                const rating = document.querySelector('input[name="rating"]:checked')?.value;
+                const fileInput = document.getElementById("book-cover").files[0];
+
+                if (!bookName || !author || !review || !rating || !fileInput) {
+                    alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+                    return;
                 }
+
+                // แปลงรูปเป็น Base64
+                const reader = new FileReader();
+                reader.readAsDataURL(fileInput);
+                reader.onloadend = async function () {
+                    const bookData = {
+                        bookName,
+                        author,
+                        review,
+                        rating,
+                        coverImage: reader.result // เก็บรูปเป็น Base64
+                    };
+
+                    try {
+                        const response = await fetch("/save-book", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(bookData),
+                        });
+
+                        if (response.ok) {
+                            alert("บันทึกข้อมูลสำเร็จ!");
+                            form.reset();
+                            deleteImage(event); // รีเซ็ตภาพ
+                        } else {
+                            alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล");
+                        }
+                    } catch (error) {
+                        alert("เกิดข้อผิดพลาด: " + error.message);
+                    }
+                };
             });
         });
-        function toggleMenu() {
-            var menu = document.getElementById("menu");
-            menu.classList.toggle("active");
-
-        }
-        function showPopup() {
-            alert("Your rating has been recorded!");
-            window.location.href = '/reviewPage'; // ไปที่หน้า reviewPage หลังจากกด OK
-        }
-
-
-
 
     </script>
 </body>
