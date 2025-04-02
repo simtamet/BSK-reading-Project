@@ -552,13 +552,13 @@ input[type="file"] {
         function updateTreeImage(days) {
             let img = document.getElementById("tree-image");
             if (days === 0) {
-                img.src = "tree_dead.png";
+                img.src = "images/dry_leaf.png";
             } else if (days >= 100) {
-                img.src = "tree_big.png";
+                img.src = "images/tree_big.png";
             } else if (days >= 30) {
-                img.src = "tree_medium.png";
+                img.src = "images/tree_medium.png";
             } else if (days >= 10) {
-                img.src = "tree_small.png";
+                img.src = "images/seedling.png";
             } else {
                 img.src = "images/tree_seed.png";
             }
