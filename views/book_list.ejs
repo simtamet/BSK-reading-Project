@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSK Reading</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style3.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="left-section">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span>
+            <img src="images/logo.png" alt="Logo" class="Logo">
+        </div>
+        <div class="right-section">
+            <button class="add-friend-btn">Add Friend</button>
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="  Search...">
+                <span class="search-icon">
+                    <img src="images/search-icon1.svg" alt="Search Icon">
+                </span>
+            </div>
+            <span class="user-icon"><img src="images/user-icon.svg" alt="User Icon"></span>
+
+        </div>
+    </div>
+
+    <div class="book-list">
+        <h1>book <img src="images/bookmark.svg" alt="" width="35" height="35"> list</h1>
+        <div class="book-container" id="bookList">
+            <div class="book">
+                <img src="images/a_little_life.jpg" alt="A Little Life">
+                <p>A Little Life <br> by Hanya Yanagihara</p>
+            </div>
+            <div class="book">
+                <img src="images/pride_and_prejudice.jpg" alt="Pride and Prejudice">
+                <p>Pride and Prejudice <br> by Jane Austen</p>
+            </div>
+            <div class="book">
+                <img src="images/The_Hunger_Games_cover.jpg" alt="The Hunger Games">
+                <p>The Hunger Games <br> by Suzanne Collins</p>
+            </div>
+            <div class="book">
+                <img src="images/heaven_mieko.JPG" alt="Heaven">
+                <p>Heaven <br> by Mieko Kawakami</p>
+            </div>
+            <!-- ปุ่ม add more books ที่จะอยู่หลังสุด -->
+            <div class="add-book" onclick="openPopup()">
+                <img src="images/plus.svg" alt="" class="icon">
+                <span>+ add more books</span>
+            </div>
+        </div>
+        
+    </div>
+
+    </div>
+
+
+
+    <!-- Sidebar Menu -->
+    <div class="menu" id="menu">
+        <a href="#">Tracking</a>
+        <a href="streak_page.html">Streak</a>
+        <a href="#">Rating Books</a>
+        <a href="#">Book List</a>
+        <div class="dark-mode-toggle">
+            <label>
+                <input type="checkbox"> Dark Mode
+            </label>
+        </div>
+    </div>
+
+
+    <!--pop up book list-->
+    <div class="popup" id="bookPopup">
+        <div class="popup-content">
+            <button class="close-btn" onclick="closePopup()">✖</button>
+            <div class="popup-body">
+                <!-- ด้านซ้าย: อัพโหลดปกหนังสือ -->
+                <div class="book-cover-upload">
+                    <label for="bookImage">
+                        <div class="upload-area">
+                            <img id="bookPreview" src="images/profile-icon.svg" alt="Upload Icon">
+                            <p id="uploadText">Please insert the book cover</p>
+                        </div>
+                    </label>
+                    <input type="file" id="bookImage" accept="image/*" onchange="previewBookCover(event)">
+                </div>
+
+                <!-- ด้านขวา: กรอกข้อมูลหนังสือ -->
+                <div class="book-info">
+                    <input type="text" id="bookTitle" placeholder="Book Title">
+                    <input type="text" id="bookAuthor" placeholder="Author">
+                    <button class="add-book-btn" onclick="addBook()">Add Book</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+
+    <div class="bottom-bar">
+
+        <p>© 2025 BookWormSenpaiKawaiiReading | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+
+        </div>
+        <br>
+        <br>
+    </div>
+
+
+
+    <!--munu side bar-->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("active");
+        }
+    </script>
+    <!-- profile insert -->
+    <script>
+        function loadFile(event) {
+            var output = document.getElementById('profile-img');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+    <!-- add books -->
+    <script>
+        function openPopup() {
+            document.getElementById("bookPopup").style.display = "flex";
+        }
+
+        function closePopup() {
+            document.getElementById("bookPopup").style.display = "none";
+        }
+
+        // ให้แน่ใจว่า popup ถูกซ่อนไว้ตั้งแต่โหลดหน้า
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("bookPopup").style.display = "none";
+        });
+
+    </script>
+    <script>
+        function previewBookCover(event) {
+            var file = event.target.files[0]; // รับไฟล์ที่ถูกเลือก
+            var preview = document.getElementById("bookPreview"); // รูปปกหนังสือ
+            var text = document.getElementById("uploadText"); // ข้อความ "Please insert the book cover"
+
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result; // เปลี่ยนรูปให้เป็นภาพที่เลือก
+                };
+                reader.readAsDataURL(file);
+                text.style.display = "none"; // ซ่อนข้อความเมื่อมีการเลือกรูป
+            }
+        }
+
+    </script>
+    <script>
+        function addBook() {
+    var title = document.getElementById("bookTitle").value;
+    var author = document.getElementById("bookAuthor").value;
+    var imageInput = document.getElementById("bookImage");
+    var bookList = document.getElementById("bookList");
+
+    // ตรวจสอบว่ามี bookList จริงหรือไม่
+    if (!bookList) {
+        alert("Error: Book list container not found!");
+        return;
+    }
+
+    if (!title || !author || !imageInput.files[0]) {
+        alert("Please fill in all required fields!");
+        return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        // สร้าง div สำหรับหนังสือใหม่
+        var newBook = document.createElement("div");
+        newBook.classList.add("book");
+
+        var bookImg = document.createElement("img");
+        bookImg.src = e.target.result;
+        bookImg.alt = title;
+
+        var bookText = document.createElement("p");
+        bookText.innerHTML = `${title} <br> by ${author}`;
+
+        newBook.appendChild(bookImg);
+        newBook.appendChild(bookText);
+        
+        // เพิ่มหนังสือใหม่เข้าไปใน bookList
+        bookList.insertBefore(newBook, bookList.querySelector(".add-book"));
+
+        closePopup(); // ปิด pop-up หลังเพิ่มหนังสือแล้ว
+
+        // รีเซ็ตค่า input
+        document.getElementById("bookTitle").value = "";
+        document.getElementById("bookAuthor").value = "";
+        document.getElementById("bookImage").value = "";
+        document.getElementById("bookPreview").src = "images/profile-icon.svg";
+        document.getElementById("uploadText").style.display = "block";
+    };
+
+    reader.readAsDataURL(imageInput.files[0]);
+}
+
+
+
+    </script>
+</body>
+
+</html>
