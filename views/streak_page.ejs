@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Streak</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="left-section">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span>
+            <a href="home_page.html">
+                <img src="images/logo.png" alt="Logo" class="Logo">
+              </a>
+        </div>
+        <div class="right-section">
+            <button class="add-friend-btn">Add Friend</button>
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="  Search...">
+                <span class="search-icon">
+                    <img src="images/search-icon1.svg" alt="Search Icon">
+                </span>
+            </div>
+            <div class="user-icon">
+                <a href="user_profile.html">
+                    <img src="images/user-icon.svg" alt="User Icon">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+        
+
+    <!-- Sidebar Menu -->
+    <div class="menu" id="menu">
+        <a href="#">Tracking</a>
+        <a href="#">Streak</a>
+        <a href="#">Rating Books</a>
+        <a href="book_list_page.html">Book List</a>
+        <div class="dark-mode-toggle">
+            <label>
+                <input type="checkbox"> Dark Mode
+            </label>
+        </div>
+    </div>
+
+
+    <div class="streak-container">
+        <h1 style="color: #023047;">Streak</h1>
+        <div class="tree-growing">
+            <img id="tree-image" src="tree_seed.png" alt="Tree Growth">
+        </div>
+        <p class="streak-days" id="streak-days"></p>
+        <p class="streak-status">in progress</p>
+        <button class="streak-button" id="nudgeButton">
+            <img src="images/nudge.svg" alt="Nudge Icon" class="nudge-icon">
+            Nudge Friends
+        </button>
+        
+
+    </div>
+
+    <div class="popup" id="friendPopup">
+        <div class="popup-content">
+            <h2>Friends List</h2>
+            <ul id="friendsList">
+                <!-- รายชื่อเพื่อนจะมาแสดงที่นี่ -->
+                <li class="friend-item">
+                    <div class="friend-avatar">
+                        <img src="images/friend1.jpg" alt="Friend 1">
+                    </div>
+                    <div class="friend-info">
+                        <p class="friend-name">Monkey D. Luffy</p>
+                        <button class="friend-action-btn">
+                            <img src="images/nudge1.svg" alt="Action Icon">
+                        </button>
+                    </div>
+                </li>
+                <li class="friend-item">
+                    <div class="friend-avatar">
+                        <img src="images/friend2.jpg" alt="Friend 2">
+                    </div>
+                    <div class="friend-info">
+                        <p class="friend-name">Taylor Swift</p>
+                        <button class="friend-action-btn">
+                            <img src="images/nudge1.svg" alt="Action Icon">
+                        </button>
+                    </div>
+                </li>
+                <!-- เพิ่มชื่อเพื่อนตามต้องการ -->
+            </ul>
+            <button class="close-btn" id="closePopup">Close</button>
+        </div>
+    </div>
+    
+
+    <div class="bottom-bar">
+        <p>Bottom Bar Content</p>
+        <p>Bottom Bar Content</p>
+        <p>Bottom Bar Content</p>
+        <p>Bottom Bar Content</p>
+    </div>
+    
+    <!--munu side bar-->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("active");
+        }
+    </script>
+    
+    <script>
+        function getStreakDays() {
+            let firstDay = localStorage.getItem("firstDay");
+            let lastActive = localStorage.getItem("lastActive");
+            let today = new Date().toISOString().split('T')[0];
+            
+            if (!firstDay) {
+                firstDay = today;
+                localStorage.setItem("firstDay", firstDay);
+            }
+            
+            if (lastActive) {
+                let diff = Math.floor((new Date(today) - new Date(lastActive)) / (1000 * 60 * 60 * 24));
+                if (diff > 1) {
+                    localStorage.setItem("firstDay", today);
+                    return 0; // Reset streak if user skipped a day
+                }
+            }
+            
+            localStorage.setItem("lastActive", today);
+            
+            let streakDays = Math.floor((new Date(today) - new Date(firstDay)) / (1000 * 60 * 60 * 24)) + 1;
+            return streakDays;
+        }
+        
+        function updateTreeImage(days) {
+            let img = document.getElementById("tree-image");
+            if (days === 0) {
+                img.src = "tree_dead.png";
+            } else if (days >= 100) {
+                img.src = "tree_big.png";
+            } else if (days >= 30) {
+                img.src = "tree_medium.png";
+            } else if (days >= 10) {
+                img.src = "tree_small.png";
+            } else {
+                img.src = "images/tree_seed.png";
+            }
+        }
+        
+        let days = getStreakDays();
+        document.getElementById("streak-days").innerText = days === 0 ? "Your tree has died!" : `${days} days`;
+        updateTreeImage(days);
+    </script>
+    <script>
+        // เมื่อคลิกปุ่ม Nudge Friends ให้เปิด Pop-up
+        document.getElementById("nudgeButton").addEventListener("click", function() {
+          document.getElementById("friendPopup").style.display = "flex"; // แสดง pop-up
+        });
+    
+        // เมื่อคลิกปุ่ม Close ให้ปิด Pop-up
+        document.getElementById("closePopup").addEventListener("click", function() {
+          document.getElementById("friendPopup").style.display = "none"; // ซ่อน pop-up
+        });
+      </script>
+</body>
+</html>
