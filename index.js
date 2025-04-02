@@ -1,10 +1,12 @@
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
-const fs = require("fs");
 
 const userController = require("./controllers/userController");
 const ratingController = require("./controllers/ratingController");
+const streakController = require("./controllers/streakController");
+const bookController = require("./controllers/bookController");
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -33,12 +35,14 @@ app.post("/signup", userController.signup);
 app.get("/homePage", userController.showHomePage);
 app.get("/ratingPage", ratingController.showRatingPage);
 app.get("/reviewPage", ratingController.showReviewPage);
+app.get("/streak_page", streakController.showStreakPage);
+app.get("/book_list", bookController.showBookListPage); // ✅ เรียกฟังก์ชันจาก bookController
 
 // API สำหรับบันทึกหนังสือ
-app.post("/save-book", ratingController.saveBook);
+app.post("/save-book", bookController.saveBook); // ✅ เปลี่ยนจาก ratingController เป็น bookController
 
 // API ดึงข้อมูลหนังสือทั้งหมด
-app.get("/books", ratingController.getBooks);
+app.get("/books", bookController.getBooks); // ✅ เปลี่ยนจาก ratingController เป็น bookController
 
 // Start server
 const PORT = process.env.PORT || 3000;

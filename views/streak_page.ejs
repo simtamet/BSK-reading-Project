@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reading Streak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
     body {
     font-family: Arial, sans-serif;
@@ -424,9 +425,13 @@ input[type="file"] {
     <div class="navbar">
         <div class="left-section">
             <span class="menu-btn" onclick="toggleMenu()">☰</span>
-            <a href="/homePage">
+            <!--yanisa add path to home page-->
+            <!--yanisa add path to home page-->
+            <!--yanisa add path to home page-->
+            <!--yanisa add path to home page-->
+            <a href="home_page.html">
                 <img src="images/logo.png" alt="Logo" class="Logo">
-              </a>
+            </a>
         </div>
         <div class="right-section">
             <button class="add-friend-btn">Add Friend</button>
@@ -437,7 +442,7 @@ input[type="file"] {
                 </span>
             </div>
             <div class="user-icon">
-                <a href="/user_profile">
+                <a href="user_profile.html">
                     <img src="images/user-icon.svg" alt="User Icon">
                 </a>
             </div>
@@ -451,7 +456,7 @@ input[type="file"] {
         <a href="#">Tracking</a>
         <a href="/streak_page">Streak</a>
         <a href="/ratingPage">Rating Books</a>
-        <a href="book_list_page.html">Book List</a>
+        <a href="/book_list">Book List</a>
         <div class="dark-mode-toggle">
             <label>
                 <input type="checkbox"> Dark Mode
@@ -463,7 +468,7 @@ input[type="file"] {
     <div class="streak-container">
         <h1 style="color: #023047;">Streak</h1>
         <div class="tree-growing">
-            <img id="tree-image" src="images/tree_seed.png" alt="Tree Growth">
+            <img id="tree-image" src="tree_seed.png" alt="Tree Growth">
         </div>
         <p class="streak-days" id="streak-days"></p>
         <p class="streak-status">in progress</p>
@@ -510,10 +515,16 @@ input[type="file"] {
     
 
     <div class="bottom-bar">
-        <p>Bottom Bar Content</p>
-        <p>Bottom Bar Content</p>
-        <p>Bottom Bar Content</p>
-        <p>Bottom Bar Content</p>
+
+        <p>© 2025 BookWormSenpaiKawaiiReading | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+
+        </div>
+        <br>
+        <br>
     </div>
     
     <!--munu side bar-->
@@ -552,13 +563,13 @@ input[type="file"] {
         function updateTreeImage(days) {
             let img = document.getElementById("tree-image");
             if (days === 0) {
-                img.src = "images/tree_dead.png";
+                img.src = "images/dry_leaf.png";
             } else if (days >= 100) {
                 img.src = "images/tree_big.png";
             } else if (days >= 30) {
                 img.src = "images/tree_medium.png";
             } else if (days >= 10) {
-                img.src = "images/tree_small.png";
+                img.src = "images/seedling.png";
             } else {
                 img.src = "images/tree_seed.png";
             }

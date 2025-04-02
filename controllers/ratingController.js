@@ -1,30 +1,29 @@
 const fs = require("fs");
 const path = require("path");
 
-const BOOKS_FILE = path.join(__dirname, "../books.json");
-
+const BOOKS_FILE = path.join(__dirname, "../models/books.json");
 // อ่านไฟล์ JSON แบบ synchronous
 const readBooksFile = () => {
   try {
+    if (!fs.existsSync(BOOKS_FILE)) {
+      return []; // ถ้าไม่มีไฟล์ ให้คืนค่าเป็นอาร์เรย์ว่าง (แต่ไม่สร้างไฟล์ใหม่)
+    }
     const data = fs.readFileSync(BOOKS_FILE, "utf8");
     return JSON.parse(data);
   } catch (error) {
-    // ถ้าไม่พบไฟล์หรือเกิดข้อผิดพลาดให้ส่งคืน array ว่าง
+    console.error("Error reading books.json:", error);
     return [];
   }
 };
 
 // บันทึกข้อมูลลงไฟล์ JSON แบบ synchronous
-const saveBooksFile = (books) => {
+const saveBooksFile = (newBook) => {
+  const books = readBooksFile(); // อ่านข้อมูลเดิม
+  books.push(newBook); // เพิ่มข้อมูลใหม่เข้าไปใน array
   fs.writeFileSync(BOOKS_FILE, JSON.stringify(books, null, 2), "utf8");
 };
 
-// แสดงหน้าให้คะแนนหนังสือ
-exports.showRatingPage = (req, res) => {
-  res.render("ratingPage"); // ใช้ EJS template (สร้างไฟล์ `views/ratingPage.ejs`)
-};
-
-// API บันทึกหนังสือ
+// API บันทึกหนังสือใหม่ โดยต่อท้ายใน `/models/books.json`
 exports.saveBook = (req, res) => {
   const newBook = req.body;
 
@@ -33,33 +32,18 @@ exports.saveBook = (req, res) => {
     return res.status(400).json({ error: "กรุณากรอกข้อมูลให้ครบถ้วน" });
   }
 
-  // อ่านข้อมูลหนังสือเก่าจากไฟล์
-  const books = readBooksFile();
+  saveBooksFile(newBook); // บันทึกข้อมูลใหม่ลงไฟล์
 
-  // เพิ่มข้อมูลหนังสือใหม่เข้าไปใน array
-  books.push(newBook);
-
-  // บันทึกข้อมูลลงในไฟล์
-  saveBooksFile(books);
-
-  // ส่งข้อความยืนยัน
   res.json({ message: "บันทึกข้อมูลสำเร็จ!" });
 };
 
-// API ดึงข้อมูลหนังสือทั้งหมด
-exports.getBooks = (req, res) => {
-  const books = readBooksFile();
-  res.json(books);
-};
 
 exports.showReviewPage = (req, res) => {
-  fs.readFile(path.join(__dirname, "../models/books.json"), "utf8", (err, data) => {
-    if (err) {
-      console.error("Error reading books.json:", err);
-      return res.status(500).send("Error loading books.");
-    }
+  const books = readBooksFile();
+  res.render("reviewPage", { books });
+};
 
-    const books = JSON.parse(data);
-    res.render("reviewPage", { books });
-  });
+// แสดงหน้าให้คะแนนหนังสือ
+exports.showRatingPage = (req, res) => {
+  res.render("ratingPage"); // ใช้ EJS template (สร้างไฟล์ `views/ratingPage.ejs`)
 };

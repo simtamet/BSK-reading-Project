@@ -10,5 +10,9 @@
   {
     "email": "amy@gmail.com",
     "password": "$2b$10$AI.ZEoq3BN9Gol3EbLsXeO243K/XI4Z0RoVeOIP8ODffpU56UeuB6"
+  },
+  {
+    "email": "test@gmail.com",
+    "password": "$2b$10$HIdJz6AC5mUiibw1e/clv.WnELQfFNup1rpCuvXuyG5I.3E/RQZ6y"
   }
 ]
