@@ -1,18 +1,20 @@
 [
   {
-    "email": "123@gmail.com",
-    "password": "$2b$10$Uxhw2/yJIDgF4iCbr.NoKuY3VuXHBh/3DpxX/aJCn/tq3z9BRlMJe"
-  },
-  {
-    "email": "abc@gmail.com",
-    "password": "$2b$10$fM.rdrv76yBM8QpfaLk1YOYfnR2sxqgh7bHluIRSrlMw0kjOOmowy"
-  },
-  {
+    "id": 1,
+    "username": "amylouis",
     "email": "amy@gmail.com",
-    "password": "$2b$10$AI.ZEoq3BN9Gol3EbLsXeO243K/XI4Z0RoVeOIP8ODffpU56UeuB6"
+    "password": "$2b$10$CV9.lda5BaFdU368tCeHPOMEr/mgkAoQTT4Adz9S5BF5wERk3BPr."
   },
   {
+    "id": 2,
+    "username": "123",
+    "email": "123@gmail.com",
+    "password": "$2b$10$8ilvgRTVc0.gL6FrlU7i1Ov/p3gMdjYibRdiky.ylnpTuSGBjohJ2"
+  },
+  {
+    "id": 3,
+    "username": "test",
     "email": "test@gmail.com",
-    "password": "$2b$10$HIdJz6AC5mUiibw1e/clv.WnELQfFNup1rpCuvXuyG5I.3E/RQZ6y"
+    "password": "$2b$10$BwPja2V6BNaS.A5/DLvPTeNo3dv878U3Moz1HClb653G4B/3BZJJS"
   }
 ]

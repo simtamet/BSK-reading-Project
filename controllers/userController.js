@@ -6,7 +6,6 @@ const USERS_FILE = path.join(__dirname, '../models/users.json');
 
 
 
-// ฟังก์ชันเพื่อโหลดข้อมูลผู้ใช้จากไฟล์
 function loadUsers() {
     try {
         if (!fs.existsSync(USERS_FILE)) {
@@ -37,43 +36,40 @@ function saveUsers(users) {
     }
 }
 
+
 exports.showSignInPage = (req, res) => {
     res.render('signin', { error: req.query.error || null });
 };
 
 
-// Handle Sign In
 exports.signin = async (req, res) => {
     const { email, password } = req.body;
 
-    // ตรวจสอบว่าอีเมลหรือรหัสผ่านไม่ได้กรอกมา
     if (!email || !password) {
-        return res.render('signin', { error: 'Please provide email and password' });
+        return res.render('signin', { error: 'Please provide email or username and password' });
     }
 
     let users = loadUsers(); // โหลดข้อมูลผู้ใช้จากไฟล์
 
-    // ค้นหาผู้ใช้ที่อีเมลตรงกัน
-    const user = users.find(user => user.email === email);
+    // ค้นหาผู้ใช้ที่ตรงกับ email หรือ username
+    const user = users.find(user => user.email === email || user.username === email);
     if (!user) {
-        // หากไม่พบผู้ใช้ที่ตรงกับอีเมล
-        return res.render('signin', { error: 'Email not found' });
+        return res.render('signin', { error: 'Email or Username not found' });
     }
 
     // เปรียบเทียบรหัสผ่านที่กรอกกับรหัสผ่านที่เก็บไว้ในไฟล์
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
-        // หากรหัสผ่านไม่ตรงกัน
         return res.render('signin', { error: 'Incorrect password' });
     }
 
-    // หากอีเมลและรหัสผ่านตรงกัน ให้ทำการล็อกอิน
-    req.session.user = email;  // บันทึกอีเมลผู้ใช้ใน session
-    console.log(`${email} has logged in`);
+    req.session.user = user.email;  // บันทึกอีเมลผู้ใช้ใน session
+    console.log(`${user.email} has logged in`);
 
-    // ไปที่หน้า homePage
     res.redirect('/homePage');
 };
+
+
 
 exports.showHomePage = (req, res) => {
     res.render('homePage', { error: req.query.error || null });
@@ -85,7 +81,11 @@ exports.homePage = (req, res) => {
     if (!req.session.user) {
         return res.redirect('/signin');  // ถ้าไม่ได้เข้าสู่ระบบให้กลับไปที่หน้า signin
     }
-    res.render('homePage');  // ถ้าเข้าสู่ระบบแล้วให้ไปที่หน้า homePage
+
+    let users = loadUsers();
+    const user = users.find(user => user.email === req.session.user);
+
+    res.render('homePage', { username: user.username });  // ส่ง username ไปที่ homePage
 };
 
 
@@ -94,15 +94,15 @@ exports.showSignUpPage = (req, res) => {
     res.render('signup', { error: req.query.error || null });
 };
 
-// Handle Sign Up
-// ใน signUpController.js
-exports.signup = async (req, res) => {
-    console.log('Received signup request'); // เพิ่มการแสดงข้อความเพื่อเช็คว่าโค้ดถูกเรียก
-    const { email, password, confirmPassword } = req.body;
 
-    if (!email || !password || !confirmPassword) {
-        console.log('Missing fields'); // ตรวจสอบว่าเข้ามาหรือไม่
-        return res.render('signup', { error: 'Please provide email, password, and confirm password' });
+// Handle Sign Up
+exports.signup = async (req, res) => {
+    console.log('Received signup request');
+    const { username, email, password, confirmPassword } = req.body;
+
+    if (!username || !email || !password || !confirmPassword) {
+        console.log('Missing fields');
+        return res.render('signup', { error: 'Please provide username, email, password, and confirm password' });
     }
 
     if (password !== confirmPassword) {
@@ -110,8 +110,8 @@ exports.signup = async (req, res) => {
         return res.render('signup', { error: 'Passwords do not match' });
     }
 
-    let users = loadUsers(); // โหลดข้อมูลผู้ใช้จากไฟล์
-    console.log('Loaded users:', users); // แสดงข้อมูล users ที่โหลดมา
+    let users = loadUsers();
+    console.log('Loaded users:', users);
 
     if (users.some(user => user.email === email)) {
         console.log('Email already exists');
@@ -119,7 +119,12 @@ exports.signup = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    users.push({ email, password: hashedPassword });
+
+    // สร้าง ID อัตโนมัติ
+    const newId = users.length > 0 ? Math.max(...users.map(user => user.id)) + 1 : 1;  // กำหนด ID โดยการหาค่ามากสุดจาก ID ที่มีอยู่แล้ว
+
+    // เพิ่มข้อมูลใหม่
+    users.push({ id: newId, username, email, password: hashedPassword });
 
     saveUsers(users);
 
