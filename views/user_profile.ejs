@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSK Reading</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="left-section">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span>
+            <img src="images/logo.png" alt="Logo" class="Logo">
+        </div>
+        <div class="right-section">
+            <button class="add-friend-btn">Add Friend</button>
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="  Search...">
+                <span class="search-icon">
+                    <img src="images/search-icon1.svg" alt="Search Icon">
+                </span>
+            </div>
+            <span class="user-icon"><img src="images/user-icon.svg" alt="User Icon"></span>
+            
+        </div>
+    </div>
+    
+        
+
+    <!-- Sidebar Menu -->
+    <div class="menu" id="menu">
+        <a href="#">Tracking</a>
+        <a href="streak_page.html">Streak</a>
+        <a href="#">Rating Books</a>
+        <a href="book_list_page.html">Book List</a>
+        <div class="dark-mode-toggle">
+            <label>
+                <input type="checkbox"> Dark Mode
+            </label>
+        </div>
+    </div>
+
+    <div class="profile-text">
+        <h1>My profile</h1>
+    </div>
+
+    <!-- Profile Picture Upload Section -->
+    <div class="profile-container">
+        <div class="profile-picture">
+            <input type="file" id="upload" accept="image/*" onchange="loadFile(event)">
+            <img id="profile-img" src="images/profile-icon.png" alt="Profile Picture">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="username-label">
+            Username
+        </div>
+        <input type="text" class="username-input" placeholder="Enter your username">
+    </div>
+
+    </div>
+        <button class="login-btn" onclick=" ">Confirm</button>
+    </div>
+
+    <div class="bottom-bar">
+        <p>Bottom Bar Content</p>
+        <p>Bottom Bar Content</p>
+        <p>Bottom Bar Content</p>
+        <p>Bottom Bar Content</p>
+    </div>
+    
+
+    
+    <!--munu side bar-->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("active");
+        }
+    </script>
+    <!-- profile insert -->
+    <script>
+        function loadFile(event) {
+            var output = document.getElementById('profile-img');
+            output.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+</body>
+</html>
