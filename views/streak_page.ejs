@@ -4,7 +4,421 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reading Streak</title>
-    <link rel="stylesheet" href="styles2.css">
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #8ECAE6;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #FFB703;
+    padding: 10px 20px; /* ช่องว่างรอบๆ */
+    display: flex; /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+    justify-content: space-between; /* จัดให้ฝั่งซ้ายและขวาอยู่ห่างกัน */
+    align-items: center; /* จัดให้ทุกองค์ประกอบอยู่ในแนวกลางตามแกน Y */
+    position: fixed; /* ทำให้ navbar อยู่ที่ตำแหน่งคงที่ */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* ทำให้ navbar อยู่เหนือ sidebar */
+}
+
+.left-section {
+    display: flex;
+    align-items: center; /* จัดให้เมนูและโลโก้อยู่ในแนวเดียวกัน */
+}
+
+.Logo {
+    width: 50px; /* ขนาดของโลโก้ */
+    height: auto;
+}
+
+.right-section {
+    display: flex;
+    align-items: center; /* จัดให้ปุ่ม Add Friend, ช่องค้นหา, และไอคอนผู้ใช้อยู่ในแถวเดียวกัน */
+    justify-content: flex-end; /* จัดให้อยู่ทางขวาสุด */
+    gap: 10px; /* ระยะห่างระหว่างปุ่มและช่องค้นหา */
+}
+
+.add-friend-btn {
+    padding: 6px 8px; /* ปรับขนาด padding ให้ปุ่มใหญ่ขึ้นและมนขึ้น */
+    background-color: #FFB703;
+    color: #023047;
+    border: none;
+    cursor: pointer;
+    margin-right: 0px; /* ช่องว่างระหว่างปุ่ม Add Friend กับช่องค้นหา */
+    border-radius: 20px; /* ทำให้มุมปุ่มมน ๆ */
+    font-size: 14px; /* ขนาดฟอนต์ให้เหมาะสม */
+}
+
+.add-friend-btn:hover {
+    background-color: #ffffff; /* สีที่เปลี่ยนเมื่อ hover */
+}
+
+.search-bar-container {
+    position: relative;
+    width: 180px; /* กำหนดความกว้างของ search bar */
+    
+}
+
+.search-bar {
+    padding: 5px 1px;
+    width: 100%; /* ทำให้ search bar ใช้ความกว้างเต็ม */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.search-icon {
+    position: absolute;
+    right: 3px; /* วางไอคอนอยู่ที่ขวาสุด */
+    top: 50%;
+    transform: translateY(-50%); /* จัดให้อยู่กลางแนวแกน Y */
+    cursor: pointer;
+}
+
+.search-icon img {
+    width: 17px;
+    height: 17px;
+}
+
+
+.user-icon img {
+    width: 30px; /* ขนาดของไอคอนผู้ใช้ */
+    height: 30px;
+    object-fit: cover; /* ป้องกันไม่ให้ไอคอนยืดหรือบิดเบี้ยว */
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+}
+
+.user-icon:hover img {
+    transform: scale(1.2); /* ขยายขนาดไอคอนขึ้น 1.2 เท่า */
+    background-color: #ffffff; /* เปลี่ยนสีพื้นหลัง */
+    padding: 5px; /* เพิ่มพื้นที่รอบ ๆ ไอคอน */
+}
+
+.menu-btn {
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+/* Sidebar Menu */
+.menu {
+    position: absolute;
+    top: 60px; /* เพิ่มให้ sidebar เริ่มต้นจากด้านล่าง navbar */
+    left: -250px;
+    width: 200px;
+    background-color: #ffffff;
+    padding: 15px;
+    transition: 0.3s ease-in-out;
+    z-index: 999; /* ทำให้ menu อยู่หลัง navbar */
+}
+
+.menu a {
+    display: block;
+    color: #023047;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    background-color: #FFB703;
+}
+
+.menu.active {
+    left: 0; /* แสดง menu เมื่อ class active ถูกเพิ่ม */
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    color: #023047;
+    padding: 10px;
+}
+
+.navbar .right-section {
+    margin-right: 40px; /* ระยะห่างจากขอบขวาของ navbar */
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150pt;
+}
+
+.profile-picture {
+    width: 200px; /* ขนาดของวงกลม */
+    height: 200px; /* ขนาดของวงกลม */
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+    overflow: hidden; /* ซ่อนส่วนที่เกินจากกรอบวงกลม */
+    border: 4px solid #023047; /* ขอบวงกลม */
+    position: relative;
+    display: flex; /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+    justify-content: center; /* จัดให้อยู่กลางตามแกน X */
+    align-items: center; /* จัดให้อยู่กลางตามแกน Y */
+}
+
+.profile-picture img {
+    width: 100%; /* กำหนดขนาดของไอคอนให้เล็ก ๆ อยู่กลาง */
+    height: 100%; /* กำหนดขนาดของไอคอนให้เล็ก ๆ อยู่กลาง */
+    object-fit: cover; /* ทำให้รูปไม่บิดเบี้ยว */
+}
+
+input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* ซ่อน input */
+    cursor: pointer;
+}
+
+
+
+.homepage-text {
+    font-size: 3rem; /* ขนาดตัวอักษรที่ใหญ่ */
+    font-weight: bold; /* ตัวหนา */
+    text-align: center; /* จัดกลาง */
+    color: #023047; /* สีที่ตัดกับพื้นหลัง */
+    margin-top: 80px; /* ให้ข้อความอยู่ห่างจาก navbar */
+}
+
+.profile-text {
+    font-size: 1rem; /* ขนาดตัวอักษรที่ใหญ่ */
+    font-weight: bold; /* ตัวหนา */
+    text-align: center; /* จัดกลาง */
+    color: #023047; /* สีที่ตัดกับพื้นหลัง */
+    margin-top: 120px; /* ให้ข้อความอยู่ห่างจาก navbar */
+}
+
+/* Centering the content */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 110px; /* ทำให้กล่องอยู่กลางหน้าจอ */
+    text-align: center;
+}
+
+/* Username label style */
+.username-label {
+    font-size: 20px;
+    margin-bottom: 15px; /* เว้นระยะห่างระหว่าง label กับ input */
+}
+
+/* Input box style */
+.username-input {
+    padding: 8px;
+    width: 300px; /* กำหนดความกว้างของ input box */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+}
+/*confirm button*/
+.login-btn {
+    background-color: #023047;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+
+.login-btn:hover {
+    background-color: #024668; /* เปลี่ยนสีเมื่อ hover */
+    transform: scale(1.1); /* เพิ่มขนาดเล็กน้อยเมื่อ hover */
+}
+
+/* Bottom bar style */
+.bottom-bar {
+    background-color: #FFB703;
+    color: #023047;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+    width: 100%;
+    margin-top: auto; /* ให้บาร์เลื่อนลงไปอยู่ล่างสุด */
+}
+
+
+/*streak*/
+
+.streak-container {
+    display: inline-block;
+    padding: 70px;
+    border-radius: 20px;
+    margin-top: 60px; /* ปรับตามความสูงของ navbar */
+}
+
+.tree-growing {
+    width: 220px; /* ขนาดของวงกลม */
+    height: 220px;
+    background-color: white; /* ตั้งค่าพื้นหลังเป็นสีขาว */
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+    
+    display: flex; /* ใช้ flexbox จัดตำแหน่ง */
+    justify-content: center; /* จัดให้อยู่กลางแนวนอน */
+    align-items: center; /* จัดให้อยู่กลางแนวตั้ง */
+}
+.tree-growing img {
+    width: 70%; /* ปรับขนาดรูปต้นไม้ */
+    height: auto;
+}
+
+
+.streak-days {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #023047;
+}
+.streak-status {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #023047;
+}
+.streak-button {
+    background-color: #023047;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* เพิ่มเพื่อจัดให้อยู่กลาง */
+    gap: 10px; /* ระยะห่างระหว่างไอคอนและข้อความ */
+    margin: 0 auto; /* ทำให้ปุ่มอยู่กลาง */
+}
+
+.streak-button .nudge-icon {
+    width: 20px; /* ขนาดของไอคอน */
+    height: 20px; /* ขนาดของไอคอน */
+}
+
+
+
+.streak-button:hover {
+    background-color: #024668; /* เปลี่ยนสีเมื่อ hover */
+    transform: scale(1.1); /* เพิ่มขนาดเล็กน้อยเมื่อ hover */
+}
+
+/* Popup styles */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Popup content */
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+/* Friends list */
+#friendsList {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.friend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+/* ให้รายการใน .friend-item เรียงกันเป็นแถว (horizontal) */
+.friend-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ทำให้รูป ชื่อ และปุ่มอยู่ในแถวเดียวกัน */
+    gap: 15px; /* ระยะห่างระหว่างแต่ละองค์ประกอบ */
+    margin-bottom: 20px; /* เว้นระยะห่างระหว่างเพื่อนแต่ละคน */
+}
+
+/* รูปโปรไฟล์ */
+.friend-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ข้อมูลเพื่อน (ชื่อ) */
+.friend-info {
+    flex-grow: 1;
+    text-align: left;
+}
+
+/* ชื่อเพื่อน */
+.friend-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #023047;
+}
+
+/* ปุ่ม */
+.friend-action-btn {
+    background-color: #FFB703;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ไอคอนในปุ่ม */
+.friend-action-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+
+/* Close button */
+.close-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+/* Make the popup responsive */
+@media (max-width: 600px) {
+    .popup-content {
+        width: 90%;
+    }
+}
+
+    </style>
 </head>
 <body>
     <div class="navbar">
