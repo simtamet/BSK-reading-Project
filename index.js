@@ -6,6 +6,7 @@ const userController = require("./controllers/userController");
 const ratingController = require("./controllers/ratingController");
 const streakController = require("./controllers/streakController");
 const bookController = require("./controllers/bookController");
+const trackingController = require("./controllers/trackingController");
 
 const app = express();
 
@@ -36,13 +37,16 @@ app.get("/homePage", userController.showHomePage);
 app.get("/ratingPage", ratingController.showRatingPage);
 app.get("/reviewPage", ratingController.showReviewPage);
 app.get("/streak_page", streakController.showStreakPage);
-app.get("/book_list", bookController.showBookListPage); // ✅ เรียกฟังก์ชันจาก bookController
+app.get("/book_list", bookController.showBookListPage); 
+app.get("/trackingPage", trackingController.showTrackingPage); 
+app.get("/communityReviewsPage", ratingController.showCommunityReviewsPage); 
+
 
 // API สำหรับบันทึกหนังสือ
-app.post("/save-book", bookController.saveBook); // ✅ เปลี่ยนจาก ratingController เป็น bookController
+app.post("/save-book", bookController.saveBook); 
 
 // API ดึงข้อมูลหนังสือทั้งหมด
-app.get("/books", bookController.getBooks); // ✅ เปลี่ยนจาก ratingController เป็น bookController
+app.get("/books", bookController.getBooks); 
 
 // Start server
 const PORT = process.env.PORT || 3000;

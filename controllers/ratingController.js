@@ -47,3 +47,8 @@ exports.showReviewPage = (req, res) => {
 exports.showRatingPage = (req, res) => {
   res.render("ratingPage"); // ใช้ EJS template (สร้างไฟล์ `views/ratingPage.ejs`)
 };
+
+exports.showCommunityReviewsPage = (req, res) => {
+  res.render("communityReviewsPage"); // ใช้ EJS template (สร้างไฟล์ `views/ratingPage.ejs`)
+};
+

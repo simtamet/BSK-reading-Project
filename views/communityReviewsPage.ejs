@@ -54,6 +54,8 @@
 
 
 
+
+
         .navbar {
             background-color: #FFB703;
             padding: 10px 20px;
@@ -365,204 +367,39 @@
         }
 
 
-        .book-card {
-            background-color: #8bc1cb;
-            padding: 25px;
-            /* เพิ่ม padding เพื่อให้เนื้อหาดูสะอาดขึ้น */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 1000px;
-            /* เพิ่ม maximum width เพื่อไม่ให้ card กว้างเกินไป */
-            box-sizing: border-box;
-            transition: transform 0.3s ease;
-        }
-
-        .book-card:hover {
-            transform: translateY(-5px);
-            /* เพิ่ม effect เมื่อ hover */
-        }
-
-        .book-card img {
-            width: 250px;
-            height: auto;
-            display: block;
-            margin: 0 auto 15px;
-            border-radius: 4px;
-            transition: transform 0.3s ease;
-        }
-
-        .book-card img:hover {
-            transform: scale(1.05);
-            /* เพิ่ม effect เมื่อ hover */
-        }
-
-        .book-actions {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .book-actions button {
-            background-color: #023047;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        .book-actions button:hover {
-            background-color: #176B87;
-            transform: scale(1.05);
-        }
-
-        .book-description {
-            text-align: left;
-            margin-top: 20px;
-            padding: 0 20px;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .book-description h3 {
-            text-align: center;
-            color: #023047;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #023047;
-            padding-bottom: 5px;
-        }
-
-        .genre {
-            display: flex;
-            align-items: center;
-            /* ทำให้คำว่า Genre อยู่ตรงกลางในแนวตั้ง */
-            margin-top: 20px;
-            border-bottom: 2px solid #023047;
-            margin-bottom: 10px;
-
-        }
-
-        .genre h3 {
-            margin-right: 20px;
-            /* ช่องว่างระหว่างคำว่า Genre และปุ่ม */
+        .community-reviews h3 {
             font-size: 18px;
+            font-weight: bold;
             color: #023047;
-
-        }
-
-        .genre-buttons {
-            display: flex;
-            gap: 10px;
-            /* ช่องว่างระหว่างปุ่ม */
-        }
-
-        .genre-button {
-            background-color: #023047;
-            color: white;
-            border: none;
-            height: 35px;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .genre-button:hover {
-            background-color: #176B87;
-        }
-
-        .genre-container {
-            margin-top: 20px;
-        }
-
-        .rating-line {
-            display: flex;
-            /* จัดเรียงเป็นแนวนอน */
-            justify-content: space-between;
-            /* ช่องว่างระหว่าง rating line และปุ่ม */
-            align-items: center;
-            /* จัดให้ทุกอย่างอยู่ตรงกลาง */
+            text-align: left;
+            /* ให้ข้อความชิดซ้าย */
             width: 100%;
             margin-top: 10px;
+            /* ลดระยะห่างจากด้านบน */
+            margin-bottom: 10px;
+            /* ลดระยะห่างจากรีวิว */
         }
-
-        .rating-line-header {
-            display: flex;
-            flex-direction: column;
-            /* จัดเรียงแถบคะแนนเป็นแนวตั้ง */
-            gap: 10px;
-            font-size: 16px;
-            color: #333;
-            flex-grow: 1;
-            /* ใช้พื้นที่ที่เหลือทั้งหมด */
-        }
-
-        .line-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .line-container span {
-            margin-right: 10px;
-        }
-
-        .line {
-            height: 10px;
-            background-color: #FFD700;
-            border-radius: 5px;
-            transition: width 0.3s ease;
-            width: 100%;
-        }
-
-        /* ปุ่มลูกศรใหญ่ */
-        .arrow-btn-large {
-            background-color: #023047;
-            color: white;
-            border: none;
-            font-size: 30px;
-            padding: 15px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .arrow-btn-large:hover {
-            background-color: #FFB703;
-        }
-
-
 
         .review-container {
+            margin-top: 10px;
+            /* ลดระยะห่างจาก Community Ratings */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            margin-top: 30px;
+            gap: 20px;
+
         }
 
         .review-card {
-            background-color: white;
-            width: 80%;
+            width: 100%;
             max-width: 800px;
-            margin-bottom: 20px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: row;
-            align-items: center;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            min-height: 200px;
+            border-bottom: 2px solid #023047;
+            /* เพิ่มความสูงขั้นต่ำ */
         }
 
         .profile-pic {
@@ -579,8 +416,8 @@
 
         .review-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            /* จัดให้ทุกส่วนอยู่ในแนวนอน */
             margin-bottom: 10px;
         }
 
@@ -588,17 +425,34 @@
             font-size: 18px;
             font-weight: bold;
             color: #333;
+            margin-right: 10px;
+            /* เพิ่มระยะห่างระหว่างชื่อและดาว */
         }
 
         .review-header .rating {
             color: #FFD700;
             font-size: 18px;
+            margin-right: 10px;
+            /* เพิ่มระยะห่างระหว่างดาวและข้อความ "rated it" */
+        }
+
+        .review-header .rated-it {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .review-header .post-date {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+            /* เพิ่มระยะห่างระหว่างวันที่กับ rating */
         }
 
         .review-text {
             color: #555;
             font-size: 16px;
             line-height: 1.5;
+            margin-bottom: 10px;
         }
 
         .review-footer {
@@ -606,46 +460,60 @@
             text-align: right;
             font-size: 14px;
             color: #888;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .comment-box {
-            margin-top: 30px;
-            width: 80%;
-            max-width: 800px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        .review-actions {
+            display: flex;
+            gap: 10px;
+            /* เพิ่มระยะห่างระหว่างปุ่ม */
         }
 
-        .comment-box h3 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .comment-box textarea {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            resize: none;
-        }
-
-        .comment-box button {
+        .review-actions button {
             background-color: #0077b6;
             color: white;
-            padding: 10px 20px;
             border: none;
+            padding: 8px 15px;
+            font-size: 14px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* ระยะห่างระหว่างไอคอนและข้อความ */
         }
 
-        .comment-box button:hover {
+        .review-actions button i {
+            font-size: 18px;
+        }
+
+        .review-actions button:hover {
             background-color: #005f82;
+        }
+
+        .like-btn {
+            background-color: #4caf50;
+        }
+
+        .like-btn:hover {
+            background-color: #45a049;
+        }
+
+        .comment-btn {
+            background-color: #ff8c00;
+        }
+
+        .comment-btn:hover {
+            background-color: #e07b00;
+        }
+
+        .like-count,
+        .comment-count {
+            font-size: 14px;
+            font-weight: bold;
         }
     </style>
 
@@ -689,72 +557,102 @@
         </div>
     </div>
 
-
-
     <main>
-        <div class="book-card">
-            <img src="images/pride_and_prejudice.jpg" alt="Pride and Prejudice">
-            <h1>Pride and Prejudice</h1>
-            <h2>by Jane Austen</h2>
-            <div class="rating">⭐⭐⭐⭐☆ <span>4.5</span></div>
-            <div class="rating-count"><span>123,456 ratings</span></div>
-            <div class="rating-count"><span>20,000 views</span></div>
-            <div class="want-to-read-container">
-                <button class="want-to-read">Want to read</button>
-            </div>
-            <div class="book-actions">
-                <button class="book-detail"><i class="fas fa-info"></i></button>
-                <button class="share"><i class="fas fa-share-alt"></i></button>
-            </div>
-            <div class="book-description">
-                <h3>BOOK DESCRIPTION</h3>
-                <p>Pride and Prejudice has charmed generations of readers for more than two centuries. Jane Austen's
-                    much-adapted novel is famed for its witty, spirited heroine, sensational romances, and deft remarks
-                    on the triumphs and pitfalls of social convention. Author Jane Austen (1775-1817) was an English
-                    novelist whose works of social realism achieved unprecedented critical and popular success, though
-                    Austen herself remained an anonymous writer throughout her life.</p>
-            </div>
-            <div class="genre">
-                <h3>Genre</h3>
-                <div class="genre-buttons">
-                    <button class="genre-button">Historical Fiction</button>
-                    <button class="genre-button">Romance</button>
-                </div>
+        <h1>Pride and Prejudice</h1>
+        <h2>Genre: Historical Fiction / Romance</h2>
+
+        <!-- เพิ่มคำว่า Community reviews and ratings -->
+        <div class="community-reviews">
+            <h3>Community Ratings and Reviews</h3>
+        </div>
+    </main>
+    <div class="review-card">
+        <img src="images/friend1.jpg" alt="Profile Picture" class="profile-pic">
+        <div class="review-content">
+            <div class="review-header">
+                <div class="username">Monkey D. Luffy</div>
+                <span class="rated-it"> rated it</span>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <span class="post-date">Posted on: April 3, 2025</span>
             </div>
 
-            <div class="rating-line">
-                <div class="rating-line-header">
-                    <div class="line-container">
-                        <span>5★</span>
-                        <div class="line" style="width: 80%"></div>
-                    </div>
-                    <div class="line-container">
-                        <span>4★</span>
-                        <div class="line" style="width: 60%"></div>
-                    </div>
-                    <div class="line-container">
-                        <span>3★</span>
-                        <div class="line" style="width: 40%"></div>
-                    </div>
-                    <div class="line-container">
-                        <span>2★</span>
-                        <div class="line" style="width: 20%"></div>
-                    </div>
-                    <div class="line-container">
-                        <span>1★</span>
-                        <div class="line" style="width: 10%"></div>
-                    </div>
+            <div class="review-text">
+                6.0 stars. Confession...this book gave me an earth-shattering Janeaustegasm and I am feeling a bit spent
+                and vulnerable at the moment, so please bear with me. You see, I decided I wanted to get more literated
+                by reading the "classicals" in between my steady flow of science fiction, mystery and horror. The
+                question was where to begin.
+            </div>
+            <div class="review-footer">
+                <div class="review-actions">
+                    <button class="like-btn">
+                        <i class="fas fa-thumbs-up"></i> Like <span class="like-count">0</span>
+                    </button>
+                    <button class="comment-btn">
+                        <i class="fas fa-comment"></i> Comment <span class="comment-count">0</span>
+                    </button>
                 </div>
-                <!-- ปุ่มลูกศรใหญ่ที่ขวาของ rating line -->
-                <button class="arrow-btn-large" onclick="window.location.href='/communityReviewsPage';">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-
             </div>
 
         </div>
+    </div>
 
-    </main>
+    <div class="review-card">
+        <img src="images/friend2.jpg" alt="Profile Picture" class="profile-pic">
+        <div class="review-content">
+            <div class="review-header">
+                <div class="username">Taylor Swift</div>
+                <span class="rated-it"> rated it</span>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <span class="post-date">Posted on: April 3, 2025</span>
+            </div>
+            <div class="review-text">
+                Pride and Prejudice is a novel by Jane Austen, first published in 1813. The story takes place in the
+                fictional town of Meryton, England, in the late 18th century. The novel follows the life of Elizabeth
+                Bennet, a witty and independent-minded young woman, as she navigates the social mores of her time and
+                falls in love with Mr. Darcy, a wealthy and proud aristocrat.
+            </div>
+            <div class="review-footer">
+                <div class="review-actions">
+                    <button class="like-btn">
+                        <i class="fas fa-thumbs-up"></i> Like <span class="like-count">0</span>
+                    </button>
+                    <button class="comment-btn">
+                        <i class="fas fa-comment"></i> Comment <span class="comment-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="review-card">
+        <img src="images/friend2.jpg" alt="Profile Picture" class="profile-pic">
+        <div class="review-content">
+            <div class="review-header">
+                <div class="username">Taylor Swift</div>
+                <span class="rated-it"> rated it</span>
+                <div class="rating">⭐⭐⭐⭐⭐</div>
+                <span class="post-date">Posted on: April 3, 2025</span>
+
+            </div>
+
+            <div class="review-text">
+                Pride and Prejudice is a novel by Jane Austen, first published in 1813. The story takes place in the
+                fictional town of Meryton, England, in the late 18th century. The novel follows the life of Elizabeth
+                Bennet, a witty and independent-minded young woman, as she navigates the social mores of her time and
+                falls in love with Mr. Darcy, a wealthy and proud aristocrat.
+            </div>
+            <div class="review-footer">
+                <div class="review-actions">
+                    <button class="like-btn">
+                        <i class="fas fa-thumbs-up"></i> Like <span class="like-count">0</span>
+                    </button>
+                    <button class="comment-btn">
+                        <i class="fas fa-comment"></i> Comment <span class="comment-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer>
         <p>© 2025 bookwormsenpaikawaii | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
@@ -764,7 +662,25 @@
             <a href="https://www.twitter.com" target="_blank"><img src="/images/x.png" alt="X"></a>
         </div>
     </footer>
-
 </body>
+<script>
+    // เพิ่มฟังก์ชันสำหรับการทำงานของปุ่ม Like และ Comment สำหรับทุกรีวิว
+    document.querySelectorAll('.like-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            let likeCount = button.querySelector('.like-count');
+            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+        });
+    });
+
+    document.querySelectorAll('.comment-btn').forEach(function (button) {
+        button.addEventListener('click', function () {
+            let commentCount = button.querySelector('.comment-count');
+            commentCount.textContent = parseInt(commentCount.textContent) + 1;
+        });
+    });
+
+
+</script>
+
 
 </html>

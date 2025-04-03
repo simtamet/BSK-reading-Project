@@ -1,251 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSK Reading</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    background-color: #8ECAE6;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
+            font-family: Arial, sans-serif;
+            background-color: #8ECAE6;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
 
-.navbar {
-    background-color: #FFB703;
-    padding: 10px 20px; /* ช่องว่างรอบๆ */
-    display: flex; /* ใช้ flexbox เพื่อจัดตำแหน่ง */
-    justify-content: space-between; /* จัดให้ฝั่งซ้ายและขวาอยู่ห่างกัน */
-    align-items: center; /* จัดให้ทุกองค์ประกอบอยู่ในแนวกลางตามแกน Y */
-    position: fixed; /* ทำให้ navbar อยู่ที่ตำแหน่งคงที่ */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* ทำให้ navbar อยู่เหนือ sidebar */
-}
+        .navbar {
+            background-color: #FFB703;
+            padding: 10px 20px;
+            /* ช่องว่างรอบๆ */
+            display: flex;
+            /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+            justify-content: space-between;
+            /* จัดให้ฝั่งซ้ายและขวาอยู่ห่างกัน */
+            align-items: center;
+            /* จัดให้ทุกองค์ประกอบอยู่ในแนวกลางตามแกน Y */
+            position: fixed;
+            /* ทำให้ navbar อยู่ที่ตำแหน่งคงที่ */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            /* ทำให้ navbar อยู่เหนือ sidebar */
+        }
 
-.left-section {
-    display: flex;
-    align-items: center; /* จัดให้เมนูและโลโก้อยู่ในแนวเดียวกัน */
-}
+        .left-section {
+            display: flex;
+            align-items: center;
+            /* จัดให้เมนูและโลโก้อยู่ในแนวเดียวกัน */
+        }
 
-.Logo {
-    width: 50px; /* ขนาดของโลโก้ */
-    height: auto;
-}
+        .Logo {
+            width: 50px;
+            /* ขนาดของโลโก้ */
+            height: auto;
+        }
 
-.right-section {
-    display: flex;
-    align-items: center; /* จัดให้ปุ่ม Add Friend, ช่องค้นหา, และไอคอนผู้ใช้อยู่ในแถวเดียวกัน */
-    justify-content: flex-end; /* จัดให้อยู่ทางขวาสุด */
-    gap: 10px; /* ระยะห่างระหว่างปุ่มและช่องค้นหา */
-}
+        .right-section {
+            display: flex;
+            align-items: center;
+            /* จัดให้ปุ่ม Add Friend, ช่องค้นหา, และไอคอนผู้ใช้อยู่ในแถวเดียวกัน */
+            justify-content: flex-end;
+            /* จัดให้อยู่ทางขวาสุด */
+            gap: 10px;
+            /* ระยะห่างระหว่างปุ่มและช่องค้นหา */
+        }
 
-.add-friend-btn {
-    padding: 6px 8px; /* ปรับขนาด padding ให้ปุ่มใหญ่ขึ้นและมนขึ้น */
-    background-color: #FFB703;
-    color: #023047;
-    border: none;
-    cursor: pointer;
-    margin-right: 0px; /* ช่องว่างระหว่างปุ่ม Add Friend กับช่องค้นหา */
-    border-radius: 20px; /* ทำให้มุมปุ่มมน ๆ */
-    font-size: 14px; /* ขนาดฟอนต์ให้เหมาะสม */
-}
+        .add-friend-btn {
+            padding: 6px 8px;
+            /* ปรับขนาด padding ให้ปุ่มใหญ่ขึ้นและมนขึ้น */
+            background-color: #FFB703;
+            color: #023047;
+            border: none;
+            cursor: pointer;
+            margin-right: 0px;
+            /* ช่องว่างระหว่างปุ่ม Add Friend กับช่องค้นหา */
+            border-radius: 20px;
+            /* ทำให้มุมปุ่มมน ๆ */
+            font-size: 14px;
+            /* ขนาดฟอนต์ให้เหมาะสม */
+        }
 
-.add-friend-btn:hover {
-    background-color: #ffffff; /* สีที่เปลี่ยนเมื่อ hover */
-}
+        .add-friend-btn:hover {
+            background-color: #ffffff;
+            /* สีที่เปลี่ยนเมื่อ hover */
+        }
 
-.search-bar-container {
-    position: relative;
-    width: 180px; /* กำหนดความกว้างของ search bar */
-    
-}
+        .search-bar-container {
+            position: relative;
+            width: 180px;
+            /* กำหนดความกว้างของ search bar */
 
-.search-bar {
-    padding: 5px 1px;
-    width: 100%; /* ทำให้ search bar ใช้ความกว้างเต็ม */
-    border: 1px solid #ccc;
-    border-radius: 20px;
-}
+        }
 
-.search-icon {
-    position: absolute;
-    right: 3px; /* วางไอคอนอยู่ที่ขวาสุด */
-    top: 50%;
-    transform: translateY(-50%); /* จัดให้อยู่กลางแนวแกน Y */
-    cursor: pointer;
-}
+        .search-bar {
+            padding: 5px 1px;
+            width: 100%;
+            /* ทำให้ search bar ใช้ความกว้างเต็ม */
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
 
-.search-icon img {
-    width: 17px;
-    height: 17px;
-}
+        .search-icon {
+            position: absolute;
+            right: 3px;
+            /* วางไอคอนอยู่ที่ขวาสุด */
+            top: 50%;
+            transform: translateY(-50%);
+            /* จัดให้อยู่กลางแนวแกน Y */
+            cursor: pointer;
+        }
 
-.user-icon img {
-    width: 30px; /* ขนาดของไอคอนผู้ใช้ */
-    height: 30px;
-    object-fit: cover; /* ป้องกันไม่ให้ไอคอนยืดหรือบิดเบี้ยว */
-    border-radius: 50%; /* ทำให้เป็นวงกลม */
-}
+        .search-icon img {
+            width: 17px;
+            height: 17px;
+        }
 
-.user-icon:hover img {
-    transform: scale(1.2); /* ขยายขนาดไอคอนขึ้น 1.2 เท่า */
-    background-color: #ffffff; /* เปลี่ยนสีพื้นหลัง */
-    padding: 5px; /* เพิ่มพื้นที่รอบ ๆ ไอคอน */
-}
+        .user-icon img {
+            width: 30px;
+            /* ขนาดของไอคอนผู้ใช้ */
+            height: 30px;
+            object-fit: cover;
+            /* ป้องกันไม่ให้ไอคอนยืดหรือบิดเบี้ยว */
+            border-radius: 50%;
+            /* ทำให้เป็นวงกลม */
+        }
 
-.menu-btn {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 10px;
-}
+        .user-icon:hover img {
+            transform: scale(1.2);
+            /* ขยายขนาดไอคอนขึ้น 1.2 เท่า */
+            background-color: #ffffff;
+            /* เปลี่ยนสีพื้นหลัง */
+            padding: 5px;
+            /* เพิ่มพื้นที่รอบ ๆ ไอคอน */
+        }
 
-/* Sidebar Menu */
-.menu {
-    position: absolute;
-    top: 60px; /* เพิ่มให้ sidebar เริ่มต้นจากด้านล่าง navbar */
-    left: -250px;
-    width: 200px;
-    background-color: #ffffff;
-    padding: 15px;
-    transition: 0.3s ease-in-out;
-    z-index: 999; /* ทำให้ menu อยู่หลัง navbar */
-}
+        .menu-btn {
+            cursor: pointer;
+            font-size: 24px;
+            margin-right: 10px;
+        }
 
-.menu a {
-    display: block;
-    color: #023047;
-    padding: 10px;
-    text-decoration: none;
-}
+        /* Sidebar Menu */
+        .menu {
+            position: absolute;
+            top: 60px;
+            /* เพิ่มให้ sidebar เริ่มต้นจากด้านล่าง navbar */
+            left: -250px;
+            width: 200px;
+            background-color: #ffffff;
+            padding: 15px;
+            transition: 0.3s ease-in-out;
+            z-index: 999;
+            /* ทำให้ menu อยู่หลัง navbar */
+        }
 
-.menu a:hover {
-    background-color: #FFB703;
-}
+        .menu a {
+            display: block;
+            color: #023047;
+            padding: 10px;
+            text-decoration: none;
+        }
 
-.menu.active {
-    left: 0; /* แสดง menu เมื่อ class active ถูกเพิ่ม */
-}
+        .menu a:hover {
+            background-color: #FFB703;
+        }
 
-/* Dark Mode Toggle */
-.dark-mode-toggle {
-    color: #023047;
-    padding: 10px;
-}
+        .menu.active {
+            left: 0;
+            /* แสดง menu เมื่อ class active ถูกเพิ่ม */
+        }
 
-.navbar .right-section {
-    margin-right: 40px; /* ระยะห่างจากขอบขวาของ navbar */
-}
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            color: #023047;
+            padding: 10px;
+        }
 
-.profile-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150pt;
-}
+        .navbar .right-section {
+            margin-right: 40px;
+            /* ระยะห่างจากขอบขวาของ navbar */
+        }
 
-.profile-picture {
-    width: 200px; /* ขนาดของวงกลม */
-    height: 200px; /* ขนาดของวงกลม */
-    border-radius: 50%; /* ทำให้เป็นวงกลม */
-    overflow: hidden; /* ซ่อนส่วนที่เกินจากกรอบวงกลม */
-    border: 4px solid #023047; /* ขอบวงกลม */
-    position: relative;
-    display: flex; /* ใช้ flexbox เพื่อจัดตำแหน่ง */
-    justify-content: center; /* จัดให้อยู่กลางตามแกน X */
-    align-items: center; /* จัดให้อยู่กลางตามแกน Y */
-}
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150pt;
+        }
 
-.section {
-    margin-bottom: 40px;
-}
-        
-h2 {        
-    text-align: center;  
-}
-        
-.carousel-container {       
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    overflow-x: auto; /* ถ้าหนังสือเยอะ จะเลื่อนได้ */
-    padding: 10px;
-    white-space: nowrap;
+        .profile-picture {
+            width: 200px;
+            /* ขนาดของวงกลม */
+            height: 200px;
+            /* ขนาดของวงกลม */
+            border-radius: 50%;
+            /* ทำให้เป็นวงกลม */
+            overflow: hidden;
+            /* ซ่อนส่วนที่เกินจากกรอบวงกลม */
+            border: 4px solid #023047;
+            /* ขอบวงกลม */
+            position: relative;
+            display: flex;
+            /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+            justify-content: center;
+            /* จัดให้อยู่กลางตามแกน X */
+            align-items: center;
+            /* จัดให้อยู่กลางตามแกน Y */
+        }
 
-}
-        
-.carousel {   
-    display: flex;     
-    gap: 20px;     
-    overflow-x: auto;      
-    scroll-behavior: smooth;        
-    white-space: nowrap;
-        
-}
-        
-.carousel img {        
-    width: 150px;         
-    height: 200px;        
-    border-radius: 10px;          
-    object-fit: cover;   
-}
-        
-.btn {        
-    position: absolute;        
-    top: 50%;          
-    transform: translateY(-50%);         
-    background-color: rgba(0, 0, 0, 0.5);        
-    color: white;        
-    border: none;           
-    cursor: pointer;           
-    padding: 10px;           
-    border-radius: 50%;
-        
-}
-        
-.btn-left {           
-    left: 0;       
-}
+        .section {
+            margin-bottom: 40px;
+        }
 
-.btn-right {        
-    right: 0;     
-}
+        h2 {
+            text-align: center;
+        }
 
-.tophit {
-    text-align: center;
-    margin-bottom: 20px;
-}
+        .carousel-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            overflow-x: auto;
+            /* ถ้าหนังสือเยอะ จะเลื่อนได้ */
+            padding: 10px;
+            white-space: nowrap;
 
-.triple-menu {
-    justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
-    display: flex;
-    gap: 120px;
-    margin-top:90px;
-    padding: 20px;
-}
+        }
 
-.triple-menu a {
-    text-decoration: none;
-    font-size: 35px;
-    font-weight: bold;
-    color: #0a2d4d;
-    cursor: pointer;
-}
+        .carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            white-space: nowrap;
 
-.bottom-bar {
-    background-color: #FFB703;
-    color: #023047;
-    text-align: center;
-    padding: 8px;
-    font-size: 18px;
-    width: 100%;
-    margin-top: auto; /* ให้บาร์เลื่อนลงไปอยู่ล่างสุด */
-}
+        }
+
+        .carousel img {
+            width: 150px;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+
+        }
+
+        .btn-left {
+            left: 0;
+        }
+
+        .btn-right {
+            right: 0;
+        }
+
+        .tophit {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .triple-menu {
+            justify-content: center;
+            /* จัดให้อยู่ตรงกลางแนวนอน */
+            display: flex;
+            gap: 120px;
+            margin-top: 90px;
+            padding: 20px;
+        }
+
+        .triple-menu a {
+            text-decoration: none;
+            font-size: 35px;
+            font-weight: bold;
+            color: #0a2d4d;
+            cursor: pointer;
+        }
+
+        .triple-menu img {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+            /* จัดให้ไอคอนอยู่ตรงกลาง */
+        }
+
+        .bottom-bar {
+            background-color: #FFB703;
+            color: #023047;
+            text-align: center;
+            padding: 8px;
+            font-size: 18px;
+            width: 100%;
+            margin-top: auto;
+            /* ให้บาร์เลื่อนลงไปอยู่ล่างสุด */
+        }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <div class="left-section">
@@ -260,20 +310,20 @@ h2 {
                     <img src="/images/search-icon1.svg" alt="Search Icon">
                 </span>
             </div>
-            <a href="user_profile.html">
+            <a href="/user_profile">
                 <span class="user-icon"><img src="/images/user-icon.svg" alt="User Icon"></span>
             </a>
         </div>
     </div>
 
 
-    
+
     <!-- Sidebar Menu -->
     <div class="menu" id="menu">
-        <a href="#">Tracking</a>
-        <a href="streak_page.html">Streak</a>
+        <a href="/trackingPage">Tracking</a>
+        <a href="/streak_page">Streak</a>
         <a href="/ratingPage">Rating Books</a>
-        <a href="book_list_page.html">Book List</a>
+        <a href="/book_list">Book List</a>
         <div class="dark-mode-toggle">
             <label>
                 <input type="checkbox"> Dark Mode
@@ -282,18 +332,18 @@ h2 {
     </div>
 
     <nav class="triple-menu">
-        <a href="streak.html">check streak</a>
-        <a href="booklist.html">
-            <span> book </span> 
-            <img src="/public/images/bookmark.svg">
-            <span> list </span> 
+        <a href="/streak_page">check streak</a>
+        <a href="/book_list">
+            <span> book </span>
+            <img src="images/bookmark.svg">
+            <span> list </span>
         </a>
-        <a href="streak.html">rating boooks</a>
+        <a href="/ratingPage">rating boooks</a>
     </nav>
 
-    
 
-    
+
+
     <!--munu side bar-->
     <script>
         function toggleMenu() {
@@ -307,9 +357,9 @@ h2 {
         <div class="carousel-container">
             <button class="btn btn-left" onclick="scrollLeft('topHits')">&#10094;</button>
             <div class="carousel" id="topHits">
-                <img src="public/images/a_little_life.jpg" alt="A Little Life by Hanya Yanagihara">
-                <img src="/public/images/pride_and_prejudice.jpg" alt="Pride And Prejudice by Jane Austen">
-                <img src="/public/images/The_Hunger_Games_cover.jpg" alt="The Hunger Games by Suzanne Collins">
+                <img src="images/a_little_life.jpg" alt="A Little Life by Hanya Yanagihara">
+                <img src="images/pride_and_prejudice.jpg" alt="Pride And Prejudice by Jane Austen">
+                <img src="images/The_Hunger_Games_cover.jpg" alt="The Hunger Games by Suzanne Collins">
             </div>
             <button class="btn btn-right" onclick="scrollRight('topHits')">&#10095;</button>
         </div>
@@ -320,7 +370,7 @@ h2 {
         <div class="carousel-container">
             <button class="btn btn-left" onclick="scrollLeft('newArrival')">&#10094;</button>
             <div class="carousel" id="newArrival">
-                <img src="book5.jpg" alt="Heaven by Mieko Kawakami">
+                <img src="images/heaven_mieko.JPG" alt="Heaven by Mieko Kawakami">
                 <img src="book6.jpg" alt="Dead Poets Society by Tom Schulman">
                 <img src="book7.jpg" alt="Funny Story by Emily Henry">
             </div>
@@ -351,4 +401,5 @@ h2 {
     </script>
 
 </body>
+
 </html>
