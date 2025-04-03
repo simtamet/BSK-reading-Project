@@ -3,35 +3,6 @@ const Encryption = require('../util');
 
 util = new Encryption();
 
-
-class Book {
-    constructor(id, title, author, genre) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.reviews = [];
-    }
-
-
-    addReview(review) {
-        this.reviews.push(review);
-    }
-
-    getReviews() {
-        return this.reviews.map((review) => this.encryptReview(review));
-    }
-
-
-    getAverageRating() {
-        const totalRating = this.reviews.reduce((acc, review) => acc + review.rating, 0);
-        return this.reviews.length > 0 ? totalRating / this.reviews.length : 0;
-    }
-}
-
-
-
-// Class for Review data structure
 class Review {
     constructor(username, rating, reviewText, datePosted) {
         this.username = username;
@@ -56,53 +27,87 @@ class BookReviewManager {
     }
 
     getAllBooks() {
-        return this.books.map((book) => ({
+        console.time('GetAllBooks');
+        const booksWithAvgRating = this.books.map((book) => ({
             ...book,
             averageRating: book.getAverageRating(),
         }));
+        console.timeEnd('GetAllBooks');
+        return booksWithAvgRating;
     }
 
     saveBooksToFile(filePath) {
+        console.time('SaveBooksToFile');
         fs.writeFileSync(filePath, JSON.stringify(this.books, null, 2));
+        console.timeEnd('SaveBooksToFile');
     }
 
     loadBooksFromFile(filePath) {
-        if (fs.existsSync(filePath)) {
-            const data = fs.readFileSync(filePath);
-            const booksData = JSON.parse(data);
-            this.books = booksData.map((bookData) => {
-                const book = new Book(bookData.id, bookData.title, bookData.author, bookData.genre);
-                book.reviews = bookData.reviews;
-                return book;
-            });
+        console.time('LoadBooksFromFile');
+        try {
+            if (fs.existsSync(filePath)) {
+                const data = fs.readFileSync(filePath, 'utf8');
+                const booksData = JSON.parse(data);
+
+                // แปลงข้อมูลและสร้าง Book แม้ว่าข้อมูลบางส่วนจะขาดหาย
+                this.books = booksData.map(bookData => {
+                    // ตรวจสอบว่ามีข้อมูลครบถ้วนหรือไม่
+                    if (bookData.id && bookData.title && bookData.author && bookData.genre) {
+                        return new Book(bookData.id, bookData.title, bookData.author, bookData.genre);
+                    } else {
+                        // ไม่ทำอะไร (หรืออาจจะ return undefined ถ้าคุณต้องการ)
+                        return new Book(bookData.id, bookData.title, bookData.author, bookData.genre);
+                    }
+                });
+            } else {
+                console.warn('File does not exist:', filePath);
+            }
+        } catch (error) {
+            console.error('Error loading books from file:', error);
         }
+        console.timeEnd('LoadBooksFromFile');
     }
+
+
+
+
+
+
+
     searchBooks(searchQuery) {
-        return this.books.filter((book) =>
+        console.time('SearchBooks');
+        const searchResult = this.books.filter((book) =>
             book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             book.author.toLowerCase().includes(searchQuery.toLowerCase())
         );
+        console.timeEnd('SearchBooks');
+        return searchResult;
     }
 
     // Summary by rating
     summarizeByRating() {
+        console.time('SummarizeByRating');
         const summary = {};
         this.books.forEach((book) => {
             book.reviews.forEach((review) => {
                 summary[review.rating] = (summary[review.rating] || 0) + 1;
             });
         });
+        console.timeEnd('SummarizeByRating');
         return summary;
     }
 
     // Sort books by average rating
     sortByRating() {
-        return this.books.sort((a, b) => {
+        console.time('SortByRating');
+        const sortedBooks = this.books.sort((a, b) => {
             const avgRatingA = a.getAverageRating();
             const avgRatingB = b.getAverageRating();
-            return avgRatingB - avgRatingA; 
+            return avgRatingB - avgRatingA;
         });
+        console.timeEnd('SortByRating');
+        return sortedBooks;
     }
 }
 
-module.exports = { Book, Review, BookReviewManager };
+module.exports = { Review, BookReviewManager };

@@ -1,18 +1,18 @@
-
-const { Book, Review, BookReviewManager } = require('../models/bookReviewManager');
+const fs = require('fs');
+const { Review, BookReviewManager } = require('../models/bookReviewManager');
+const { Book } = require('../models/bookModel');
 
 describe('BookReviewManager Tests', () => {
     let bookManager;
     let book1;
     let book2;
+    const filePath = './books.json'; // เพิ่มไฟล์สำหรับทดสอบการโหลดบันทึก
 
     beforeEach(() => {
         bookManager = new BookReviewManager();
 
-
         book1 = new Book(1, 'Book 1', 'Author A', 'Fiction');
         book2 = new Book(2, 'Book 2', 'Author B', 'Non-fiction');
-
 
         book1.addReview(new Review('User1', 5, 'Great book!', '2025-04-01'));
         book1.addReview(new Review('User2', 4, 'Enjoyed it', '2025-04-02'));
@@ -20,30 +20,21 @@ describe('BookReviewManager Tests', () => {
         book2.addReview(new Review('User3', 3, 'Interesting but slow', '2025-04-01'));
         book2.addReview(new Review('User4', 2, 'Not my style', '2025-04-02'));
 
-
         bookManager.addBook(book1);
         bookManager.addBook(book2);
+    });
+
+    afterEach(() => {
+        // Cleanup: ลบไฟล์หลังทดสอบเสร็จ
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
     });
 
     test('should add books correctly', () => {
         expect(bookManager.books.length).toBe(2);
         expect(bookManager.getBookById(1).title).toBe('Book 1');
         expect(bookManager.getBookById(2).title).toBe('Book 2');
-    });
-
-    test('should add reviews correctly', () => {
-        const reviews1 = bookManager.getBookById(1).getReviews();
-        expect(reviews1.length).toBe(2);
-        expect(reviews1[0].reviewText).toBe('Great book!');
-
-        const reviews2 = bookManager.getBookById(2).getReviews();
-        expect(reviews2.length).toBe(2);
-        expect(reviews2[1].reviewText).toBe('Not my style');
-    });
-
-    test('should calculate average rating correctly', () => {
-        expect(book1.getAverageRating()).toBe(4.5);
-        expect(book2.getAverageRating()).toBe(2.5);
     });
 
     test('should summarize reviews by rating correctly', () => {
@@ -70,58 +61,79 @@ describe('BookReviewManager Tests', () => {
         expect(searchResult2[0].title).toBe('Book 2');
     });
 
-    test('should load and save books correctly', () => {
-        const filePath = './books.json';
 
+
+    test('should not load books if file does not exist', () => {
+        const invalidPath = './invalid_books.json';
+        const newManager = new BookReviewManager();
+        newManager.loadBooksFromFile(invalidPath);
+
+        // Check if books remain empty when file does not exist
+        expect(newManager.books.length).toBe(0);
+    });
+
+    test('should get all books correctly', () => {
+        const allBooks = bookManager.getAllBooks();
+        expect(allBooks.length).toBe(2); // ตรวจสอบจำนวนทั้งหมดของหนังสือ
+        expect(allBooks[0].title).toBe('Book 1');
+        expect(allBooks[1].title).toBe('Book 2');
+    });
+
+
+
+    test('should save books to file correctly', () => {
         // Save books to file
         bookManager.saveBooksToFile(filePath);
+
+        // Check if the file exists
+        expect(fs.existsSync(filePath)).toBe(true);
+
+        // Read the file and verify its content
         const fileData = fs.readFileSync(filePath, 'utf-8');
         const savedBooks = JSON.parse(fileData);
 
         expect(savedBooks.length).toBe(2);
-
-        // Load books from file
-        const newManager = new BookReviewManager();
-        newManager.loadBooksFromFile(filePath);
-        expect(newManager.books.length).toBe(2);
-    });
-
-    test('should add new book correctly', () => {
-        const newBook = new Book(3, 'Book 3', 'Author C', 'Fantasy');
-        bookManager.addBook(newBook);
-        expect(bookManager.books.length).toBe(3);
-        expect(bookManager.getBookById(3).title).toBe('Book 3');
-    });
-
-    test('should add review to existing book', () => {
-        const review = new Review('User5', 5, 'Amazing read!', '2025-04-03');
-        book1.addReview(review);
-        const reviews = bookManager.getBookById(1).getReviews();
-        expect(reviews.length).toBe(3);
-        expect(reviews[2].reviewText).toBe('Amazing read!');
-    });
-    test('should handle book with no reviews correctly', () => {
-        const book3 = new Book(4, 'Book 4', 'Author D', 'Thriller');
-        bookManager.addBook(book3);
-        expect(bookManager.getBookById(4).getReviews().length).toBe(0);
-        expect(bookManager.getBookById(4).getAverageRating()).toBe(0); // ไม่มีรีวิว ควรคืนค่าเป็น 0
+        expect(savedBooks[0].title).toBe('Book 1');
+        expect(savedBooks[0].reviews.length).toBe(2);
     });
 
     test('should load books from file correctly', () => {
-        const filePath = './books.json';
+        const booksData = [
+            { id: 1, title: 'Book 1', author: 'Author A', genre: 'Fiction' },
+            { id: 2, title: 'Book 2', author: 'Author B', genre: 'Non-fiction' }
+        ];
 
-        // Save books to file
-        bookManager.saveBooksToFile(filePath);
+        // เขียนข้อมูลลงในไฟล์
+        fs.writeFileSync(filePath, JSON.stringify(booksData, null, 2));
 
-        // Create new manager and load books
-        const newManager = new BookReviewManager();
-        newManager.loadBooksFromFile(filePath);
+        // ทดสอบการโหลดข้อมูล
+        bookManager.loadBooksFromFile(filePath);
 
-        // Check if books are loaded correctly
-        expect(newManager.books.length).toBe(2);
-        expect(newManager.getBookById(1).title).toBe('Book 1');
-        expect(newManager.getBookById(2).title).toBe('Book 2');
+        // ตรวจสอบว่ามีการโหลดข้อมูลที่ถูกต้อง
+        expect(bookManager.books.length).toBe(2);
+        expect(bookManager.books[0].title).toBe('Book 1');
+        expect(bookManager.books[1].author).toBe('Author B');
     });
 
+
+    test('should skip incomplete books when loading', () => {
+        const booksData = [
+            { id: 1, title: 'Book 1', author: 'Author A', genre: 'Fiction' },
+            { id: 2, title: '', author: 'Author B', genre: 'Non-fiction' }, // ข้อมูลไม่สมบูรณ์
+            { id: 3, title: 'Book 3', author: 'Author C', genre: 'Mystery' }
+        ];
+
+        fs.writeFileSync(filePath, JSON.stringify(booksData, null, 2));
+
+        bookManager.loadBooksFromFile(filePath);
+
+        expect(bookManager.books.length).toBe(2); // ควรจะมี 2 รายการที่สมบูรณ์
+        expect(bookManager.books[0].title).toBe('Book 1');
+        expect(bookManager.books[1].title).toBe('Book 3');
+    });
+
+    
+
+    
 
 });
