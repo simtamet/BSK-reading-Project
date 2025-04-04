@@ -14,3 +14,30 @@
 **1.9.**  **trackingPage.ejs :** หน้าสำหรับฟีเจอร์ที่ช่วยให้ผู้ใช้ ดูภาพรวม ของหนังสือที่กำลังอ่าน แสดง หนังสือที่อ่านอยู่ หนังสือที่อ่านจบ หนังสือที่อยากอ่าน <br>
 **1.10.**     **user_profile.ejs :** หน้าเว็บสำหรับการแก้ไขข้อมูลส่วนตัวของผู้ใช้งาน <br>
 
+**2.**         **Folder public** <br>
+**2.1.**     **Img** ใช้เก็บรูปต่าง ๆ ที่ต้องใช้ในเว็บ<br>
+![image.png](/.attachments/image-de22415c-e1cd-4190-b776-bbb789dfb971.png)<br>
+![image.png](/.attachments/image-d627b7ac-215c-4615-8300-844bf246075e.png)<br>
+**3.**         **folder test** <br>
+![image.png](/.attachments/image-d40bad06-d443-40e2-a9b0-a355d1eadb70.png) <br>
+**3.1**    **bookModel.test.js** **:** ใช้ในการทดสอบ class Book ทดสอบฟังก์ชันการทำงานหลักๆ ที่เกี่ยวข้องกับการจัดการหนังสือและรีวิว <br>
+**3.2**    **bookReviewManager.test.js** **:** ใช้ในการทดสอบ class Review , BookReviewManager ครอบคลุมการทดสอบฟังก์ชันหลักที่เกี่ยวข้องกับการจัดการหนังสือและรีวิว รวมถึงการบันทึกและโหลดข้อมูลจากไฟล์ JSON <br>
+
+**4.**         **folder controllers** <br>
+![image.png](/.attachments/image-b26245e8-9690-46f3-aecc-3ce187da49b5.png)<br>
+**bookController.js :** ควบคุมการจัดการข้อมูลหนังสือ เช่น การเพิ่ม แก้ไข ลบ และค้นหาหนังสือ ทำหน้าที่เชื่อมต่อระหว่างผู้ใช้กับฐานข้อมูลหนังสือผ่าน API ช่วยให้ระบบสามารถจัดการหนังสือได้อย่างมีประสิทธิภาพ<br>
+**bookController.js :** เป็น Controller สำหรับ API ที่ใช้จัดการข้อมูลหนังสือในระบบ โดยทำงานร่วมกับไฟล์ books.json เพื่อเก็บข้อมูลหนังสือค้นหาหนังสือ<br>
+**4.1**    **ratingController.js :** เอาไว้จัดการกับการให้คะแนนหนังสือ<br>
+**4.2**    **streakController.js :** จัดการเกี่ยวกับสถิติต่อเนื่อง เช่นการอ่านหนังสือต่อเนื่องหลายวัน<br>
+**4.3**    **trackingController.js :** จัดการเกี่ยวกับการติดตามการอ่านหรือความคืบหน้า<br>
+**userController.js :** จัดการข้อมูลผู้ใช้ เช่น การสมัครสมาชิก ล็อกอิน อัปเดตโปรไฟล์ควบคุมการเข้าถึงและความปลอดภัยของบัญชีผู้ใช้งาน ดูแลระบบบัญชีให้มีความปลอดภัยและเป็นส่วนตัว<br>
+
+**5.**         **file อื่นที่เกี่ยวข้อง** <br>
+![image.png](/.attachments/image-fffb99c6-fd52-4e33-a49b-9f8ed173555b.png)<br>
+**5.1**    **index.js** : เป็น Express.js Backend Server สำหรับจัดการหนังสือและรีวิว โดยใช้EJS เป็น template engine และรองรับ session-based authentication <br>
+**5.2**    **package-lock.json , package.json :** ใช้กำหนดข้อมูลโปรเจกต์และแพ็กเกจที่ต้องใช้ <br>
+**5.3**    **util.js :** เป็น คลาส Encryption ที่ใช้ crypto ใน Node.js เพื่อ เข้ารหัส (Hashing) ข้อความ ด้วย pbkdf2Sync และส่งออกผลลัพธ์เป็นค่า Hash <br>
+
+**6.**         **Screen shot ตัวอย่างโค้ดในโปรเจกต์** <br>
+![image.png](/.attachments/image-d47fb8f2-e75f-4804-b08f-842821341ff2.png)<br>
+![image.png](/.attachments/image-8f84db2b-f09d-4a7f-ab3d-79dade065c0a.png)<br>
