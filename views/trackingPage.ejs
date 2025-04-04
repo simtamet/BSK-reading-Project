@@ -282,7 +282,7 @@ h1 {
     align-items: center;
     gap: 10px;
     position: absolute; /* เพิ่ม position: absolute; */
-    top: 0px; /* กำหนดตำแหน่ง top */
+    top: 20px; /* กำหนดตำแหน่ง top */
     right: 0; /* เปลี่ยน left เป็น right */
     transform: translateX(0); /* เปลี่ยน translateX(-50%) เป็น translateX(0) */
 }
@@ -294,9 +294,7 @@ h1 {
     <div class="navbar">
         <div class="left-section">
             <span class="menu-btn" onclick="toggleMenu()">☰</span>
-            <a href="homePage.ejs">
-                <img src="images/logo.png" alt="Logo" class="Logo">
-            </a>
+            <img src="images/logo.png" alt="Logo" class="Logo">
         </div>
         <div class="right-section">
             <button class="add-friend-btn">Add Friend</button>
@@ -306,7 +304,7 @@ h1 {
                     <img src="/images/search-icon1.svg" alt="Search Icon">
                 </span>
             </div>
-            <a href="user_profile.html">
+            <a href="/user_profile">
                 <span class="user-icon"><img src="/images/user-icon.svg" alt="User Icon"></span>
             </a>
         </div>
@@ -314,10 +312,10 @@ h1 {
 
     <!-- Sidebar Menu -->
     <div class="menu" id="menu">
-        <a href="trackingPage.ejs">Tracking</a>
-        <a href="streak_page.html">Streak</a>
-        <a href="ratingPage.ejs">Rating Books</a>
-        <a href="book_list_page.html">Book List</a>
+        <a href="/trackingPage">Tracking</a>
+        <a href="/streak_page">Streak</a>
+        <a href="/ratingPage">Rating Books</a>
+        <a href="/book_list">Book List</a>
         <div class="dark-mode-toggle">
             <label>
                 <input type="checkbox"> Dark Mode
@@ -391,89 +389,88 @@ h1 {
 
     
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const dateInput = document.getElementById("date");
-        const pagesInput = document.getElementById("pages");
-        const saveButton = document.getElementById("saveButton");
+        document.addEventListener("DOMContentLoaded", function () {
+            const dateInput = document.getElementById("date");
+            const pagesInput = document.getElementById("pages");
+            const saveButton = document.getElementById("saveButton");
 
-    // ฟังก์ชันรีเซ็ตข้อมูลเมื่อหน้าโหลด
-    function resetPage() {
-        // รีเซ็ตค่าที่เก็บใน localStorage
-        localStorage.clear();
+        // ฟังก์ชันรีเซ็ตข้อมูลเมื่อหน้าโหลด
+        function resetPage() {
+            // รีเซ็ตค่าที่เก็บใน localStorage
+            localStorage.clear();
 
-        // รีเซ็ตค่าฟอร์ม
-        dateInput.value = '';
-        pagesInput.value = '';
+            // รีเซ็ตค่าฟอร์ม
+            dateInput.value = '';
+            pagesInput.value = '';
         
-        // ลบการเลือกของปุ่ม
-        document.querySelectorAll(".button-group button").forEach((btn) => {
-            btn.classList.remove("active-button");
+            // ลบการเลือกของปุ่ม
+            document.querySelectorAll(".button-group button").forEach((btn) => {
+                btn.classList.remove("active-button");
         });
 
         // ซ่อนปุ่มบันทึกเมื่อเริ่มต้น
         saveButton.style.display = "none";
-    }
-
-    // ฟังก์ชันบันทึกข้อมูล
-    function saveData() {
-        const selectedBookType = document.querySelector('.button-group button.active-button')?.getAttribute('data-value');
-        const selectedProgressType = document.querySelector('.button-group button.active-button')?.getAttribute('data-value');
-        const date = dateInput.value;
-        const pages = pagesInput.value;
-
-        if (date && selectedBookType && selectedProgressType && pages) {
-            localStorage.setItem("readingDate", date);
-            localStorage.setItem("bookType", selectedBookType);
-            localStorage.setItem("progressType", selectedProgressType);
-            localStorage.setItem("pages", pages);
-
-            // แสดงข้อความ "บันทึกสำเร็จ"
-            const successMessage = document.getElementById("successMessage");
-            successMessage.style.display = "block"; // แสดงข้อความ
-            setTimeout(() => {
-                successMessage.style.display = "none"; // ซ่อนข้อความหลังจาก 3 วินาที
-            }, 3000);
-
-            // ซ่อนปุ่ม "บันทึก"
-            saveButton.style.display = "none"; // ซ่อนปุ่ม
         }
-    }
 
-    // ตรวจสอบการกรอกข้อมูล
-    function checkInputs() {
-        if (dateInput.value && pagesInput.value) {
-            saveButton.style.display = "flex"; // แสดงปุ่มเมื่อกรอกข้อมูลครบ
-        } else {
-            saveButton.style.display = "none"; // ซ่อนปุ่มเมื่อกรอกข้อมูลไม่ครบ
+        // ฟังก์ชันบันทึกข้อมูล
+        function saveData() {
+            const selectedBookType = document.querySelector('.button-group button.active-button')?.getAttribute('data-value');
+            const selectedProgressType = document.querySelector('.button-group button.active-button')?.getAttribute('data-value');
+            const date = dateInput.value;
+            const pages = pagesInput.value;
+
+            if (date && selectedBookType && selectedProgressType && pages) {
+                localStorage.setItem("readingDate", date);
+                localStorage.setItem("bookType", selectedBookType);
+                localStorage.setItem("progressType", selectedProgressType);
+                localStorage.setItem("pages", pages);
+
+                // แสดงข้อความ "บันทึกสำเร็จ"
+                const successMessage = document.getElementById("successMessage");
+                successMessage.style.display = "block"; // แสดงข้อความ
+                setTimeout(() => {
+                    successMessage.style.display = "none"; // ซ่อนข้อความหลังจาก 3 วินาที
+                }, 3000);
+
+                // ซ่อนปุ่ม "บันทึก"
+                saveButton.style.display = "none"; // ซ่อนปุ่ม
+            }
         }
-    }
 
-    // ฟังก์ชันโหลดข้อมูลที่บันทึกไว้ (ไม่ใช้ในกรณีนี้)
-    function loadSavedData() {
-        // คุณอาจจะไม่ต้องการโหลดข้อมูลที่บันทึกไว้หลังจากรีเซ็ต
-        resetPage(); // เรียกใช้งาน reset ทุกครั้งที่โหลดหน้า
-    }
+        // ตรวจสอบการกรอกข้อมูล
+        function checkInputs() {
+            if (dateInput.value && pagesInput.value) {
+                saveButton.style.display = "flex"; // แสดงปุ่มเมื่อกรอกข้อมูลครบ
+            } else {
+                saveButton.style.display = "none"; // ซ่อนปุ่มเมื่อกรอกข้อมูลไม่ครบ
+            }
+        }
 
-    // รีเซ็ตค่าฟอร์มเมื่อหน้าโหลด
-    loadSavedData();
+        // ฟังก์ชันโหลดข้อมูลที่บันทึกไว้ (ไม่ใช้ในกรณีนี้)
+        function loadSavedData() {
+            // คุณอาจจะไม่ต้องการโหลดข้อมูลที่บันทึกไว้หลังจากรีเซ็ต
+            resetPage(); // เรียกใช้งาน reset ทุกครั้งที่โหลดหน้า
+        }
 
-    // Event Listeners
-    dateInput.addEventListener("input", checkInputs);
-    pagesInput.addEventListener("input", checkInputs);
+        // รีเซ็ตค่าฟอร์มเมื่อหน้าโหลด
+        loadSavedData();
+
+        // Event Listeners
+        dateInput.addEventListener("input", checkInputs);
+        pagesInput.addEventListener("input", checkInputs);
     
-    // สำหรับปุ่มที่เลือก
-    document.querySelectorAll(".button-group button").forEach((button) => {
-        button.addEventListener("click", function () {
-            // ล้าง active-button ออกจากปุ่มในกลุ่มเดียวกัน
-            this.parentNode.querySelectorAll("button").forEach((btn) => btn.classList.remove("active-button"));
-            this.classList.add("active-button"); // เพิ่ม class ให้ปุ่มที่ถูกเลือก
-            checkInputs();
+        // สำหรับปุ่มที่เลือก
+        document.querySelectorAll(".button-group button").forEach((button) => {
+            button.addEventListener("click", function () {
+                // ล้าง active-button ออกจากปุ่มในกลุ่มเดียวกัน
+                this.parentNode.querySelectorAll("button").forEach((btn) => btn.classList.remove("active-button"));
+                this.classList.add("active-button"); // เพิ่ม class ให้ปุ่มที่ถูกเลือก
+                checkInputs();
+            });
         });
-    });
 
-    saveButton.addEventListener("click", saveData);
-    });
-
+        saveButton.addEventListener("click", saveData);
+        });
     </script>
 </body>
 </html>
