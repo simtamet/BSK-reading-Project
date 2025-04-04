@@ -342,17 +342,65 @@
         .add-book-btn:hover {
             background-color: #024668;
         }
-
-        /* Bottom bar style */
-        .bottom-bar {
-            background-color: #FFB703;
-            color: #023047;
-            text-align: center;
-            padding: 8px;
-            font-size: 18px;
+         footer {
             width: 100%;
-            margin-top: auto;
-            /* ให้บาร์เลื่อนลงไปอยู่ล่างสุด */
+            background-color: #FFB703;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        footer a {
+            color: #023047;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            /* ใช้ Flexbox เพื่อจัดการตำแหน่ง */
+            justify-content: center;
+            /* จัดไอคอนให้อยู่ตรงกลาง */
+            margin-top: 10px;
+            /* ระยะห่างจากเนื้อหาข้างบน */
+
+        }
+
+        /* กำหนดการจัดการกับลิงค์ไอคอน */
+        .social-icons a {
+            margin: 0 15px;
+            /* ระยะห่างระหว่างไอคอน */
+            font-size: 2rem;
+            /* ปรับขนาดของไอคอนให้พอดีกับ footer */
+            color: #023047;
+            /* สีไอคอน */
+            text-decoration: none;
+            /* ไม่มีขีดเส้นใต้ */
+        }
+
+        /* เมื่อ hover ไอคอน */
+        .social-icons a:hover {
+            color: #FFB703;
+            /* เปลี่ยนสีไอคอนเมื่อ hover */
+            transform: scale(1.1);
+            /* ขยายขนาดไอคอนเมื่อ hover */
+        }
+
+        .social-icons a img {
+            width: 35px;
+            /* ขนาดของรูปไอคอน */
+            height: 35px;
+            /* ขนาดของรูปไอคอน */
+            object-fit: cover;
+            /* ป้องกันไม่ให้ไอคอนยืดเบี้ยว */
         }
     </style>
 </head>
@@ -456,18 +504,14 @@
 
 
 
-    <div class="bottom-bar">
-
-        <p>© 2025 BookWormSenpaiKawaiiReading | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+     <footer>
+        <p>© 2025 bookwormsenpaikawaii | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         <div class="social-icons">
-            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-
+            <a href="https://www.facebook.com" target="_blank"><img src="/images/facebook.png" alt="Facebook"></a>
+            <a href="https://www.instagram.com" target="_blank"><img src="/images/instagram.png" alt="Instagram"></a>
+            <a href="https://www.twitter.com" target="_blank"><img src="/images/x.png" alt="X"></a>
         </div>
-        <br>
-        <br>
-    </div>
+    </footer>
 
 
 
