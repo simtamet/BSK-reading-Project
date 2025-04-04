@@ -41,6 +41,8 @@ app.get("/book_list", bookController.showBookListPage);
 app.get("/trackingPage", trackingController.showTrackingPage); 
 app.get("/communityReviewsPage", ratingController.showCommunityReviewsPage); 
 app.get("/user_profile", userController.showUserProfilePage);
+app.get("/save_reading_session", trackingController.showSaveReadingSessionPage);
+
 
 // API สำหรับบันทึกหนังสือ
 app.post("/save-book", bookController.saveBook); 
