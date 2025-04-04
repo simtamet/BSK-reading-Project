@@ -1,336 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BSK Reading</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #8ECAE6;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #8ECAE6;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
-        .menu-btn {
-            cursor: pointer;
-            font-size: 24px;
-            margin-right: 10px;
-        }
+.container {
+    width: 50%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
 
-        /* Sidebar Menu (กลับมาเป็นแบบเก่า) */
-        .menu {
-            position: absolute;
-            left: -250px;
-            top: 50px;
-            width: 200px;
-            background-color: #ffffff;
-            padding: 15px;
-            transition: 0.3s ease-in-out;
-        }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-        .menu a {
-            display: block;
-            color: #023047;
-            padding: 10px;
-            text-decoration: none;
-        }
+.header img {
+    width: 50px;
+}
 
-        .menu a:hover {
-            background-color: #FFB703;
-        }
+.header input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-        .menu.active {
-            left: 0;
-        }
+.content {
+    position: relative;
+    margin-top: 50px;
+    width: 45%;
+    margin: 80px auto 20px;
+    padding-top: 50px; /* เพิ่ม padding-top */
+}
 
-        /* Dark Mode Toggle */
-        .dark-mode-toggle {
-            color: #023047;
-            padding: 10px;
-        }
+h1 {
+    text-align: left;
+}
 
-        .container {
-            width: 50%;
-            margin: 20px auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-        }
+.form-group {
+    gap: 100px;
+    margin-bottom: 20px;
+    justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
+}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+.form-group label {
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    justify-content: center; /* จัดให้อยู่ตรงกลางแนวนอน */
+}
 
-        .header img {
-            width: 50px;
-        }
+.form-group input[type="text"],
+.form-group input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-        .header input[type="text"] {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+.form-group button {
+    margin: 0 40px;
+    padding: 10px 30px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-        .content {
-            position: relative;
-            margin-top: 50px;
-            width: 45%;
-            margin: 80px auto 20px;
-            padding-top: 50px;
-            /* เพิ่ม padding-top */
-        }
-
-        h1 {
-            text-align: left;
-        }
-
-        .form-group {
-            gap: 100px;
-            margin-bottom: 20px;
-            justify-content: center;
-            /* จัดให้อยู่ตรงกลางแนวนอน */
+.form-group button:hover {
+    background-color: #2980b9;
+}
 
 
-        }
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
 
-        .form-group label {
-            text-align: left;
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            justify-content: center;
-            /* จัดให้อยู่ตรงกลางแนวนอน */
-        }
+.bottom-nav {
+    background-color: #F39C12; /* สีพื้นหลังของแถบนำทางด้านล่าง */
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 
-        .form-group input[type="text"],
-        .form-group input[type="date"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+.bottom-nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+}
 
-        .form-group button {
-            margin: 0 40px;
-            padding: 10px 30px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+.bottom-nav a:hover {
+    text-decoration: underline;
+}
+.navbar {
+    background-color: #FFB703;
+    padding: 10px 0%; /* ช่องว่างรอบๆ */
+    display: flex; /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+    justify-content: space-between; /* จัดให้ฝั่งซ้ายและขวาอยู่ห่างกัน */
+    align-items: center; /* จัดให้ทุกองค์ประกอบอยู่ในแนวกลางตามแกน Y */
+    position: fixed; /* ทำให้ navbar อยู่ที่ตำแหน่งคงที่ */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* ทำให้ navbar อยู่เหนือ sidebar */
+    padding-right: 50px; /* เพิ่ม padding-right */
+}
 
-        .form-group button:hover {
-            background-color: #2980b9;
-        }
+.left-section {
+    display: flex;
+    align-items: center; /* จัดให้เมนูและโลโก้อยู่ในแนวเดียวกัน */
+}
 
+.Logo {
+    width: 50px; /* ขนาดของโลโก้ */
+    height: auto;
+}
 
-        .radio-group input[type="radio"] {
-            margin-right: 5px;
-        }
+.right-section {
+    display: flex;
+    align-items: center; /* จัดให้ปุ่ม Add Friend, ช่องค้นหา, และไอคอนผู้ใช้อยู่ในแถวเดียวกัน */
+    justify-content: flex-end; /* จัดให้อยู่ทางขวาสุด */
+    gap: 10px; /* ระยะห่างระหว่างปุ่มและช่องค้นหา */
+}
 
-        .bottom-nav {
-            background-color: #F39C12;
-            /* สีพื้นหลังของแถบนำทางด้านล่าง */
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+.add-friend-btn {
+    padding: 6px 8px; /* ปรับขนาด padding ให้ปุ่มใหญ่ขึ้นและมนขึ้น */
+    background-color: #FFB703;
+    color: #023047;
+    border: none;
+    cursor: pointer;
+    margin-right: 0px; /* ช่องว่างระหว่างปุ่ม Add Friend กับช่องค้นหา */
+    border-radius: 20px; /* ทำให้มุมปุ่มมน ๆ */
+    font-size: 14px; /* ขนาดฟอนต์ให้เหมาะสม */
+}
 
-        .bottom-nav a {
-            margin: 0 15px;
-            color: white;
-            text-decoration: none;
-        }
+.add-friend-btn:hover {
+    background-color: #ffffff; /* สีที่เปลี่ยนเมื่อ hover */
+}
 
-        .bottom-nav a:hover {
-            text-decoration: underline;
-        }
+.search-bar-container {
+    position: relative;
+    width: 180px; /* กำหนดความกว้างของ search bar */
+    
+}
 
-        .navbar {
-            background-color: #FFB703;
-            padding: 10px 20px;
-            /* ช่องว่างรอบๆ */
-            display: flex;
-            /* ใช้ flexbox เพื่อจัดตำแหน่ง */
-            justify-content: space-between;
-            /* จัดให้ฝั่งซ้ายและขวาอยู่ห่างกัน */
-            align-items: center;
-            /* จัดให้ทุกองค์ประกอบอยู่ในแนวกลางตามแกน Y */
-            position: fixed;
-            /* ทำให้ navbar อยู่ที่ตำแหน่งคงที่ */
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            /* ทำให้ navbar อยู่เหนือ sidebar */
-        }
+.search-bar {
+    padding: 5px 1px;
+    width: 100%; /* ทำให้ search bar ใช้ความกว้างเต็ม */
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
 
-        .left-section {
-            display: flex;
-            align-items: center;
-            /* จัดให้เมนูและโลโก้อยู่ในแนวเดียวกัน */
-        }
+.search-icon {
+    position: absolute;
+    right: 3px; /* วางไอคอนอยู่ที่ขวาสุด */
+    top: 50%;
+    transform: translateY(-50%); /* จัดให้อยู่กลางแนวแกน Y */
+    cursor: pointer;
+}
 
-        .Logo {
-            width: 50px;
-            /* ขนาดของโลโก้ */
-            height: auto;
-        }
+.search-icon img {
+    width: 17px;
+    height: 17px;
+}
 
-        .right-section {
-            display: flex;
-            align-items: center;
-            /* จัดให้ปุ่ม Add Friend, ช่องค้นหา, และไอคอนผู้ใช้อยู่ในแถวเดียวกัน */
-            justify-content: flex-end;
-            /* จัดให้อยู่ทางขวาสุด */
-            gap: 10px;
-            /* ระยะห่างระหว่างปุ่มและช่องค้นหา */
-        }
+.user-icon img {
+    width: 30px; /* ขนาดของไอคอนผู้ใช้ */
+    height: 30px;
+    object-fit: cover; /* ป้องกันไม่ให้ไอคอนยืดหรือบิดเบี้ยว */
+    border-radius: 50%; /* ทำให้เป็นวงกลม */
+}
 
-        .add-friend-btn {
-            padding: 6px 8px;
-            /* ปรับขนาด padding ให้ปุ่มใหญ่ขึ้นและมนขึ้น */
-            background-color: #FFB703;
-            color: #023047;
-            border: none;
-            cursor: pointer;
-            margin-right: 0px;
-            /* ช่องว่างระหว่างปุ่ม Add Friend กับช่องค้นหา */
-            border-radius: 20px;
-            /* ทำให้มุมปุ่มมน ๆ */
-            font-size: 14px;
-            /* ขนาดฟอนต์ให้เหมาะสม */
-        }
+.user-icon:hover img {
+    transform: scale(1.2); /* ขยายขนาดไอคอนขึ้น 1.2 เท่า */
+    background-color: #ffffff; /* เปลี่ยนสีพื้นหลัง */
+    padding: 5px; /* เพิ่มพื้นที่รอบ ๆ ไอคอน */
+}
 
-        .add-friend-btn:hover {
-            background-color: #ffffff;
-            /* สีที่เปลี่ยนเมื่อ hover */
-        }
+/* Sidebar Menu */
+.menu {
+    position: absolute;
+    top: 60px; /* เพิ่มให้ sidebar เริ่มต้นจากด้านล่าง navbar */
+    left: -250px;
+    width: 200px;
+    background-color: #ffffff;
+    padding: 15px;
+    transition: 0.3s ease-in-out;
+    z-index: 999; /* ทำให้ menu อยู่หลัง navbar */
+}
 
-        .search-bar-container {
-            position: relative;
-            width: 180px;
-            /* กำหนดความกว้างของ search bar */
+.menu-btn {
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 10px;
+}
 
-        }
+.menu a {
+    display: block;
+    color: #023047;
+    padding: 10px;
+    text-decoration: none;
+}
 
-        .search-bar {
-            padding: 5px 1px;
-            width: 100%;
-            /* ทำให้ search bar ใช้ความกว้างเต็ม */
-            border: 1px solid #ccc;
-            border-radius: 20px;
-        }
+.menu a:hover {
+    background-color: #FFB703;
+}
 
-        .search-icon {
-            position: absolute;
-            right: 3px;
-            /* วางไอคอนอยู่ที่ขวาสุด */
-            top: 50%;
-            transform: translateY(-50%);
-            /* จัดให้อยู่กลางแนวแกน Y */
-            cursor: pointer;
-        }
+.menu.active {
+    left: 0; /* แสดง menu เมื่อ class active ถูกเพิ่ม */
+}
 
-        .search-icon img {
-            width: 17px;
-            height: 17px;
-        }
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    color: #023047;
+    padding: 10px;
+}
 
-        .user-icon img {
-            width: 30px;
-            /* ขนาดของไอคอนผู้ใช้ */
-            height: 30px;
-            object-fit: cover;
-            /* ป้องกันไม่ให้ไอคอนยืดหรือบิดเบี้ยว */
-            border-radius: 50%;
-            /* ทำให้เป็นวงกลม */
-        }
+.bottom-bar {
+    background-color: #FFB703;
+    color: #023047;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+    width: 100%;
+    position: fixed; /* ทำให้ bottom-bar อยู่กับที่ */
+    bottom: 0; /* ทำให้ bottom-bar อยู่ชิดขอบล่าง */
+}
 
-        .user-icon:hover img {
-            transform: scale(1.2);
-            /* ขยายขนาดไอคอนขึ้น 1.2 เท่า */
-            background-color: #ffffff;
-            /* เปลี่ยนสีพื้นหลัง */
-            padding: 5px;
-            /* เพิ่มพื้นที่รอบ ๆ ไอคอน */
-        }
+.button-group {
+    display: flex;
+    justify-content: space-between; /* จัดปุ่มให้ห่างกัน */
+}
 
-        .menu-btn {
-            cursor: pointer;
-            font-size: 24px;
-            margin-right: 10px;
-        }
+.button-group button {
+    flex: 1; /* ทำให้ปุ่มทุกปุ่มขยายตัวเท่ากัน */
+    margin: 0 5px; /* เพิ่มช่องว่างระหว่างปุ่ม */
+    padding: 10px 20px; /* ปรับขนาด padding ของปุ่ม */
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 
-        .bottom-bar {
-            background-color: #FFB703;
-            color: #023047;
-            text-align: center;
-            padding: 8px;
-            font-size: 18px;
-            width: 100%;
-            position: fixed;
-            /* ทำให้ bottom-bar อยู่กับที่ */
-            bottom: 0;
-            /* ทำให้ bottom-bar อยู่ชิดขอบล่าง */
-        }
+.button-group button.active-button {
+    background-color: #2980b9;
+}
 
-        .button-group {
-            margin-top: 20px;
-            /* เพิ่มระยะห่างด้านบน */
-        }
+/* สไตล์ปุ่มที่ถูกเลือก */
+.active-button {
+    background-color: #ff9800 !important; /* สีปุ่มเมื่อเลือก */
+    color: white !important;
+    font-weight: bold;
+}
 
-        .button-group button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+.save-button {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: none; /* ซ่อนปุ่มเริ่มต้น */
+    align-items: center;
+    gap: 10px;
+    position: absolute; /* เพิ่ม position: absolute; */
+    top: 0px; /* กำหนดตำแหน่ง top */
+    right: 0; /* เปลี่ยน left เป็น right */
+    transform: translateX(0); /* เปลี่ยน translateX(-50%) เป็น translateX(0) */
+}
 
-        .button-group button.active-button {
-            background-color: #2980b9;
-        }
-
-        .save-button {
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            display: none;
-            /* ซ่อนปุ่มเริ่มต้น */
-            align-items: center;
-            gap: 10px;
-            position: absolute;
-            /* เพิ่ม position: absolute; */
-            top: 0px;
-            /* กำหนดตำแหน่ง top */
-            right: 0;
-            /* เปลี่ยน left เป็น right */
-            transform: translateX(0);
-            /* เปลี่ยน translateX(-50%) เป็น translateX(0) */
-        }
     </style>
 </head>
-
 <body>
-
+    
     <div class="navbar">
         <div class="left-section">
             <span class="menu-btn" onclick="toggleMenu()">☰</span>
-            <img src="/images/logo.png" alt="Logo" class="Logo">
+            <a href="homePage.ejs">
+                <img src="images/logo.png" alt="Logo" class="Logo">
+            </a>
         </div>
         <div class="right-section">
             <button class="add-friend-btn">Add Friend</button>
@@ -340,7 +306,7 @@
                     <img src="/images/search-icon1.svg" alt="Search Icon">
                 </span>
             </div>
-            <a href="/user_profile">
+            <a href="user_profile.html">
                 <span class="user-icon"><img src="/images/user-icon.svg" alt="User Icon"></span>
             </a>
         </div>
@@ -348,10 +314,10 @@
 
     <!-- Sidebar Menu -->
     <div class="menu" id="menu">
-        <a href="/trackingPage">Tracking</a>
-        <a href="/streak_page">Streak</a>
-        <a href="/ratingPage">Rating Books</a>
-        <a href="/book_list">Book List</a>
+        <a href="trackingPage.ejs">Tracking</a>
+        <a href="streak_page.html">Streak</a>
+        <a href="ratingPage.ejs">Rating Books</a>
+        <a href="book_list_page.html">Book List</a>
         <div class="dark-mode-toggle">
             <label>
                 <input type="checkbox"> Dark Mode
@@ -362,40 +328,44 @@
     <div class="content">
         <h1>Tracking</h1>
         <button id="saveButton" class="save-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="20 6 9 17 4 12" />
             </svg>
-            บันทึก
+            save
         </button>
+
+        <div id="successMessage" style="display:none; color: green; font-size: 16px; margin-top: 20px;">
+            บันทึกข้อมูลเรียบร้อยแล้ว!
+        </div>
+
         <div class="form-group">
             <label for="date">Start reading date</label>
-            <input type="date" id="date">
+                <input type="date" id="date">
         </div>
 
-        <div class="form-group">
-            <label>What type of book do you read?</label>
-            <div class="button-group">
-                <button type="button" data-value="paperBook" id="paperBook">paper book</button>
-                <button type="button" data-value="ebook" id="ebook">e-book</button>
-                <button type="button" data-value="audioBook" id="audioBook">audio book</button>
+            <div class="form-group">
+                <label>What type of book do you read?</label>
+                <div class="button-group">
+                    <button type="button" data-value="paperBook" id="paperBook">paper book</button>
+                    <button type="button" data-value="ebook" id="ebook">e-book</button>
+                    <button type="button" data-value="audioBook" id="audioBook">audio book</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>How would you like to record your progress?</label>
+                <div class="button-group">
+                    <button type="button" data-value="page" id="page">page</button>
+                    <button type="button" data-value="percentage" id="percentage">percentage</button>
+                    <button type="button" data-value="episode" id="episode">episode</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="pages">Total Pages</label>
+                <input type="text" id="pages" placeholder="add number of page">
             </div>
         </div>
-
-        <div class="form-group">
-            <label>How would you like to record your progress?</label>
-            <div class="button-group">
-                <button type="button" data-value="page" id="page">page</button>
-                <button type="button" data-value="percentage" id="percentage">percentage</button>
-                <button type="button" data-value="episode" id="episode">episode</button>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="pages">Total Pages</label>
-            <input type="text" id="pages" placeholder="add number of page">
-        </div>
-    </div>
     </div>
 
     <div class="bottom-bar">
@@ -411,111 +381,99 @@
         <br>
     </div>
 
-
+    <!--munu side bar-->
     <script>
-        // สคริปต์สำหรับปุ่ม "บันทึก" และ input "Total Pages"
-        const dateInput = document.getElementById('date');
-        const pagesInput = document.getElementById('pages');
-        const saveButton = document.getElementById('saveButton');
-
-        function checkInputs() {
-            if (dateInput.value && pagesInput.value) {
-                saveButton.style.display = 'flex';
-            } else {
-                saveButton.style.display = 'none';
-            }
-        }
-
-        dateInput.addEventListener('input', checkInputs);
-        pagesInput.addEventListener('input', checkInputs);
-
-        saveButton.addEventListener('click', function () {
-            console.log('บันทึกข้อมูลแล้ว!');
-        });
-
-        // สคริปต์สำหรับฟอร์ม "Tracking" และปุ่มเลือกประเภทหนังสือ/วิธีการบันทึก
-        document.getElementById('trackingForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const date = document.getElementById('date').value;
-            const bookType = document.querySelector('.form-group button.active').getAttribute('data-value');
-            const progressType = document.querySelector('.button-group button.active').getAttribute('data-value');
-            const pages = document.getElementById('pages').value;
-
-            console.log({ date, bookType, progressType, pages });
-        });
-
-        document.querySelectorAll('.form-group button').forEach(button => {
-            button.addEventListener('click', function () {
-                document.querySelectorAll('.form-group button').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        document.querySelectorAll('.button-group button').forEach(button => {
-            button.addEventListener('click', function () {
-                document.querySelectorAll('.button-group button').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // สคริปต์สำหรับ input "Total Pages"
-        pagesInput.addEventListener('focus', function () {
-            if (this.value === 'add number of page') {
-                this.value = '';
-            }
-        });
-
-        pagesInput.addEventListener('blur', function () {
-            if (!this.value) {
-                this.value = 'add number of page';
-            }
-        });
-        pagesInput.addEventListener('input', function () {
-            if (this.value === 'add number of page') {
-                this.value = '';
-            }
-        });
-    </script>
-
-    <script>
-        document.getElementById('trackingForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // ป้องกันการ reload หน้า
-
-            const date = document.getElementById('date').value;
-            const bookType = document.querySelector('.form-group button.active').getAttribute('data-value');
-            const progressType = document.querySelector('.button-group button.active').getAttribute('data-value');
-            const pages = document.getElementById('pages').value;
-
-            // บันทึกข้อมูล (ตัวอย่าง: แสดงใน console)
-            console.log({ date, bookType, progressType, pages });
-
-
-        });
-
-        // เพิ่ม class 'active' เมื่อคลิกปุ่มเลือกประเภทหนังสือและวิธีการบันทึกความคืบหน้า
-        document.querySelectorAll('.form-group button').forEach(button => {
-            button.addEventListener('click', function () {
-                document.querySelectorAll('.form-group button').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        document.querySelectorAll('.button-group button').forEach(button => {
-            button.addEventListener('click', function () {
-                document.querySelectorAll('.button-group button').forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-
         function toggleMenu() {
             var menu = document.getElementById("menu");
             menu.classList.toggle("active");
         }
-
     </script>
 
-</body>
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const dateInput = document.getElementById("date");
+        const pagesInput = document.getElementById("pages");
+        const saveButton = document.getElementById("saveButton");
 
+    // ฟังก์ชันรีเซ็ตข้อมูลเมื่อหน้าโหลด
+    function resetPage() {
+        // รีเซ็ตค่าที่เก็บใน localStorage
+        localStorage.clear();
+
+        // รีเซ็ตค่าฟอร์ม
+        dateInput.value = '';
+        pagesInput.value = '';
+        
+        // ลบการเลือกของปุ่ม
+        document.querySelectorAll(".button-group button").forEach((btn) => {
+            btn.classList.remove("active-button");
+        });
+
+        // ซ่อนปุ่มบันทึกเมื่อเริ่มต้น
+        saveButton.style.display = "none";
+    }
+
+    // ฟังก์ชันบันทึกข้อมูล
+    function saveData() {
+        const selectedBookType = document.querySelector('.button-group button.active-button')?.getAttribute('data-value');
+        const selectedProgressType = document.querySelector('.button-group button.active-button')?.getAttribute('data-value');
+        const date = dateInput.value;
+        const pages = pagesInput.value;
+
+        if (date && selectedBookType && selectedProgressType && pages) {
+            localStorage.setItem("readingDate", date);
+            localStorage.setItem("bookType", selectedBookType);
+            localStorage.setItem("progressType", selectedProgressType);
+            localStorage.setItem("pages", pages);
+
+            // แสดงข้อความ "บันทึกสำเร็จ"
+            const successMessage = document.getElementById("successMessage");
+            successMessage.style.display = "block"; // แสดงข้อความ
+            setTimeout(() => {
+                successMessage.style.display = "none"; // ซ่อนข้อความหลังจาก 3 วินาที
+            }, 3000);
+
+            // ซ่อนปุ่ม "บันทึก"
+            saveButton.style.display = "none"; // ซ่อนปุ่ม
+        }
+    }
+
+    // ตรวจสอบการกรอกข้อมูล
+    function checkInputs() {
+        if (dateInput.value && pagesInput.value) {
+            saveButton.style.display = "flex"; // แสดงปุ่มเมื่อกรอกข้อมูลครบ
+        } else {
+            saveButton.style.display = "none"; // ซ่อนปุ่มเมื่อกรอกข้อมูลไม่ครบ
+        }
+    }
+
+    // ฟังก์ชันโหลดข้อมูลที่บันทึกไว้ (ไม่ใช้ในกรณีนี้)
+    function loadSavedData() {
+        // คุณอาจจะไม่ต้องการโหลดข้อมูลที่บันทึกไว้หลังจากรีเซ็ต
+        resetPage(); // เรียกใช้งาน reset ทุกครั้งที่โหลดหน้า
+    }
+
+    // รีเซ็ตค่าฟอร์มเมื่อหน้าโหลด
+    loadSavedData();
+
+    // Event Listeners
+    dateInput.addEventListener("input", checkInputs);
+    pagesInput.addEventListener("input", checkInputs);
+    
+    // สำหรับปุ่มที่เลือก
+    document.querySelectorAll(".button-group button").forEach((button) => {
+        button.addEventListener("click", function () {
+            // ล้าง active-button ออกจากปุ่มในกลุ่มเดียวกัน
+            this.parentNode.querySelectorAll("button").forEach((btn) => btn.classList.remove("active-button"));
+            this.classList.add("active-button"); // เพิ่ม class ให้ปุ่มที่ถูกเลือก
+            checkInputs();
+        });
+    });
+
+    saveButton.addEventListener("click", saveData);
+    });
+
+    </script>
+</body>
 </html>
