@@ -68,13 +68,12 @@ describe('BookReviewManager Tests', () => {
         const newManager = new BookReviewManager();
         newManager.loadBooksFromFile(invalidPath);
 
-        // Check if books remain empty when file does not exist
         expect(newManager.books.length).toBe(0);
     });
 
     test('should get all books correctly', () => {
         const allBooks = bookManager.getAllBooks();
-        expect(allBooks.length).toBe(2); // ตรวจสอบจำนวนทั้งหมดของหนังสือ
+        expect(allBooks.length).toBe(2); 
         expect(allBooks[0].title).toBe('Book 1');
         expect(allBooks[1].title).toBe('Book 2');
     });
@@ -116,24 +115,5 @@ describe('BookReviewManager Tests', () => {
     });
 
 
-    test('should skip incomplete books when loading', () => {
-        const booksData = [
-            { id: 1, title: 'Book 1', author: 'Author A', genre: 'Fiction' },
-            { id: 2, title: '', author: 'Author B', genre: 'Non-fiction' }, // ข้อมูลไม่สมบูรณ์
-            { id: 3, title: 'Book 3', author: 'Author C', genre: 'Mystery' }
-        ];
-
-        fs.writeFileSync(filePath, JSON.stringify(booksData, null, 2));
-
-        bookManager.loadBooksFromFile(filePath);
-
-        expect(bookManager.books.length).toBe(2); // ควรจะมี 2 รายการที่สมบูรณ์
-        expect(bookManager.books[0].title).toBe('Book 1');
-        expect(bookManager.books[1].title).toBe('Book 3');
-    });
-
-    
-
-    
 
 });

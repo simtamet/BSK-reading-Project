@@ -40,7 +40,7 @@ app.get("/streak_page", streakController.showStreakPage);
 app.get("/book_list", bookController.showBookListPage); 
 app.get("/trackingPage", trackingController.showTrackingPage); 
 app.get("/communityReviewsPage", ratingController.showCommunityReviewsPage); 
-
+app.get("/user_profile", userController.showUserProfilePage);
 
 // API สำหรับบันทึกหนังสือ
 app.post("/save-book", bookController.saveBook); 

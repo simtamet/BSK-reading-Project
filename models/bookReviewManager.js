@@ -69,11 +69,6 @@ class BookReviewManager {
     }
 
 
-
-
-
-
-
     searchBooks(searchQuery) {
         console.time('SearchBooks');
         const searchResult = this.books.filter((book) =>

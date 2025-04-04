@@ -131,3 +131,7 @@ exports.signup = async (req, res) => {
     console.log(`New user signed up: ${email}`);
     res.redirect('/signin');
 };
+
+exports.showUserProfilePage = (req, res) => {
+    res.render('user_profile', { error: req.query.error || null });
+};
