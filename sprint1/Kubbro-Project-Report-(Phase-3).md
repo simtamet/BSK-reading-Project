@@ -71,7 +71,7 @@
 **ภายในโปรเจกต์ประกอบด้วย** <br>
 **1.folder views** <br>
 
-![image.png](/.attachments/image-3db1a392-284e-4146-b3f7-4227c99e3a02.png)
+![Screenshot 2025-04-04 182207.png](/.attachments/Screenshot%202025-04-04%20182207-7c839b37-cc5d-4f99-934f-e6f86e20e812.png)
 
 1.1. book_list.ejs : หน้าเว็บสำหรับแสดงหน้าหนังสือที่ผู้ใช้เพิ่มเป็นรายการโปรด <br>
 
@@ -99,12 +99,12 @@
 
 2.1.Img ใช้เก็บรูปต่าง ๆ ที่ต้องใช้ในเว็บ<br>
 
-![image.png](/.attachments/image-de22415c-e1cd-4190-b776-bbb789dfb971.png)<br>
-![image.png](/.attachments/image-d627b7ac-215c-4615-8300-844bf246075e.png)<br>
+![Picture1.png](/.attachments/Picture1-36a6dd60-0f88-4e42-b597-546c8718af0e.png)
+![Picture2.png](/.attachments/Picture2-61deb8fe-03b7-47bf-9d67-485a647416cc.png)
 
 **3.folder test** <br>
 
-![image.png](/.attachments/image-d40bad06-d443-40e2-a9b0-a355d1eadb70.png) <br>
+![Screenshot 2025-04-04 182800.png](/.attachments/Screenshot%202025-04-04%20182800-6835520a-1686-42c9-81f5-48777eee77de.png)
 
 3.1 bookModel.test.js : ใช้ในการทดสอบ class Book ทดสอบฟังก์ชันการทำงานหลักๆ ที่เกี่ยวข้องกับการจัดการหนังสือและรีวิว <br>
 
@@ -112,7 +112,7 @@
 
 **4.folder controllers** <br>
 
-![image.png](/.attachments/image-b26245e8-9690-46f3-aecc-3ce187da49b5.png)<br>
+![Picture3.png](/.attachments/Picture3-096a8b16-4d4c-4c9b-b805-8f8daf10b9e2.png)
 
 4.1 bookController.js : เป็น Controller สำหรับ API ที่ใช้จัดการข้อมูลหนังสือในระบบ โดยทำงานร่วมกับไฟล์ books.json เพื่อเก็บข้อมูลหนังสือค้นหาหนังสือ<br>
 
@@ -126,7 +126,8 @@
 
 **5.file อื่นที่เกี่ยวข้อง**
 
-![image.png](/.attachments/image-fffb99c6-fd52-4e33-a49b-9f8ed173555b.png)<br>
+![Picture4.png](/.attachments/Picture4-a0a1833c-c251-4152-945b-9d6e9782788f.png)
+
 5.1 index.js : เป็น Express.js Backend Server สำหรับจัดการหนังสือและรีวิว โดยใช้EJS เป็น template engine และรองรับ session-based authentication <br>
 
 5.2 package-lock.json , package.json : ใช้กำหนดข้อมูลโปรเจกต์และแพ็กเกจที่ต้องใช้ <br>
@@ -135,8 +136,7 @@
 
 **6.Screen shot ตัวอย่างโค้ดในโปรเจกต์**
 
-![image.png](/.attachments/image-d47fb8f2-e75f-4804-b08f-842821341ff2.png)<br>
-![image.png](/.attachments/image-8f84db2b-f09d-4a7f-ab3d-79dade065c0a.png)<br>
+![Picture5.png](/.attachments/Picture5-401c2035-8a81-412e-b346-df3dd9cb8dc3.png)![Picture6.png](/.attachments/Picture6-d4ddb262-3a0d-4145-b3a0-3ec9efc66b4d.png)
 
 **หน้าเว็บไซต์** 
 ===============================
