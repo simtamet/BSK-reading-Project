@@ -7,6 +7,7 @@ const ratingController = require("./controllers/ratingController");
 const streakController = require("./controllers/streakController");
 const bookController = require("./controllers/bookController");
 const trackingController = require("./controllers/trackingController");
+const moodController = require('./controllers/moodController');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.get("/trackingPage", trackingController.showTrackingPage);
 app.get("/communityReviewsPage", ratingController.showCommunityReviewsPage); 
 app.get("/user_profile", userController.showUserProfilePage);
 app.get("/save_reading_session", trackingController.showSaveReadingSessionPage);
+app.get("/moodPage", moodController.showMoodPage);
 
 
 // API สำหรับบันทึกหนังสือ
