@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSK Reading</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #8ECAE6;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #FFB703;
+            padding: 10px 20px;
+            /* ช่องว่างรอบๆ */
+            display: flex;
+            /* ใช้ flexbox เพื่อจัดตำแหน่ง */
+            justify-content: space-between;
+            /* จัดให้ฝั่งซ้ายและขวาอยู่ห่างกัน */
+            align-items: center;
+            /* จัดให้ทุกองค์ประกอบอยู่ในแนวกลางตามแกน Y */
+            position: fixed;
+            /* ทำให้ navbar อยู่ที่ตำแหน่งคงที่ */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            /* ทำให้ navbar อยู่เหนือ sidebar */
+        }
+
+        .left-section {
+            display: flex;
+            align-items: center;
+            /* จัดให้เมนูและโลโก้อยู่ในแนวเดียวกัน */
+        }
+
+        .Logo {
+            width: 50px;
+            /* ขนาดของโลโก้ */
+            height: auto;
+        }
+
+        .right-section {
+            display: flex;
+            align-items: center;
+            /* จัดให้ปุ่ม Add Friend, ช่องค้นหา, และไอคอนผู้ใช้อยู่ในแถวเดียวกัน */
+            justify-content: flex-end;
+            /* จัดให้อยู่ทางขวาสุด */
+            gap: 10px;
+            /* ระยะห่างระหว่างปุ่มและช่องค้นหา */
+        }
+
+        .add-friend-btn {
+            padding: 6px 8px;
+            /* ปรับขนาด padding ให้ปุ่มใหญ่ขึ้นและมนขึ้น */
+            background-color: #FFB703;
+            color: #023047;
+            border: none;
+            cursor: pointer;
+            margin-right: 0px;
+            /* ช่องว่างระหว่างปุ่ม Add Friend กับช่องค้นหา */
+            border-radius: 20px;
+            /* ทำให้มุมปุ่มมน ๆ */
+            font-size: 14px;
+            /* ขนาดฟอนต์ให้เหมาะสม */
+        }
+
+        .add-friend-btn:hover {
+            background-color: #ffffff;
+            /* สีที่เปลี่ยนเมื่อ hover */
+        }
+
+        .search-bar-container {
+            position: relative;
+            width: 180px;
+            /* กำหนดความกว้างของ search bar */
+
+        }
+
+        .search-bar {
+            padding: 5px 1px;
+            width: 100%;
+            /* ทำให้ search bar ใช้ความกว้างเต็ม */
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 3px;
+            /* วางไอคอนอยู่ที่ขวาสุด */
+            top: 50%;
+            transform: translateY(-50%);
+            /* จัดให้อยู่กลางแนวแกน Y */
+            cursor: pointer;
+        }
+
+        .search-icon img {
+            width: 17px;
+            height: 17px;
+        }
+
+
+        .user-icon img {
+            width: 30px;
+            /* ขนาดของไอคอนผู้ใช้ */
+            height: 30px;
+            object-fit: cover;
+            /* ป้องกันไม่ให้ไอคอนยืดหรือบิดเบี้ยว */
+            border-radius: 50%;
+            /* ทำให้เป็นวงกลม */
+        }
+
+        .user-icon:hover img {
+            transform: scale(1.2);
+            /* ขยายขนาดไอคอนขึ้น 1.2 เท่า */
+            background-color: #ffffff;
+            /* เปลี่ยนสีพื้นหลัง */
+            padding: 5px;
+            /* เพิ่มพื้นที่รอบ ๆ ไอคอน */
+        }
+
+        .menu-btn {
+            cursor: pointer;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        /* Sidebar Menu */
+        .menu {
+            position: absolute;
+            top: 60px;
+            /* เพิ่มให้ sidebar เริ่มต้นจากด้านล่าง navbar */
+            left: -250px;
+            width: 200px;
+            background-color: #ffffff;
+            padding: 15px;
+            transition: 0.3s ease-in-out;
+            z-index: 999;
+            /* ทำให้ menu อยู่หลัง navbar */
+        }
+
+        .menu a {
+            display: block;
+            color: #023047;
+            padding: 10px;
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background-color: #FFB703;
+        }
+
+        .menu.active {
+            left: 0;
+            /* แสดง menu เมื่อ class active ถูกเพิ่ม */
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            color: #023047;
+            padding: 10px;
+        }
+
+        .navbar .right-section {
+            margin-right: 40px;
+            /* ระยะห่างจากขอบขวาของ navbar */
+        }
+
+        .book-list {
+            margin-top: 110px;
+        }
+
+        .book-list h1 {
+            color: #023047;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .book-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .book {
+            width: 180px;
+            text-align: center;
+        }
+
+        .book img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+
+        .add-book {
+            width: 180px;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 5px;
+            color: #023047;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .add-book {
+            display: flex;
+            flex-direction: column;
+            /* จัดให้ไอคอนอยู่บน และข้อความอยู่ล่าง */
+            align-items: center;
+            /* จัดให้อยู่กึ่งกลาง */
+            gap: 5px;
+            /* ระยะห่างระหว่างไอคอนกับข้อความ */
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .add-book .icon {
+            width: 30px;
+            /* ปรับขนาดไอคอน */
+            height: 30px;
+        }
+
+
+
+        .popup {
+            display: none;
+            /* ซ่อน pop-up เริ่มต้น */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .popup-content {
+            background-color: white;
+            width: 600px;
+            max-width: 90%;
+            padding: 20px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .popup-body {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* ส่วนอัพโหลดรูป */
+        .book-cover-upload {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .upload-area {
+            width: 150px;
+            height: 220px;
+            border: 2px dashed #023047;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .upload-area img {
+            width: 50px;
+            height: 50px;
+        }
+
+        #bookImage {
+            display: none;
+            /* ซ่อน input file */
+        }
+
+        .book-info {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            /* ลดระยะห่างระหว่างช่อง */
+            max-width: 300px;
+            /* กำหนดความกว้างสูงสุดให้ช่องกรอกข้อมูล */
+        }
+
+        .book-info input {
+            width: 90%;
+            /* ปรับให้ไม่กว้างเต็มพื้นที่ */
+            padding: 8px;
+            /* ลดขนาด padding */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            /* ลดขนาดตัวอักษรเล็กน้อย */
+        }
+
+
+        .add-book-btn {
+            background-color: #023047;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-book-btn:hover {
+            background-color: #024668;
+        }
+
+        footer {
+            width: 100%;
+            background-color: #FFB703;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        footer a {
+            color: #023047;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1rem;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            display: flex;
+            /* ใช้ Flexbox เพื่อจัดการตำแหน่ง */
+            justify-content: center;
+            /* จัดไอคอนให้อยู่ตรงกลาง */
+            margin-top: 10px;
+            /* ระยะห่างจากเนื้อหาข้างบน */
+
+        }
+
+        /* กำหนดการจัดการกับลิงค์ไอคอน */
+        .social-icons a {
+            margin: 0 15px;
+            /* ระยะห่างระหว่างไอคอน */
+            font-size: 2rem;
+            /* ปรับขนาดของไอคอนให้พอดีกับ footer */
+            color: #023047;
+            /* สีไอคอน */
+            text-decoration: none;
+            /* ไม่มีขีดเส้นใต้ */
+        }
+
+        /* เมื่อ hover ไอคอน */
+        .social-icons a:hover {
+            color: #FFB703;
+            /* เปลี่ยนสีไอคอนเมื่อ hover */
+            transform: scale(1.1);
+            /* ขยายขนาดไอคอนเมื่อ hover */
+        }
+
+        .social-icons a img {
+            width: 35px;
+            /* ขนาดของรูปไอคอน */
+            height: 35px;
+            /* ขนาดของรูปไอคอน */
+            object-fit: cover;
+            /* ป้องกันไม่ให้ไอคอนยืดเบี้ยว */
+        }
+
+        button {
+            background-color: #FFB703;
+            color: #023047;
+            border: none;
+            padding: 10px 14px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffffff;
+        }
+
+        .book-title,
+        .book-author {
+            color: #023047;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="left-section">
+            <span class="menu-btn" onclick="toggleMenu()">☰</span>
+            <a href="/homePage">
+                <img src="images/logo.png" alt="Logo" class="Logo">
+            </a>
+        </div>
+        <div class="right-section">
+            <button class="add-friend-btn">Add Friend</button>
+            <div class="search-bar-container">
+                <input type="text" class="search-bar" placeholder="  Search...">
+                <span class="search-icon">
+                    <img src="images/search-icon1.svg" alt="Search Icon">
+                </span>
+            </div>
+            <a href="/user_profile">
+                <span class="user-icon"><img src="/images/user-icon.svg" alt="User Icon"></span>
+            </a>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- Sidebar Menu -->
+    <div class="menu" id="menu">
+        <a href="/trackingPage">Tracking</a>
+        <a href="/streak_page">Streak</a>
+        <a href="/ratingPage">Rating Books</a>
+        <a href="/book_list">Book List</a>
+        <div class="dark-mode-toggle">
+            <label>
+                <input type="checkbox"> Dark Mode
+            </label>
+        </div>
+    </div>
+
+    <div class="book-list">
+        <h1>depends on <img src="images/bookmark.svg" alt="" width="35" height="35"> your mood!</h1>
+    </div>
+    <!-- Emotion Buttons -->
+    <div style="margin-top: 20px;">
+        <button onclick="showBooks('happy')">😊 Happy</button>
+        <button onclick="showBooks('grief')">😢 Grief</button>
+        <button onclick="showBooks('alone')">😶 Alone</button>
+        <button onclick="showBooks('thoughtful')">🤔 Thoughtful</button>
+        <button onclick="showBooks('thriller')">😱 Thriller</button>
+        <button onclick="showBooks('anger')">😡 Anger</button>
+        <button onclick="showBooks('surprised')">😲 Surprised</button>
+        <button onclick="showBooks('heartbroken')">💔 Heartbroken</button>
+    </div>
+
+    <!-- Books Display -->
+    <div class="book-container" id="bookList">
+        <!-- หนังสือจะแสดงตรงนี้ผ่าน JavaScript -->
+    </div>
+
+
+
+
+
+    <footer>
+        <p>© 2025 bookwormsenpaikawaii | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com" target="_blank"><img src="/images/facebook.png" alt="Facebook"></a>
+            <a href="https://www.instagram.com" target="_blank"><img src="/images/instagram.png" alt="Instagram"></a>
+            <a href="https://www.twitter.com" target="_blank"><img src="/images/x.png" alt="X"></a>
+        </div>
+    </footer>
+
+
+
+    <!--munu side bar-->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("active");
+        }
+    </script>
+    <script>
+        const booksByMood = {
+            happy: [
+                { img: "images/the_alchemist.jpg", title: "The Alchemist", author: "Paulo Coelho" },
+                { img: "images/is_completely_fine.jpg", title: "Eleanor Oliphant", author: "Gail Honeyman" },
+                { img: "images/AManCalledOve.jpg", title: "A Man Called Ove", author: "Fredrik Backman" },
+                { img: "images/therosie.jpg", title: "The Rosie Project", author: "Graeme Simsion" },
+                { img: "images/Wonder_Cover_Art.png", title: "Wonder", author: "R.J. Palacio" },
+                { img: "images/the_house_in_cerulean_sea.jpg.webp", title: "The House in the Cerulean Sea", author: "TJ Klunen" },
+            ],
+            grief: [
+                { img: "images/a_little_life.jpg", title: "A Little Life", author: "Hanya Yanagihara" },
+                { img: "images/book7.jpg", title: "The Year of Magical Thinking", author: "Joan Didion" },
+                { img: "images/book8.jpg", title: "When Breath Becomes Air", author: "Paul Kalanithi" },
+                { img: "images/book9.jpg", title: "Tuesdays with Morrie", author: "Mitch Albom" },
+                { img: "images/book10.jpg", title: "The Lovely Bones", author: "Alice Sebold" },
+                { img: "images/book11.jpg", title: "Wave", author: "Sonali Deraniyagala" },
+            ],
+            alone: [
+                { img: "images/book12.jpg", title: "Norwegian Wood", author: "Haruki Murakami" },
+                { img: "images/book13.jpg", title: "The Catcher in the Rye", author: "J.D. Salinger" },
+                { img: "images/book14.jpg", title: "The Bell Jar", author: "Sylvia Plath" },
+                { img: "images/book15.jpg", title: "Kafka on the Shore", author: "Haruki Murakam" },
+                { img: "images/book16.jpeg", title: "The Stranger", author: "Albert Camus" },
+                { img: "images/book17.jpeg", title: "On the Road", author: "Jack Kerouac" },
+            ],
+            thoughtful: [
+                { img: "images/book24.png", title: "Meditations", author: "Marcus Aurelius" },
+                { img: "images/book22.jpg", title: "Sapiens", author: "Yuval Noah Harari" },
+                { img: "images/book18.jpg", title: "Man’s Search for Meaning", author: "Viktor Frankl" },
+                { img: "images/book19.jpeg", title: "Thinking, Fast and Slow", author: "Daniel Kahneman" },
+                { img: "images/book20.jpg", title: "The Prophet", author: "Kahlil Gibran" },
+                { img: "images/book21.jpg", title: "Letters to a Young Poet", author: "Rainer Maria Rilke" },
+            ],
+            thriller: [
+                { img: "images/book25.jpg", title: "Gone Girl", author: "Gillian Flynn" },
+                { img: "images/book26.jpg", title: "The Girl with the Dragon Tattoo", author: "Stieg Larsson" },
+                { img: "images/book27.png", title: "The Silent Patient", author: "Alex Michaelides" },
+                { img: "images/book28.jpg", title: "Behind Closed Doors", author: "B.A. Paris" },
+                { img: "images/book29.jpg", title: "Before I Go to Sleep", author: ".J. Watson" },
+                { img: "images/book30.jpg", title: "The Couple Next Door", author: "Shari Lapena" },
+            ],
+            anger: [
+                { img: "images/book31.jpg", title: "1984", author: "George Orwell" },
+                { img: "images/book32.jpg", title: "Animal Farm", author: "George Orwell" },
+                { img: "images/book33.jpg", title: "The Handmaid’s Tale", author: "Margaret Atwood" },
+                { img: "images/book34.jpg", title: "We Should All Be Feminists", author: "Chimamanda Ngozi Adichie" },
+                { img: "images/book35.jpg", title: "The Color Purple", author: "Alice Walker" },
+                { img: "images/book36.jpg", title: "Between the World and Me", author: "Ta-Nehisi Coates" },
+            ],
+            surprised: [
+                { img: "images/book37.jpg", title: "Life of Pi", author: "Yann Martel" },
+                { img: "images/book38.jpg", title: "The Midnight Library", author: "Matt Haig" },
+                { img: "images/book39.jpg", title: "Cloud Atlas", author: "David Mitchell" },
+                { img: "images/book40.jpg", title: "Room", author: "Emma Donoghue" },
+                { img: "images/book41.jpg", title: "The Time Traveler’s Wife", author: "Audrey Niffenegger" },
+                { img: "images/book42.jpg", title: "The Seven Husbands of Evelyn Hugo", author: "Taylor Jenkins Reid" },
+            ],
+            heartbroken: [
+                { img: "images/book43.jpg", title: "Call Me by Your Name", author: "André Aciman" },
+                { img: "images/book44.jpg", title: "Me Before You", author: "Jojo Moyes" },
+                { img: "images/book45.jpg", title: "Normal People", author: "Sally Rooney" },
+                { img: "images/book46.jpg", title: "The Notebook", author: "Nicholas Sparks" },
+                { img: "images/book47.jpg", title: "One Day", author: "David Nicholls" },
+                { img: "images/book48.jpg", title: "Everything I Never Told You", author: "Celeste Ng" },
+            ]
+        };
+
+        function showBooks(mood) {
+            const bookList = document.getElementById("bookList");
+            const books = booksByMood[mood] || [];
+            bookList.innerHTML = ""; // clear previous books
+
+            books.forEach(book => {
+                const bookElement = document.createElement("div");
+                bookElement.classList.add("book");
+                bookElement.innerHTML = `
+                    <img src="${book.img}" alt="${book.title}">
+                    <h3>${book.title}</h3>
+                    <p>${book.author}</p>
+                `;
+                bookList.appendChild(bookElement);
+            });
+        }
+    </script>
+
+
+
+</body>
+
+</html>
