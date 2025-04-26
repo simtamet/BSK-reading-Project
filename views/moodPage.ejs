@@ -7,12 +7,36 @@
     <title>BSK Reading</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-row .form-group {
+                width: 100%;
+            }
+
+            .image-upload {
+                width: 100%;
+                height: 200px;
+            }
+
+            .form-content {
+                width: 100%;
+            }
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #8ECAE6;
             text-align: center;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* Ensures the body takes up at least the full viewport height */
         }
 
         .navbar {
@@ -192,7 +216,14 @@
             flex-wrap: wrap;
             gap: 20px;
             padding: 20px;
+            max-height: 500px;
+            /* Ensures scroll only appears when content overflows */
+            overflow-y: auto;
+            /* Makes the container scrollable */
+            border: 1px solid #ccc;
+            /* Optional border for visibility */
         }
+
 
         .book {
             width: 180px;
@@ -349,9 +380,11 @@
             color: white;
             padding: 20px 0;
             text-align: center;
-            position: fixed;
+            position: relative;
             bottom: 0;
             left: 0;
+            margin-top: auto;
+            /* Pushes the footer to the bottom */
         }
 
         footer a {
@@ -424,6 +457,13 @@
         .book-author {
             color: #023047;
         }
+
+        .sorting-options {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
     </style>
 </head>
 
@@ -484,6 +524,11 @@
         <button onclick="showBooks('heartbroken')">💔 Heartbroken</button>
     </div>
 
+    <div class="sorting-options">
+        <button onclick="sortAndDisplay('asc')">Sort by rating (low to high)</button>
+        <button onclick="sortAndDisplay('desc')">Sort by rating (high to low)</button>
+    </div>
+
     <!-- Books Display -->
     <div class="book-container" id="bookList">
         <!-- หนังสือจะแสดงตรงนี้ผ่าน JavaScript -->
@@ -514,76 +559,89 @@
     <script>
         const booksByMood = {
             happy: [
-                { img: "images/the_alchemist.jpg", title: "The Alchemist", author: "Paulo Coelho" },
-                { img: "images/is_completely_fine.jpg", title: "Eleanor Oliphant", author: "Gail Honeyman" },
-                { img: "images/AManCalledOve.jpg", title: "A Man Called Ove", author: "Fredrik Backman" },
-                { img: "images/therosie.jpg", title: "The Rosie Project", author: "Graeme Simsion" },
-                { img: "images/Wonder_Cover_Art.png", title: "Wonder", author: "R.J. Palacio" },
-                { img: "images/the_house_in_cerulean_sea.jpg.webp", title: "The House in the Cerulean Sea", author: "TJ Klunen" },
+                { img: "images/the_alchemist.jpg", title: "The Alchemist", author: "Paulo Coelho", rating: "4.7" },
+                { img: "images/is_completely_fine.jpg", title: "Eleanor Oliphant", author: "Gail Honeyman", rating: "4.1" },
+                { img: "images/AManCalledOve.jpg", title: "A Man Called Ove", author: "Fredrik Backman", rating: "4.5" },
+                { img: "images/therosie.jpg", title: "The Rosie Project", author: "Graeme Simsion", rating: "3.9" },
+                { img: "images/Wonder_Cover_Art.png", title: "Wonder", author: "R.J. Palacio", rating: "4.6" },
+                { img: "images/the_house_in_cerulean_sea.jpg.webp", title: "The House in the Cerulean Sea", author: "TJ Klunen", rating: "4.8" },
             ],
             grief: [
-                { img: "images/a_little_life.jpg", title: "A Little Life", author: "Hanya Yanagihara" },
-                { img: "images/book7.jpg", title: "The Year of Magical Thinking", author: "Joan Didion" },
-                { img: "images/book8.jpg", title: "When Breath Becomes Air", author: "Paul Kalanithi" },
-                { img: "images/book9.jpg", title: "Tuesdays with Morrie", author: "Mitch Albom" },
-                { img: "images/book10.jpg", title: "The Lovely Bones", author: "Alice Sebold" },
-                { img: "images/book11.jpg", title: "Wave", author: "Sonali Deraniyagala" },
+                { img: "images/a_little_life.jpg", title: "A Little Life", author: "Hanya Yanagihara", rating: "4.2" },
+                { img: "images/book7.jpg", title: "The Year of Magical Thinking", author: "Joan Didion", rating: "4.0" },
+                { img: "images/book8.jpg", title: "When Breath Becomes Air", author: "Paul Kalanithi", rating: "4.7" },
+                { img: "images/book9.jpg", title: "Tuesdays with Morrie", author: "Mitch Albom", rating: "4.4" },
+                { img: "images/book10.jpg", title: "The Lovely Bones", author: "Alice Sebold", rating: "3.8" },
+                { img: "images/book11.jpg", title: "Wave", author: "Sonali Deraniyagala", rating: "3.9" },
             ],
             alone: [
-                { img: "images/book12.jpg", title: "Norwegian Wood", author: "Haruki Murakami" },
-                { img: "images/book13.jpg", title: "The Catcher in the Rye", author: "J.D. Salinger" },
-                { img: "images/book14.jpg", title: "The Bell Jar", author: "Sylvia Plath" },
-                { img: "images/book15.jpg", title: "Kafka on the Shore", author: "Haruki Murakam" },
-                { img: "images/book16.jpeg", title: "The Stranger", author: "Albert Camus" },
-                { img: "images/book17.jpeg", title: "On the Road", author: "Jack Kerouac" },
+                { img: "images/book12.jpg", title: "Norwegian Wood", author: "Haruki Murakami", rating: "4.5" },
+                { img: "images/book13.jpg", title: "The Catcher in the Rye", author: "J.D. Salinger", rating: "4.1" },
+                { img: "images/book14.jpg", title: "The Bell Jar", author: "Sylvia Plath", rating: "4.2" },
+                { img: "images/book15.jpg", title: "Kafka on the Shore", author: "Haruki Murakam", rating: "4.0" },
+                { img: "images/book16.jpeg", title: "The Stranger", author: "Albert Camus", rating: "3.7" },
+                { img: "images/book17.jpeg", title: "On the Road", author: "Jack Kerouac", rating: "4.3" },
             ],
             thoughtful: [
-                { img: "images/book24.png", title: "Meditations", author: "Marcus Aurelius" },
-                { img: "images/book22.jpg", title: "Sapiens", author: "Yuval Noah Harari" },
-                { img: "images/book18.jpg", title: "Man’s Search for Meaning", author: "Viktor Frankl" },
-                { img: "images/book19.jpeg", title: "Thinking, Fast and Slow", author: "Daniel Kahneman" },
-                { img: "images/book20.jpg", title: "The Prophet", author: "Kahlil Gibran" },
-                { img: "images/book21.jpg", title: "Letters to a Young Poet", author: "Rainer Maria Rilke" },
+                { img: "images/book24.png", title: "Meditations", author: "Marcus Aurelius", rating: "4.6" },
+                { img: "images/book22.jpg", title: "Sapiens", author: "Yuval Noah Harari", rating: "4.8" },
+                { img: "images/book18.jpg", title: "Man’s Search for Meaning", author: "Viktor Frankl", rating: "4.7" },
+                { img: "images/book19.jpeg", title: "Thinking, Fast and Slow", author: "Daniel Kahneman", rating: "4.2" },
+                { img: "images/book20.jpg", title: "The Prophet", author: "Kahlil Gibran", rating: "4.0" },
+                { img: "images/book21.jpg", title: "Letters to a Young Poet", author: "Rainer Maria Rilke", rating: "3.9" },
             ],
             thriller: [
-                { img: "images/book25.jpg", title: "Gone Girl", author: "Gillian Flynn" },
-                { img: "images/book26.jpg", title: "The Girl with the Dragon Tattoo", author: "Stieg Larsson" },
-                { img: "images/book27.png", title: "The Silent Patient", author: "Alex Michaelides" },
-                { img: "images/book28.jpg", title: "Behind Closed Doors", author: "B.A. Paris" },
-                { img: "images/book29.jpg", title: "Before I Go to Sleep", author: ".J. Watson" },
-                { img: "images/book30.jpg", title: "The Couple Next Door", author: "Shari Lapena" },
+                { img: "images/book25.jpg", title: "Gone Girl", author: "Gillian Flynn", rating: "4.5" },
+                { img: "images/book26.jpg", title: "The Girl with the Dragon Tattoo", author: "Stieg Larsson", rating: "4.6" },
+                { img: "images/book27.png", title: "The Silent Patient", author: "Alex Michaelides", rating: "4.3" },
+                { img: "images/book28.jpg", title: "Behind Closed Doors", author: "B.A. Paris", rating: "4.0" },
+                { img: "images/book29.jpg", title: "Before I Go to Sleep", author: ".J. Watson", rating: "3.8" },
+                { img: "images/book30.jpg", title: "The Couple Next Door", author: "Shari Lapena", rating: "4.1" },
             ],
             anger: [
-                { img: "images/book31.jpg", title: "1984", author: "George Orwell" },
-                { img: "images/book32.jpg", title: "Animal Farm", author: "George Orwell" },
-                { img: "images/book33.jpg", title: "The Handmaid’s Tale", author: "Margaret Atwood" },
-                { img: "images/book34.jpg", title: "We Should All Be Feminists", author: "Chimamanda Ngozi Adichie" },
-                { img: "images/book35.jpg", title: "The Color Purple", author: "Alice Walker" },
-                { img: "images/book36.jpg", title: "Between the World and Me", author: "Ta-Nehisi Coates" },
+                { img: "images/book31.jpg", title: "1984", author: "George Orwell", rating: "4.7" },
+                { img: "images/book32.jpg", title: "Animal Farm", author: "George Orwell", rating: "4.5" },
+                { img: "images/book33.jpg", title: "The Handmaid’s Tale", author: "Margaret Atwood", rating: "4.3" },
+                { img: "images/book34.jpg", title: "We Should All Be Feminists", author: "Chimamanda Ngozi Adichie", rating: "4.1" },
+                { img: "images/book35.jpg", title: "The Color Purple", author: "Alice Walker", rating: "4.4" },
+                { img: "images/book36.jpg", title: "Between the World and Me", author: "Ta-Nehisi Coates", rating: "4.2" },
             ],
             surprised: [
-                { img: "images/book37.jpg", title: "Life of Pi", author: "Yann Martel" },
-                { img: "images/book38.jpg", title: "The Midnight Library", author: "Matt Haig" },
-                { img: "images/book39.jpg", title: "Cloud Atlas", author: "David Mitchell" },
-                { img: "images/book40.jpg", title: "Room", author: "Emma Donoghue" },
-                { img: "images/book41.jpg", title: "The Time Traveler’s Wife", author: "Audrey Niffenegger" },
-                { img: "images/book42.jpg", title: "The Seven Husbands of Evelyn Hugo", author: "Taylor Jenkins Reid" },
+                { img: "images/book37.jpg", title: "Life of Pi", author: "Yann Martel", rating: "4.6" },
+                { img: "images/book38.jpg", title: "The Midnight Library", author: "Matt Haig", rating: "4.3" },
+                { img: "images/book39.jpg", title: "Cloud Atlas", author: "David Mitchell", rating: "4.2" },
+                { img: "images/book40.jpg", title: "Room", author: "Emma Donoghue", rating: "4.0" },
+                { img: "images/book41.jpg", title: "The Time Traveler’s Wife", author: "Audrey Niffenegger", rating: "4.1" },
+                { img: "images/book42.jpg", title: "The Seven Husbands of Evelyn Hugo", author: "Taylor Jenkins Reid", rating: "4.7" },
             ],
             heartbroken: [
-                { img: "images/book43.jpg", title: "Call Me by Your Name", author: "André Aciman" },
-                { img: "images/book44.jpg", title: "Me Before You", author: "Jojo Moyes" },
-                { img: "images/book45.jpg", title: "Normal People", author: "Sally Rooney" },
-                { img: "images/book46.jpg", title: "The Notebook", author: "Nicholas Sparks" },
-                { img: "images/book47.jpg", title: "One Day", author: "David Nicholls" },
-                { img: "images/book48.jpg", title: "Everything I Never Told You", author: "Celeste Ng" },
+                { img: "images/book43.jpg", title: "Call Me by Your Name", author: "André Aciman", rating: "4.5" },
+                { img: "images/book44.jpg", title: "Me Before You", author: "Jojo Moyes", rating: "4.4" },
+                { img: "images/book45.jpg", title: "Normal People", author: "Sally Rooney", rating: "4.3" },
+                { img: "images/book46.jpg", title: "The Notebook", author: "Nicholas Sparks", rating: "4.2" },
+                { img: "images/book47.jpg", title: "One Day", author: "David Nicholls", rating: "4.0" },
+                { img: "images/book48.jpg", title: "Everything I Never Told You", author: "Celeste Ng", rating: "4.1" },
             ]
         };
 
-        function showBooks(mood) {
-            const bookList = document.getElementById("bookList");
-            const books = booksByMood[mood] || [];
-            bookList.innerHTML = ""; // clear previous books
+        let currentMoodBooks = []; // เก็บหนังสือของ mood ที่เลือก
+        const bookListContainer = document.getElementById("bookList");
 
+        function showBooks(mood) {
+            currentMoodBooks = booksByMood[mood] || [];
+            displayBooks(currentMoodBooks);
+        }
+
+        function sortBooksByRating(books, order = 'desc') {
+            return [...books].sort((a, b) => {
+                const ratingA = parseFloat(a.rating);
+                const ratingB = parseFloat(b.rating);
+                return order === 'asc' ? ratingA - ratingB : ratingB - ratingA;
+            });
+        }
+
+        function displayBooks(books) {
+            bookListContainer.innerHTML = ""; // Clear previous books
             books.forEach(book => {
                 const bookElement = document.createElement("div");
                 bookElement.classList.add("book");
@@ -591,12 +649,21 @@
                     <img src="${book.img}" alt="${book.title}">
                     <h3>${book.title}</h3>
                     <p>${book.author}</p>
+                    <div class="book-rating">⭐ ${book.rating}</div>
                 `;
-                bookList.appendChild(bookElement);
+                bookListContainer.appendChild(bookElement);
             });
         }
-    </script>
 
+        function sortAndDisplay(order) {
+            if (currentMoodBooks.length > 0) {
+                const sortedBooks = sortBooksByRating(currentMoodBooks, order);
+                displayBooks(sortedBooks);
+            } else {
+                alert("กรุณาเลือก mood ก่อนเรียงลำดับ");
+            }
+        }
+    </script>
 
 
 </body>

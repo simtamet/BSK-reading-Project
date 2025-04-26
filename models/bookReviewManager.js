@@ -92,17 +92,14 @@ class BookReviewManager {
         return summary;
     }
 
-    // Sort books by average rating
-    sortByRating() {
-        console.time('SortByRating');
-        const sortedBooks = this.books.sort((a, b) => {
-            const avgRatingA = a.getAverageRating();
-            const avgRatingB = b.getAverageRating();
-            return avgRatingB - avgRatingA;
+    sortBooksByRating(books, order = 'desc') {
+        return [...books].sort((a, b) => {
+            const ratingA = parseFloat(a.rating);
+            const ratingB = parseFloat(b.rating);
+            return order === 'asc' ? ratingA - ratingB : ratingB - ratingA;
         });
-        console.timeEnd('SortByRating');
-        return sortedBooks;
     }
+
 }
 
 module.exports = { Review, BookReviewManager };

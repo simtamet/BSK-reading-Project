@@ -411,12 +411,14 @@ h2 {
                 <button class="arrow arrow-left" onclick="scrollLeft('topHits')">&#10094;</button>
                 <div class="carousel-items">
                     <div class="carousel-item">
-                        <img src="/images/a_little_life.jpg" alt="A Little Life">
+                        <a href="/reviewPage?bookId=a_little_life">
+                            <img src="/images/a_little_life.jpg" alt="A Little Life">
+                        </a>
                         <p>A Little Life</p>
                         <p>by Hanya Yanagihara</p>
                     </div>
                     <div class="carousel-item">
-                        <a href="/reviewPage">
+                        <a href="/reviewPage?bookId=pride_and_prejudice">
                             <img src="/images/pride_and_prejudice.jpg" alt="Pride and Prejudice">
                         </a>
                         <p>Pride and Prejudice</p>
@@ -510,5 +512,42 @@ h2 {
             });
         });
    </script>
+   <script>
+    // Example book data
+    const books = [
+        { title: "A Little Life", author: "Hanya Yanagihara", rating: 4.7, image: "/images/a_little_life.jpg" },
+        { title: "Pride and Prejudice", author: "Jane Austen", rating: 4.9, image: "/images/pride_and_prejudice.jpg" },
+        { title: "The Hunger Games", author: "Suzanne Collins", rating: 4.5, image: "/images/The_Hunger_Games_cover.jpg" }
+    ];
+    
+    // Function to sort books by rating in descending order
+    function sortBooksByRating(books) {
+        return books.sort((a, b) => b.rating - a.rating);
+    }
+    
+    // Function to render books
+    function renderBooks(books) {
+        const carouselItems = document.querySelector('.carousel-items');
+        carouselItems.innerHTML = ''; // Clear current items
+    
+        books.forEach(book => {
+            const item = document.createElement('div');
+            item.classList.add('carousel-item');
+            item.innerHTML = `
+                <a href="/reviewPage?bookId=${book.title.replace(/ /g, "_").toLowerCase()}">
+                    <img src="${book.image}" alt="${book.title}">
+                </a>
+                <p>${book.title}</p>
+                <p>by ${book.author}</p>
+            `;
+            carouselItems.appendChild(item);
+        });
+    }
+    
+    // Sort books and render them
+    const sortedBooks = sortBooksByRating(books);
+    renderBooks(sortedBooks);
+    </script>
+    
 </body>
 </html>
