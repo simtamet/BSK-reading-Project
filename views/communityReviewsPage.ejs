@@ -515,6 +515,166 @@
             font-size: 14px;
             font-weight: bold;
         }
+
+        .add-review-section {
+            background-color: #ffffffb8;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-review-section h3 {
+            margin-bottom: 15px;
+            color: #023047;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .submit-review-btn {
+            background-color: #0077b6;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-review-btn:hover {
+            background-color: #005f82;
+        }
+
+        /* แก้ไขให้ปุ่มสามจุดและเมนูตัวเลือกอยู่ข้างๆ กัน */
+        .options-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            /* ระยะห่างระหว่างปุ่ม */
+            position: relative;
+            /* ทำให้เมนูแสดงภายใต้ปุ่มได้ */
+        }
+
+        .options-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .options-btn:hover {
+            color: #007BFF;
+            /* เปลี่ยนสีเมื่อ hover */
+        }
+
+        /* เมนูตัวเลือก */
+        .options-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 30px;
+            /* วางเมนูให้ต่ำลงจากปุ่ม */
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .options-menu button {
+            padding: 10px;
+            width: 150px;
+            border: none;
+            background-color: #fff;
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .options-menu button:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* ======= ฟอร์มแก้ไข Review & Rating ======= */
+        .edit-review-container {
+            margin-top: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .edit-review-text {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+
+        .edit-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .edit-rating label {
+            margin-right: 10px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .edit-rating-select {
+            width: 80px;
+            padding: 8px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+
+        .save-edit-btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .save-edit-btn:hover {
+            background-color: #45a049;
+        }
     </style>
 
     <script>
@@ -567,93 +727,39 @@
         <div class="community-reviews">
             <h3>Community Ratings and Reviews</h3>
         </div>
+        <section class="add-review-section">
+            <h3>Add Your Review</h3>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label for="username">Your Name:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Rating:</label>
+                    <select id="rating" required>
+                        <option value="">Select</option>
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="reviewText">Review:</label>
+                    <textarea id="reviewText" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-review-btn">Submit Review</button>
+            </form>
+        </section>
+
     </main>
-    <div class="review-card">
-        <img src="images/friend1.jpg" alt="Profile Picture" class="profile-pic">
-        <div class="review-content">
-            <div class="review-header">
-                <div class="username">Monkey D. Luffy</div>
-                <span class="rated-it"> rated it</span>
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <span class="post-date">Posted on: April 3, 2025</span>
-            </div>
-
-            <div class="review-text">
-                6.0 stars. Confession...this book gave me an earth-shattering Janeaustegasm and I am feeling a bit spent
-                and vulnerable at the moment, so please bear with me. You see, I decided I wanted to get more literated
-                by reading the "classicals" in between my steady flow of science fiction, mystery and horror. The
-                question was where to begin.
-            </div>
-            <div class="review-footer">
-                <div class="review-actions">
-                    <button class="like-btn">
-                        <i class="fas fa-thumbs-up"></i> Like <span class="like-count">0</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fas fa-comment"></i> Comment <span class="comment-count">0</span>
-                    </button>
-                </div>
-            </div>
-
+    <section class="reviews">
+        <h2>Reviews</h2>
+        <div id="reviewsContainer">
+            <!-- ตรงนี้จะมีรีวิวที่เพิ่มเข้ามา -->
         </div>
-    </div>
-
-    <div class="review-card">
-        <img src="images/friend2.jpg" alt="Profile Picture" class="profile-pic">
-        <div class="review-content">
-            <div class="review-header">
-                <div class="username">Taylor Swift</div>
-                <span class="rated-it"> rated it</span>
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <span class="post-date">Posted on: April 3, 2025</span>
-            </div>
-            <div class="review-text">
-                Pride and Prejudice is a novel by Jane Austen, first published in 1813. The story takes place in the
-                fictional town of Meryton, England, in the late 18th century. The novel follows the life of Elizabeth
-                Bennet, a witty and independent-minded young woman, as she navigates the social mores of her time and
-                falls in love with Mr. Darcy, a wealthy and proud aristocrat.
-            </div>
-            <div class="review-footer">
-                <div class="review-actions">
-                    <button class="like-btn">
-                        <i class="fas fa-thumbs-up"></i> Like <span class="like-count">0</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fas fa-comment"></i> Comment <span class="comment-count">0</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="review-card">
-        <img src="images/friend3.jpg" alt="Profile Picture" class="profile-pic">
-        <div class="review-content">
-            <div class="review-header">
-                <div class="username">Raika Hojo</div>
-                <span class="rated-it"> rated it</span>
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <span class="post-date">Posted on: April 3, 2025</span>
-
-            </div>
-
-            <div class="review-text">
-                Pride and Prejudice is a novel by Jane Austen, first published in 1813. The story takes place in the
-                fictional town of Meryton, England, in the late 18th century. The novel follows the life of Elizabeth
-                Bennet, a witty and independent-minded young woman, as she navigates the social mores of her time and
-                falls in love with Mr. Darcy, a wealthy and proud aristocrat.
-            </div>
-            <div class="review-footer">
-                <div class="review-actions">
-                    <button class="like-btn">
-                        <i class="fas fa-thumbs-up"></i> Like <span class="like-count">0</span>
-                    </button>
-                    <button class="comment-btn">
-                        <i class="fas fa-comment"></i> Comment <span class="comment-count">0</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
 
     <footer>
@@ -666,23 +772,229 @@
     </footer>
 </body>
 <script>
-    // เพิ่มฟังก์ชันสำหรับการทำงานของปุ่ม Like และ Comment สำหรับทุกรีวิว
-    document.querySelectorAll('.like-btn').forEach(function (button) {
-        button.addEventListener('click', function () {
-            let likeCount = button.querySelector('.like-count');
-            likeCount.textContent = parseInt(likeCount.textContent) + 1;
+    document.addEventListener('click', function (event) {
+        // เช็คว่าเป็นปุ่มไลค์ที่ถูกกด
+        if (event.target.closest('.like-btn')) {
+            const button = event.target.closest('.like-btn');
+            const likeCount = button.querySelector('.like-count');
+            const reviewId = button.getAttribute('data-review-id'); // ควรมี id หรือ attribute เฉพาะที่ระบุรีวิว
+
+            // เพิ่มจำนวนไลค์ใน localStorage
+            let currentLikes = parseInt(likeCount.textContent);
+            currentLikes++;
+            likeCount.textContent = currentLikes;
+
+            // เซฟจำนวนไลค์ใน localStorage
+            localStorage.setItem(`likeCount_${reviewId}`, currentLikes);
+        }
+
+        // เช็คว่าเป็นปุ่มคอมเมนต์ที่ถูกกด
+        if (event.target.closest('.comment-btn')) {
+            const button = event.target.closest('.comment-btn');
+            const commentCount = button.querySelector('.comment-count');
+            const reviewId = button.getAttribute('data-review-id'); // ควรมี id หรือ attribute เฉพาะที่ระบุรีวิว
+
+            // เพิ่มจำนวนคอมเมนต์ใน localStorage
+            let currentComments = parseInt(commentCount.textContent);
+            currentComments++;
+            commentCount.textContent = currentComments;
+
+            // เซฟจำนวนคอมเมนต์ใน localStorage
+            localStorage.setItem(`commentCount_${reviewId}`, currentComments);
+        }
+    });
+
+    // เมื่อโหลดหน้าใหม่ให้โหลดข้อมูลจาก localStorage
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.like-btn').forEach(function (button) {
+            const likeCount = button.querySelector('.like-count');
+            const reviewId = button.getAttribute('data-review-id');
+
+            // เช็คว่าใน localStorage มีการเก็บจำนวนไลค์ไว้หรือยัง
+            const storedLikeCount = localStorage.getItem(`likeCount_${reviewId}`);
+            if (storedLikeCount) {
+                likeCount.textContent = storedLikeCount;
+            }
+        });
+
+        document.querySelectorAll('.comment-btn').forEach(function (button) {
+            const commentCount = button.querySelector('.comment-count');
+            const reviewId = button.getAttribute('data-review-id');
+
+            // เช็คว่าใน localStorage มีการเก็บจำนวนคอมเมนต์ไว้หรือยัง
+            const storedCommentCount = localStorage.getItem(`commentCount_${reviewId}`);
+            if (storedCommentCount) {
+                commentCount.textContent = storedCommentCount;
+            }
         });
     });
 
-    document.querySelectorAll('.comment-btn').forEach(function (button) {
-        button.addEventListener('click', function () {
-            let commentCount = button.querySelector('.comment-count');
-            commentCount.textContent = parseInt(commentCount.textContent) + 1;
+</script>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('reviewForm');
+        const reviewsContainer = document.getElementById('reviewsContainer');
+
+        // โหลดรีวิวจาก localStorage ตอนเปิดหน้าเว็บ
+        loadReviews();
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const rating = document.getElementById('rating').value;
+            const reviewText = document.getElementById('reviewText').value;
+
+            if (username && rating && reviewText) {
+                const currentDate = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = currentDate.toLocaleDateString('en-US', options);
+
+                const reviewData = {
+                    username,
+                    rating,
+                    reviewText,
+                    date: formattedDate
+                };
+
+                // บันทึกรีวิวลง localStorage
+                saveReview(reviewData);
+
+                // แสดงรีวิวใหม่
+                addReviewToPage(reviewData);
+
+                form.reset();
+            }
         });
+
+        function saveReview(review) {
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            reviews.unshift(review); // ใส่รีวิวใหม่ไว้ข้างหน้า
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+        }
+
+        function loadReviews() {
+            const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            reviews.forEach(addReviewToPage);
+        }
+
+        function addReviewToPage(review) {
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review-card');
+            reviewElement.innerHTML = `
+        <img src="images/default-profile.jpg" alt="Profile Picture" class="profile-pic">
+       <div class="review-content">
+    <div class="review-header">
+        <div class="username">${review.username}</div>
+        <span class="rated-it"> rated it</span>
+        <div class="rating">${"⭐".repeat(review.rating)}</div>
+        <span class="post-date">Posted on: ${review.date}</span>
+        <div class="options-container">
+            <button class="options-btn">⋮</button>
+            <div class="options-menu" style="display: none;">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+    <div class="review-text">
+        ${review.reviewText}
+    </div>
+    <div class="review-footer">
+        <div class="review-actions">
+            <button class="like-btn">
+                <i class="fas fa-thumbs-up"></i> Like <span class="like-count">0</span>
+            </button>
+            <button class="comment-btn">
+                <i class="fas fa-comment"></i> Comment <span class="comment-count">0</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+    `;
+
+            reviewsContainer.prepend(reviewElement);
+
+            // ฟังก์ชันแสดง/ซ่อนเมนูสามจุด
+            reviewElement.querySelector('.options-btn').addEventListener('click', function (event) {
+                const optionsMenu = reviewElement.querySelector('.options-menu');
+                const isVisible = optionsMenu.style.display === 'block';
+                optionsMenu.style.display = isVisible ? 'none' : 'block';
+                event.stopPropagation(); // ป้องกันคลิกที่อื่นทำให้ปิดเมนู
+            });
+
+            // ปิดเมนูหากคลิกที่พื้นที่อื่น
+            document.addEventListener('click', function (event) {
+                const optionsMenu = reviewElement.querySelector('.options-menu');
+                const optionsBtn = reviewElement.querySelector('.options-btn');
+                if (!optionsBtn.contains(event.target) && !optionsMenu.contains(event.target)) {
+                    optionsMenu.style.display = 'none';
+                }
+            });
+
+            // ฟังก์ชันลบรีวิว
+            reviewElement.querySelector('.delete-btn').addEventListener('click', function () {
+                reviewElement.remove(); // ลบรีวิวออกจาก DOM
+            });
+
+            document.querySelectorAll('.edit-btn').forEach(button => {
+                button.addEventListener('click', function () {
+
+                    const reviewCard = button.closest('.review-card');
+                    const reviewTextElement = reviewCard.querySelector('.review-text');
+                    const ratingElement = reviewCard.querySelector('.rating');
+
+                    // แสดงฟอร์มให้ผู้ใช้แก้ไขรีวิวและ Rating
+                    reviewTextElement.innerHTML = `
+            <textarea class="edit-review-text">${reviewTextElement.textContent}</textarea>
+            <div class="edit-rating">
+                <label for="rating">Rating: </label>
+                <select class="edit-rating-select">
+                    <option value="1">1 ⭐</option>
+                    <option value="2">2 ⭐</option>
+                    <option value="3">3 ⭐</option>
+                    <option value="4">4 ⭐</option>
+                    <option value="5">5 ⭐</option>
+                </select>
+            </div>
+            <button class="save-edit-btn">Save Changes</button>
+        `;
+
+                    // ตั้งค่าคะแนนที่มีอยู่ในตอนแรก
+                    const currentRating = ratingElement.textContent.trim().length;
+                    reviewCard.querySelector('.edit-rating-select').value = currentRating;
+
+                    // เมื่อกดปุ่ม Save Changes
+                    reviewCard.querySelector('.save-edit-btn').addEventListener('click', function () {
+                        const newReviewText = reviewCard.querySelector('.edit-review-text').value;
+                        const newRating = reviewCard.querySelector('.edit-rating-select').value;
+
+                        // อัปเดตรีวิวและ Rating
+                        ratingElement.innerHTML = "⭐".repeat(newRating); // แสดง Rating ใหม่
+                        reviewTextElement.textContent = newReviewText; // แสดงข้อความรีวิวใหม่
+
+                        // ซ่อนฟอร์มแก้ไข
+                        reviewTextElement.innerHTML = newReviewText;
+                        reviewCard.querySelector('.edit-rating').remove();
+                        reviewCard.querySelector('.save-edit-btn').remove();
+                    });
+                });
+            });
+        }
+
     });
+
+
 
 
 </script>
+
+
+
+
+
 
 
 </html>
