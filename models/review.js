@@ -20,6 +20,13 @@ class Review {
 
     // ฟังก์ชันเพื่อเพิ่มรีวิวในหน้าเว็บ
     addReviewToPage() {
+        // ตรวจสอบว่า reviewsContainer มีอยู่ใน DOM ก่อน
+        const reviewsContainer = document.getElementById("reviewsContainer");
+        if (!reviewsContainer) {
+            console.error("reviewsContainer element not found");
+            return;
+        }
+
         const reviewElement = document.createElement('div');
         reviewElement.classList.add('review-card');
         reviewElement.innerHTML = `
@@ -52,7 +59,6 @@ class Review {
             </div>
         `;
 
-        const reviewsContainer = document.getElementById("reviewsContainer");
         reviewsContainer.prepend(reviewElement);
 
         // ฟังก์ชันแสดง/ซ่อนเมนูสามจุด
