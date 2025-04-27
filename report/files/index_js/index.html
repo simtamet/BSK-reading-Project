@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">55</p>
+      <p class="stat">59</p>
     </div>
   </div>
   <div class="row historical">
@@ -66,7 +66,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.59</p>
+      <p class="stat">0.64</p>
     </div>
   </div>
 </div>
@@ -98,6 +98,7 @@ const ratingController = require(&quot;./controllers/ratingController&quot;);
 const streakController = require(&quot;./controllers/streakController&quot;);
 const bookController = require(&quot;./controllers/bookController&quot;);
 const trackingController = require(&quot;./controllers/trackingController&quot;);
+const moodController = require(&#039;./controllers/moodController&#039;);
 
 const app = express();
 
@@ -132,6 +133,9 @@ app.get(&quot;/book_list&quot;, bookController.showBookListPage);
 app.get(&quot;/trackingPage&quot;, trackingController.showTrackingPage); 
 app.get(&quot;/communityReviewsPage&quot;, ratingController.showCommunityReviewsPage); 
 app.get(&quot;/user_profile&quot;, userController.showUserProfilePage);
+app.get(&quot;/save_reading_session&quot;, trackingController.showSaveReadingSessionPage);
+app.get(&quot;/moodPage&quot;, moodController.showMoodPage);
+
 
 // API สำหรับบันทึกหนังสือ
 app.post(&quot;/save-book&quot;, bookController.saveBook); 
