@@ -268,66 +268,7 @@ h2 {
     width: 100%;
     position: fixed; /* ทำให้ bottom-bar อยู่กับที่ */
     bottom: 0; /* ทำให้ bottom-bar อยู่ชิดขอบล่าง */
-} footer {
-            width: 100%;
-            background-color: #FFB703;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-
-        footer a {
-            color: #023047;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 1rem;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        .social-icons {
-            display: flex;
-            /* ใช้ Flexbox เพื่อจัดการตำแหน่ง */
-            justify-content: center;
-            /* จัดไอคอนให้อยู่ตรงกลาง */
-            margin-top: 10px;
-            /* ระยะห่างจากเนื้อหาข้างบน */
-
-        }
-
-        /* กำหนดการจัดการกับลิงค์ไอคอน */
-        .social-icons a {
-            margin: 0 15px;
-            /* ระยะห่างระหว่างไอคอน */
-            font-size: 2rem;
-            /* ปรับขนาดของไอคอนให้พอดีกับ footer */
-            color: #023047;
-            /* สีไอคอน */
-            text-decoration: none;
-            /* ไม่มีขีดเส้นใต้ */
-        }
-
-        /* เมื่อ hover ไอคอน */
-        .social-icons a:hover {
-            color: #FFB703;
-            /* เปลี่ยนสีไอคอนเมื่อ hover */
-            transform: scale(1.1);
-            /* ขยายขนาดไอคอนเมื่อ hover */
-        }
-
-        .social-icons a img {
-            width: 35px;
-            /* ขนาดของรูปไอคอน */
-            height: 35px;
-            /* ขนาดของรูปไอคอน */
-            object-fit: cover;
-            /* ป้องกันไม่ให้ไอคอนยืดเบี้ยว */
-        }
+}
 
 .banner-slider {
     width: 100vw; /* ใช้ 100% ของความกว้าง viewport */
@@ -351,7 +292,9 @@ h2 {
     <div class="navbar">
         <div class="left-section">
             <span class="menu-btn" onclick="toggleMenu()">☰</span>
-            <img src="images/logo.png" alt="Logo" class="Logo">
+            <a href="homePage.ejs">
+                <img src="images/logo.png" alt="Logo" class="Logo">
+            </a>
         </div>
         <div class="right-section">
             <button class="add-friend-btn">Add Friend</button>
@@ -361,7 +304,7 @@ h2 {
                     <img src="/images/search-icon1.svg" alt="Search Icon">
                 </span>
             </div>
-            <a href="/user_profile">
+            <a href="user_profile.html">
                 <span class="user-icon"><img src="/images/user-icon.svg" alt="User Icon"></span>
             </a>
         </div>
@@ -371,10 +314,10 @@ h2 {
     
     <!-- Sidebar Menu -->
     <div class="menu" id="menu">
-        <a href="/trackingPage">Tracking</a>
-        <a href="/streak_page">Streak</a>
-        <a href="/ratingPage">Rating Books</a>
-        <a href="/book_list">Book List</a>
+        <a href="trackingPage.ejs">Tracking</a>
+        <a href="streak_page.html">Streak</a>
+        <a href="ratingPage.ejs">Rating Books</a>
+        <a href="book_list_page.html">Book List</a>
         <div class="dark-mode-toggle">
             <label>
                 <input type="checkbox"> Dark Mode
@@ -383,13 +326,13 @@ h2 {
     </div>
 
     <nav class="triple-menu">
-        <a href="/moodPage">your mood</a>
-        <a href="/book_list">
+        <a href="streak.html">check streak</a>
+        <a href="booklist.html">
             <span> book </span> 
             <img src="/images/bookmark.svg">
             <span> list </span> 
         </a>
-        <a href="/ratingPage">rating books</a>
+        <a href="ratingPage.ejs">rating books</a>
     </nav>
 
     <div class="swiper-container banner-slider">
@@ -411,16 +354,12 @@ h2 {
                 <button class="arrow arrow-left" onclick="scrollLeft('topHits')">&#10094;</button>
                 <div class="carousel-items">
                     <div class="carousel-item">
-                        <a href="/reviewPage?bookId=a_little_life">
-                            <img src="/images/a_little_life.jpg" alt="A Little Life">
-                        </a>
+                        <img src="/images/a_little_life.jpg" alt="A Little Life">
                         <p>A Little Life</p>
                         <p>by Hanya Yanagihara</p>
                     </div>
                     <div class="carousel-item">
-                        <a href="/reviewPage?bookId=pride_and_prejudice">
-                            <img src="/images/pride_and_prejudice.jpg" alt="Pride and Prejudice">
-                        </a>
+                        <img src="/images/pride_and_prejudice.jpg" alt="Pride and Prejudice">
                         <p>Pride and Prejudice</p>
                         <p>by Jane Austen</p>
                     </div>
@@ -458,14 +397,18 @@ h2 {
         </div>
     </div>
     
- <footer>
-        <p>© 2025 bookwormsenpaikawaii | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+
+    <div class="bottom-bar">
+        <p>© 2025 BookWormSenpaiKawaiiReading | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         <div class="social-icons">
-            <a href="https://www.facebook.com" target="_blank"><img src="/images/facebook.png" alt="Facebook"></a>
-            <a href="https://www.instagram.com" target="_blank"><img src="/images/instagram.png" alt="Instagram"></a>
-            <a href="https://www.twitter.com" target="_blank"><img src="/images/x.png" alt="X"></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+
         </div>
-    </footer>
+        <br>
+        <br>
+    </div>
 
     <!--munu side bar-->
     <script>
@@ -487,15 +430,6 @@ h2 {
             const items = carousel.querySelector('.carousel-items');
             items.scrollBy({ left: 220, behavior: 'smooth' });
         }
-        /*ทำให้ banner เลื่อนภาพถัดไปได้*/
-        const slider = document.querySelector('.banner-slider');
-        const images = document.querySelectorAll('.banner-slider img');
-        let index = 0;
-
-        setInterval(() => {
-            index = (index + 1) % images.length;
-            slider.style.transform = `translateX(-${index * 600}px)`;
-        }, 3000);
 
         // เริ่มใช้งาน Swiper
         document.addEventListener('DOMContentLoaded', function() {
@@ -512,42 +446,5 @@ h2 {
             });
         });
    </script>
-   <script>
-    // Example book data
-    const books = [
-        { title: "A Little Life", author: "Hanya Yanagihara", rating: 4.7, image: "/images/a_little_life.jpg" },
-        { title: "Pride and Prejudice", author: "Jane Austen", rating: 4.9, image: "/images/pride_and_prejudice.jpg" },
-        { title: "The Hunger Games", author: "Suzanne Collins", rating: 4.5, image: "/images/The_Hunger_Games_cover.jpg" }
-    ];
-    
-    // Function to sort books by rating in descending order
-    function sortBooksByRating(books) {
-        return books.sort((a, b) => b.rating - a.rating);
-    }
-    
-    // Function to render books
-    function renderBooks(books) {
-        const carouselItems = document.querySelector('.carousel-items');
-        carouselItems.innerHTML = ''; // Clear current items
-    
-        books.forEach(book => {
-            const item = document.createElement('div');
-            item.classList.add('carousel-item');
-            item.innerHTML = `
-                <a href="/reviewPage?bookId=${book.title.replace(/ /g, "_").toLowerCase()}">
-                    <img src="${book.image}" alt="${book.title}">
-                </a>
-                <p>${book.title}</p>
-                <p>by ${book.author}</p>
-            `;
-            carouselItems.appendChild(item);
-        });
-    }
-    
-    // Sort books and render them
-    const sortedBooks = sortBooksByRating(books);
-    renderBooks(sortedBooks);
-    </script>
-    
 </body>
 </html>
