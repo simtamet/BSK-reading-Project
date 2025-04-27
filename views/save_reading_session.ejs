@@ -182,66 +182,16 @@
     margin-bottom: 40px;
 }
 
- footer {
-            width: 100%;
-            background-color: #FFB703;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-        }
-
-        footer a {
-            color: #023047;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 1rem;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        .social-icons {
-            display: flex;
-            /* ใช้ Flexbox เพื่อจัดการตำแหน่ง */
-            justify-content: center;
-            /* จัดไอคอนให้อยู่ตรงกลาง */
-            margin-top: 10px;
-            /* ระยะห่างจากเนื้อหาข้างบน */
-
-        }
-
-        /* กำหนดการจัดการกับลิงค์ไอคอน */
-        .social-icons a {
-            margin: 0 15px;
-            /* ระยะห่างระหว่างไอคอน */
-            font-size: 2rem;
-            /* ปรับขนาดของไอคอนให้พอดีกับ footer */
-            color: #023047;
-            /* สีไอคอน */
-            text-decoration: none;
-            /* ไม่มีขีดเส้นใต้ */
-        }
-
-        /* เมื่อ hover ไอคอน */
-        .social-icons a:hover {
-            color: #FFB703;
-            /* เปลี่ยนสีไอคอนเมื่อ hover */
-            transform: scale(1.1);
-            /* ขยายขนาดไอคอนเมื่อ hover */
-        }
-
-        .social-icons a img {
-            width: 35px;
-            /* ขนาดของรูปไอคอน */
-            height: 35px;
-            /* ขนาดของรูปไอคอน */
-            object-fit: cover;
-            /* ป้องกันไม่ให้ไอคอนยืดเบี้ยว */
-        }
+.bottom-bar {
+    background-color: #FFB703;
+    color: #023047;
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+    width: 100%;
+    position: fixed; /* ทำให้ bottom-bar อยู่กับที่ */
+    bottom: 0; /* ทำให้ bottom-bar อยู่ชิดขอบล่าง */
+}
 
 .content {
     padding: 20px;
@@ -497,9 +447,7 @@ select {
     <div class="navbar">
         <div class="left-section">
             <span class="menu-btn" onclick="toggleMenu()">☰</span>
-            <a href="/homePage">
-                <img src="images/logo.png" alt="Logo" class="Logo">
-            </a>
+            <img src="images/logo.png" alt="Logo" class="Logo">
         </div>
         <div class="right-section">
             <button class="add-friend-btn">Add Friend</button>
@@ -572,15 +520,15 @@ select {
         <div class="timer-container">
             <div class="timer-group">
               <label>hours</label>
-              <input type="number" class="timer-input" value="00">
+              <input type="number" id="hours" class="timer-input" value="00">
             </div>
             <div class="timer-group">
               <label>minutes</label>
-              <input type="number" class="timer-input" value="00">
+              <input type="number" id="minutes" class="timer-input" value="00">
             </div>
             <div class="timer-group">
               <label>seconds</label>
-              <input type="number" class="timer-input" value="00">
+              <input type="number" id="seconds" class="timer-input" value="00">
             </div>
           </div>
         <button id="read-time-save-btn">Save</button>
@@ -607,14 +555,17 @@ select {
     </div>
 
 
-     <footer>
-        <p>© 2025 bookwormsenpaikawaii | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    <div class="bottom-bar">
+        <p>© 2025 BookWormSenpaiKawaiiReading | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         <div class="social-icons">
-            <a href="https://www.facebook.com" target="_blank"><img src="/images/facebook.png" alt="Facebook"></a>
-            <a href="https://www.instagram.com" target="_blank"><img src="/images/instagram.png" alt="Instagram"></a>
-            <a href="https://www.twitter.com" target="_blank"><img src="/images/x.png" alt="X"></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+
         </div>
-    </footer>
+        <br>
+        <br>
+    </div>
 
     <div id="overlay"></div>
     <!--munu side bar-->
@@ -626,157 +577,115 @@ select {
     </script>
     
     <script>
-        document.querySelectorAll('.input-group').forEach(group => {
-            group.addEventListener('click', function (event) {
-                event.stopPropagation(); // ป้องกัน popup ปิดเมื่อกด
-                const popupId = this.id.replace('-group', '-popup');
-                const popup = document.getElementById(popupId);
-                if (popup) {
-                    popup.style.display = 'block';
-                }
+        // ฟังก์ชันแสดง popup
+        function showPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+            document.getElementById("overlay").style.display = 'block';
+        }
+    
+        // ฟังก์ชันซ่อน popup
+        function hidePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+            document.getElementById("overlay").style.display = 'none';
+        }
+    
+        // กดที่กลุ่ม input เพื่อโชว์ popup
+        document.getElementById("read-time-group").addEventListener("click", () => showPopup("read-time-popup"));
+        document.getElementById("read-pages-group").addEventListener("click", () => showPopup("read-pages-popup"));
+        document.getElementById("status-group").addEventListener("click", () => showPopup("status-popup"));
+    
+        // กดปุ่ม Cancel เพื่อซ่อน popup
+        document.getElementById("read-time-cancel-btn").addEventListener("click", () => hidePopup("read-time-popup"));
+        document.getElementById("read-pages-cancel-btn").addEventListener("click", () => hidePopup("read-pages-popup"));
+        document.getElementById("status-cancel-btn").addEventListener("click", () => hidePopup("status-popup"));
+    
+        // กดพื้นหลัง overlay เพื่อปิด popup
+        document.getElementById("overlay").addEventListener("click", function() {
+            document.querySelectorAll('.popup').forEach(popup => {
+                popup.style.display = 'none';
             });
+            this.style.display = 'none';
         });
     
-        // ปิด popup เมื่อกดนอก popup
-        window.addEventListener('click', function (event) {
-            if (event.target.classList.contains('popup')) {
-                event.target.style.display = 'none';
+        // ปุ่ม Save Read Time
+        document.getElementById("read-time-save-btn").addEventListener("click", function() {
+            // ตรวจสอบค่าใน input ที่กรอก
+            let hours = document.getElementById('hours').value.padStart(2, '0');
+            let minutes = document.getElementById('minutes').value.padStart(2, '0');
+            let seconds = document.getElementById('seconds').value.padStart(2, '0');
+    
+            // ตรวจสอบว่าผู้ใช้กรอกข้อมูลในช่องทั้งหมดหรือไม่
+            if (hours && minutes && seconds) {
+                document.getElementById("read-time").value = `${hours}:${minutes}:${seconds}`;
+                hidePopup("read-time-popup");
+                checkAllInputs(); // ตรวจสอบข้อมูลทั้งหมด
+            } else {
+                alert("กรุณากรอกข้อมูลเวลาให้ครบถ้วน");
             }
         });
     
-        // ตรวจสอบว่า "Save All" ต้องแสดงหรือไม่
+        // ปุ่ม Save Read Pages
+        document.getElementById('read-pages-save-btn').addEventListener('click', function () {
+            document.getElementById('read-pages').value = document.getElementById('pages').value || '0';
+            hidePopup('read-pages-popup');
+            checkAllInputs();
+        });
+    
+        // ปุ่ม Save Status
+        document.getElementById('status-save-btn').addEventListener('click', function () {
+            document.getElementById('status').value = document.getElementById('status-select').value;
+            hidePopup('status-popup');
+            checkAllInputs();
+        });
+    
+        // เช็คการกรอกข้อมูล
         function checkAllInputs() {
             const readTime = document.getElementById('read-time').value.trim();
             const readPages = document.getElementById('read-pages').value.trim();
             const status = document.getElementById('status').value.trim();
-    
-            const saveButton = document.getElementById('saveButton'); 
-            if (readTime && readPages && status) {
-                saveButton.style.display = 'block'; // แสดงปุ่ม "Save"
-            } else {
-                saveButton.style.display = 'none'; // ซ่อนถ้ายังมีค่าว่าง
-            }
+            const saveButton = document.getElementById('saveButton');
+            saveButton.style.display = (readTime && readPages && status) ? 'block' : 'none';
         }
     
-        // ซ่อนปุ่ม "Save" เริ่มต้น
-        document.querySelectorAll('.save-button').forEach(btn => btn.style.display = 'none');
+        // ซ่อนปุ่ม Save ตอนโหลด
+        document.getElementById('saveButton').style.display = 'none';
     
-        // ตรวจสอบการกรอกข้อมูลใน pop-up "Read time"
+        // ปุ่ม Save All
+        document.getElementById('saveButton').addEventListener('click', function () {
+            // ตรวจสอบให้แน่ใจว่าข้อมูลถูกบันทึกแล้ว
+            if (document.getElementById('read-time').value.trim() && 
+                document.getElementById('read-pages').value.trim() && 
+                document.getElementById('status').value.trim()) {
+                alert('บันทึกข้อมูลทั้งหมดเรียบร้อย!');
+                this.style.display = 'none';
+            } else {
+                alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+            }
+        });
+    
+        // Event listener สำหรับ input การกรอกข้อมูล
         document.querySelectorAll('#hours, #minutes, #seconds').forEach(input => {
             input.addEventListener('input', function () {
                 const saveBtn = document.getElementById('read-time-save-btn');
+                // ปุ่ม Save จะปรากฏเมื่อมีการกรอกข้อมูลในช่องใดช่องหนึ่ง
                 saveBtn.style.display = (document.getElementById('hours').value || 
                                          document.getElementById('minutes').value || 
                                          document.getElementById('seconds').value) ? 'block' : 'none';
             });
         });
     
-        // ตรวจสอบการกรอกข้อมูลใน pop-up "Read pages"
         document.getElementById('pages').addEventListener('input', function () {
             document.getElementById('read-pages-save-btn').style.display = this.value ? 'block' : 'none';
         });
     
-        // ตรวจสอบการเลือก Status
         document.getElementById('status-select').addEventListener('change', function () {
             document.getElementById('status-save-btn').style.display = 'block';
         });
     
-        // ปุ่ม Save
-        document.getElementById("read-time-save-btn").addEventListener("click", function() {
-            // ดึงค่าจาก input field
-            let hours = document.querySelector("#read-time-popup .timer-group:nth-child(1) input").value;
-            let minutes = document.querySelector("#read-time-popup .timer-group:nth-child(2) input").value;
-            let seconds = document.querySelector("#read-time-popup .timer-group:nth-child(3) input").value;
-
-            // แปลงค่าให้อยู่ในรูปแบบ "HH:MM:SS"
-            let formattedTime = `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`;
-
-            // นำค่าไปแสดงในช่อง Read Time
-            document.getElementById("read-time").value = formattedTime;
-
-            // ปิด popup
-            document.getElementById("read-time-popup").style.display = "none";
-        });
-
-        document.getElementById("read-time-cancel-btn").addEventListener("click", function() {
-            // ปิด popup เมื่อกด Cancel
-            document.getElementById("read-time-popup").style.display = "none";
-        });
-
-    
-        document.getElementById('read-pages-save-btn').addEventListener('click', function () {
-            document.getElementById('read-pages').value = document.getElementById('pages').value || '0'; // ใช้ .value
-            this.style.display = 'none';
-            document.getElementById('read-pages-popup').style.display = 'none';
-            checkAllInputs();
-        });
-    
-        document.getElementById('status-save-btn').addEventListener('click', function () {
-            document.getElementById('status').value = document.getElementById('status-select').value; // ใช้ .value
-            this.style.display = 'none';
-            document.getElementById('status-popup').style.display = 'none';
-            checkAllInputs();
-        });
-    
-        // ปุ่ม Cancel
-        document.getElementById('read-time-cancel-btn').addEventListener('click', function () {
-        document.getElementById('read-time-popup').style.display = 'none';
-        });
-
-        document.getElementById('read-pages-cancel-btn').addEventListener('click', function () {
-        document.getElementById('read-pages-popup').style.display = 'none';
-        });
-
-        document.getElementById('status-cancel-btn').addEventListener('click', function () {
-        document.getElementById('status-popup').style.display = 'none';
-        });
-  
-        // ตรวจสอบการเปลี่ยนแปลงใน input ทุกช่อง
         document.querySelectorAll('#read-time, #read-pages, #status').forEach(input => {
             input.addEventListener('input', checkAllInputs);
         });
-    
-        // ปุ่ม Save All
-        document.getElementById('saveButton').addEventListener('click', function () {
-            alert('บันทึกข้อมูลทั้งหมดเรียบร้อย!');
-
-        // ซ่อนปุ่ม saveButton หลังจากบันทึกสำเร็จ
-        this.style.display = 'none';
-        });
-
-        function showPopup(popupId) {
-            document.getElementById(popupId).style.display = 'block';
-            document.getElementById("overlay").style.display = 'block';
-        }
-
-        function hidePopup(popupId) {
-            document.getElementById(popupId).style.display = 'none';
-            document.getElementById("overlay").style.display = 'none';
-        }
-
-        document.getElementById("read-time-group").addEventListener("click", function() {
-            showPopup("read-time-popup");
-        });
-
-        document.getElementById("read-time-cancel-btn").addEventListener("click", function() {
-            hidePopup("read-time-popup");
-        });
-
-        document.getElementById("read-pages-group").addEventListener("click", function() {
-            showPopup("read-pages-popup");
-        });
-
-        document.getElementById("read-pages-cancel-btn").addEventListener("click", function() {
-            hidePopup("read-pages-popup");
-        });
-
-        document.getElementById("status-group").addEventListener("click", function() {
-            showPopup("status-popup");
-        });
-
-        document.getElementById("status-cancel-btn").addEventListener("click", function() {
-            hidePopup("status-popup");
-        });
     </script>
+    
 </body>
 </html>
