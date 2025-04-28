@@ -1,23 +1,28 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 const assert = require('assert');
 
-jest.setTimeout(30000); // เพิ่ม timeout ให้ยาวหน่อยเพื่อความชัวร์
+jest.setTimeout(30000); // เพิ่ม timeout ให้ยาวขึ้น 60 วินาที
 
 describe('BSK Reading Test', () => {
     let driver;
 
     beforeAll(async () => {
         try {
+            console.log('Initializing Chrome driver...');
             driver = await new Builder().forBrowser('chrome').build();
+            console.log('Chrome driver initialized successfully.');
         } catch (error) {
             console.error('Failed to initialize the browser driver:', error);
+            throw error;  // เพิ่มการโยน error เพื่อหยุดการทดสอบหากไม่สามารถสร้าง driver ได้
         }
     });
 
     afterAll(async () => {
         if (driver) {
             try {
+                console.log('Closing Chrome driver...');
                 await driver.quit();
+                console.log('Chrome driver closed successfully.');
             } catch (error) {
                 console.error('Failed to quit the driver:', error);
             }
@@ -69,10 +74,8 @@ describe('BSK Reading Test', () => {
         await passwordField.sendKeys('123');
         await submitBtn.click();
 
-        // รอ URL เปลี่ยน (สำคัญมาก!)
         await driver.wait(until.urlContains('/homePage'), 10000);
 
-        // จากนั้นค่อยรอหาคำ "Top Hits This Month"
         const topHits = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Top Hits This Month')]")), 10000);
         expect(await topHits.getText()).toContain('Top Hits This Month');
     });
@@ -89,7 +92,7 @@ describe('BSK Reading Test', () => {
         const headerText = await header.getText();
         expect(headerText).toBe('BSK READING');
     });
-    
+
     test('should navigate to signup page when "Sign up here" link is clicked', async () => {
         if (!driver) {
             console.error('Driver was not initialized.');
@@ -101,13 +104,9 @@ describe('BSK Reading Test', () => {
         const signupLink = await driver.findElement(By.linkText('Sign up here.'));
         await signupLink.click();
 
-        // รอให้ URL เปลี่ยน
         await driver.wait(until.urlContains('/signup'), 10000);
 
         const currentUrl = await driver.getCurrentUrl();
         expect(currentUrl).toContain('/signup');
     });
-
-
-
 });

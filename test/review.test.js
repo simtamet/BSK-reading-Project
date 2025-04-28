@@ -3,9 +3,10 @@ const { Review } = require('../models/review');  // นำเข้า Review
 require('jest-localstorage-mock');  // Mock localStorage
 
 describe('Review Class', () => {
-  // ก่อนเริ่มการทดสอบทุกครั้ง, mock การแสดงผลของ console.error
+    // ก่อนเริ่มการทดสอบทุกครั้ง, mock การแสดงผลของ console.error
     beforeEach(() => {
         jest.spyOn(console, 'error').mockImplementation(() => {});
+        localStorage.clear(); // เคลียร์ข้อมูล localStorage ก่อนการทดสอบทุกครั้ง
     });
 
     // หลังการทดสอบทุกครั้ง, restore การแสดงผลของ console.error กลับมาเป็นปกติ
