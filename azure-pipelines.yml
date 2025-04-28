@@ -18,7 +18,7 @@ steps:
     - script: |
         npm install
         npm run lint --if-present
-        npx jest --coverage
+        jest --coverage
       displayName: 'npm install, build and test'
 
     - task: PublishTestResults@2
