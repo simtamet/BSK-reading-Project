@@ -1,0 +1,56 @@
+[
+  {
+    "username": "Alice",
+    "rating": 4,
+    "reviewText": "Good book",
+    "datePosted": "2025-04-30"
+  },
+  {
+    "username": "Alice",
+    "rating": 5,
+    "reviewText": "Fantastic read!",
+    "datePosted": "2025-04-29"
+  },
+  {
+    "username": "Bob",
+    "rating": 4,
+    "reviewText": "Interesting book",
+    "datePosted": "2025-04-28"
+  },
+  {
+    "username": "Alice",
+    "rating": 5,
+    "reviewText": "Great book!",
+    "datePosted": "2025-04-27"
+  },
+  {
+    "username": "Jane Doe",
+    "rating": 4,
+    "reviewText": "Good book",
+    "datePosted": "2025-04-26"
+  },
+  {
+    "username": "John Doe",
+    "rating": 5,
+    "reviewText": "This book was amazing!",
+    "datePosted": "2025-04-25"
+  },
+  {
+    "username": "Jane Doe",
+    "rating": 4,
+    "reviewText": "Good book",
+    "datePosted": "2025-04-26"
+  },
+  {
+    "username": "John Doe",
+    "rating": 5,
+    "reviewText": "This book was amazing!",
+    "datePosted": "2025-04-25"
+  },
+  {
+    "username": "John Doe",
+    "rating": 5,
+    "reviewText": "This book was amazing!",
+    "datePosted": "2025-04-25"
+  }
+]
