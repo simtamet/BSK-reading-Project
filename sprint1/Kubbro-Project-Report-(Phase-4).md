@@ -664,4 +664,5 @@ https://youtu.be/dfMW2MEtJmQ
 - ทำโค้ดส่วนที่เหลือ ui test dynamic static test ของ phase ที่ 4
 - ใน phase นี้พบเจอปัญหาคือ lack of communication ไม่ค่อยได้สื่อสารกัน เพราะภาระหน้าที่จากงานของวิชาอื่นเลยทำให้มีเวลาคุยกันน้อย ต่างคนต่างทำ แต่งานก็สามารถเสร็จออกมาลุล่วงด้วยดี
 
-# **Link to submit report + source code (zip file) :** [https://drive.google.com/drive/folders/1AygxO5T6YZfnhxBeXBH4jQUFog69jomU?usp=sharing]()
+# **Link to submit report + source code (zip file) :** 
+[https://drive.google.com/drive/folders/1AygxO5T6YZfnhxBeXBH4jQUFog69jomU?usp=sharing]()
