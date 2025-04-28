@@ -18,7 +18,7 @@ steps:
     - script: |
         npm install
         npm run lint --if-present
-        npx jest test/book.test.js test/review.test.js
+        npx jest test/book.test.js test/review.test.js --coverage
       displayName: 'npm install, build and test'
 
     - task: PublishTestResults@2
