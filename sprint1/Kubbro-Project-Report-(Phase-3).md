@@ -154,12 +154,13 @@
 *   homepage.html 
     
 
-![==image_2==.png](/.attachments/==image_2==-2da01fc7-3922-41d2-90cf-3fd835d046ca.png)  
+![image.png](/.attachments/image-1571d6b4-8a27-4f8a-82c6-4d95bd5e09f6.png) 
 
 *   streak_page.html 
     
 
 ![==image_3==.png](/.attachments/==image_3==-23e19451-9115-4203-b675-c3fe57871bd5.png)  
+![image.png](/.attachments/image-0f4e5831-7e67-4cc4-9dee-174ccfe8e8ae.png)
 
 ![==image_4==.png](/.attachments/==image_4==-a4f8d5f4-bc54-4b53-8530-0b0c2d4a33fa.png)  
 
@@ -184,7 +185,7 @@
 
 ![==image_11==.png](/.attachments/==image_11==-0cdf52fd-52ec-41d7-b71f-a9631898e563.png)  
 
-![==image_12==.png](/.attachments/==image_12==-a3ebd687-f8e8-4a9e-baf3-c781e2985dc9.png)  
+![image.png](/.attachments/image-b65ecba4-3ec3-49bd-b6a5-65424a2644ab.png)
 
 *   tracking.html 
     
@@ -204,25 +205,20 @@
 *   communityReviewsPage.html 
     
 
-![==image_17==.png](/.attachments/==image_17==-11ebe285-5b69-457a-9162-be43be92eae9.png)  
+![image.png](/.attachments/image-12f81d20-5857-46c7-8c00-014bb5e2cf69.png)
+![image.png](/.attachments/image-1bc6ee2e-9115-4271-98a3-35ece061c7be.png)
+*   moodPage.html
+![image.png](/.attachments/image-b76d2b98-0579-4f86-9e60-89106bf31656.png)
+![image.png](/.attachments/image-84ef8598-7758-40d4-b691-3a37fcbc88d6.png)
+![image.png](/.attachments/image-5f5e3a5c-b289-4b7e-a95f-240da6e225ff.png)
+![image.png](/.attachments/image-7ca5ba82-75f8-4646-bd47-22e4adf791f9.png)
+![image.png](/.attachments/image-0a139cf8-ab5b-471b-a131-03e6fc656f3e.png)
+![image.png](/.attachments/image-1a69ecf4-f921-49f7-8dee-1c0ffc81355b.png)
+![image.png](/.attachments/image-2f08f76b-76a1-45c2-b97b-869361abb169.png)
+![image.png](/.attachments/image-7f78e55e-ae9f-4e20-9a38-189a01ea0354.png)
+![image.png](/.attachments/image-b07ec763-c8be-40f3-99b2-4a7035d56c12.png)
+![image.png](/.attachments/image-92eb0d0a-9d7b-4b27-bf1e-a0f1000cee48.png)
 
-
-**สิ่งที่ยังไม่เสร็จสมบูรณ์** 
-===============================
-
-*   UI ของ Website บางส่วนยังต้องมีการปรับแก้ให้สวยงามและใช้งานได้ง่ายมากขึ้น 
-    
-
-*   หน้า add friend 
-    
-
-*   การทำงานของ Website function บางอย่างยังไม่สามารถทำงานได้อย่างเต็มที่ 
-    
-
-*   Test coverage อาจต้องมีการปรับแก้เพื่อให้ cover ได้ 100% 
-    
-
-*   การเก็บข้อมูลยังต้องมีการปรับแก้ให้เก็บข้อมูลละเอียดมากขึ้นเพื่อความเสถียรในการทำงานของ website
 
 **Unit test** 
 ===============================
@@ -243,6 +239,18 @@ Testcases description 
 | <br><br>8. Test Class BookReviewManager : addBooks <br><br><br><br> | <br><br>ทดสอบกรณีที่เพิ่มหนังสือที่ไม่มีรีวิวเข้ามาในระบบ <br><br><br><br><br> | <br><br>*   should handle book with no reviews correctly <br>    <br><br><br><br><br> | <br><br>ทดสอบกรณีที่มีหนังสือที่ยังไม่ได้รับการรีวิวในระบบ และตรวจสอบว่าระบบสามารถจัดการกับหนังสือที่ไม่มีรีวิวได้ถูกต้องหรือไม่ <br><br><br><br><br> |
 | <br><br>9. Test Class BookModel : addReview and getReviews <br><br><br><br> | <br><br>ทดสอบการเพิ่มรีวิวใหม่ไปยังหนังสือที่มีอยู่แล้ว <br><br><br><br><br> | <br><br>*   should add review to existing book <br>    <br><br><br><br><br> | <br><br>ทดสอบการเพิ่มรีวิวใหม่ให้กับหนังสือที่มีอยู่ในระบบแล้ว และตรวจสอบว่ารีวิวถูกเพิ่มเข้าไปอย่างถูกต้อง <br><br><br><br><br> |
 | <br><br>10. Test Class BookModel : getAverageRating <br><br><br><br> | <br><br>ทดสอบการคำนวณคะแนนเฉลี่ยของรีวิวในหนังสือ <br><br><br><br><br> | <br><br>*   should calculate average rating correctly <br>    <br><br><br><br><br> | <br><br>ทดสอบการคำนวณคะแนนเฉลี่ย (average rating) ของรีวิวที่ถูกเพิ่มให้กับหนังสือแต่ละเล่ม ว่าถูกคำนวณอย่างถูกต้องหรือไม่ <br><br><br><br><br> |
+
+![image.png](/.attachments/image-a7b064b0-8b68-400b-9797-d96b11cad8ac.png)
+**1.Test should open BSK Readind and check title**
+![image.png](/.attachments/image-ec60c63b-716a-462c-acb1-3d0dedd603ce.png)
+**2.Test should open sidebar menu when menu button is clicked**
+![image.png](/.attachments/image-af17ccb1-9b49-4c9c-8681-f37f747505ce.png)
+**3.Test should submit form and display “Top hits This Month”**
+![image.png](/.attachments/image-034a1cd5-e6e7-4add-a12f-7e7847ad90ea.png)
+**4.Test should display correct header text**
+![image.png](/.attachments/image-2875d739-c15a-45f1-8dc6-4614c40366e1.png)
+**5.Test should navigate to signup page when “Sign up here” link is clicked**
+![image.png](/.attachments/image-ac88b972-ef42-4acb-9ef6-98988487a285.png)
 
 **Test coverage and code** 
 ===============================
@@ -307,7 +315,7 @@ Testcases description 
 ![==image_9==.png](/.attachments/==image_9==-6a026f87-c194-467d-a6ab-397545641697.png) 
 
        
-**Static**
+**Static(phase 3)**
 ===============================
 
 ![==image_0==.png](/.attachments/==image_0==-eac8a1ff-b434-4069-8976-d5bcfc4c4dda.png) 
@@ -343,7 +351,7 @@ Testcases description 
 
 สรุป : index.js สามารถบำรุงรักษาได้ง่ายเนื่องจากมีค่าบำรุงรักษา 94.52 มีจำนวนบรรทัด 55 บรรทัด มีค่าความยากอยู่ที่ 8.65 และมีข้อผิดพลาดโดยประมาณอยู่ที่ 0.59
 
-**Dynamic**
+**Dynamic(phase 3)**
 ===============================
 
 ![==image_6==.png](/.attachments/==image_6==-6679bc67-f04d-4385-8175-7877aa477672.png)
@@ -359,6 +367,58 @@ Testcases description 
 ![==image_7==.png](/.attachments/==image_7==-5fb8ea06-02d1-4ece-b964-9bbfe677c73d.png)
 ใส่ console.time(“…”) เพื่อเริ่มจับเวลา และ console.timeEnd(“…”) เพื่อปิดการจับเวลา
 
+**Dynamic (Phase 4)**
+![image.png](/.attachments/image-18a8188d-916e-46f4-bb07-6f8bd1826d7f.png)
+**สรุป** **:** **แสดงให้เห็นว่าต้องใช้เวลานานแค่ไหน สำหรับการรันเว็บในแต่ละหน้าตั้งแต่เริ่มใช้งาน เราได้มีการบันทึกเป็นตัวอย่างในการใช้งาน และผลที่ได้ใช้เวลา**
+-       **system : 6,620 ms**
+-       **scripting : 5,284 ms**
+-       **rendering : 2,718 ms**
+-       **painting : 2,203 ms**
+-       **loading : 143 ms**
+![image.png](/.attachments/image-04b9b767-750c-453f-920b-823043d19a10.png)
+**ใส่** **console.time(“…”)** **เพื่อเริ่มจับเวลา และ** **console.timeEnd(“…”)** **เพื่อปิดการจับเวลา**
+
+**อธิบายการทำ** **CI/CD** **ที่ใช้ในการทำ** **Product**
+**CI: Continuous Integration**
+![image.png](/.attachments/image-92b8ba01-5cac-46c0-818c-e89d8c8c8805.png)
+**1.** **โค้ดถูกดึงเข้ามาจาก** **Version Control System (VCS)** **เช่น** **Git**
+**ทุกครั้งที่มีการ** **commit** **หรือ** **push** **โค้ดไปที่** **repository** **ระบบ** **CI** **จะเริ่มทำงานโดยอัตโนมัติ**
+
+**เครื่องมือ** **CI** **จะตรวจสอบว่าโค้ดใน** **repository** **มีการเปลี่ยนแปลงหรือไม่**
+
+**trigger:**
+**- main #** **ทุกครั้งที่มีการ** **push** **ไปที่** **branch 'main'**
+
+**2.** **การ** **Build** **โค้ดจะทำงานอัตโนมัติ**
+**ระบบจะทำการ** **build** **โค้ด เพื่อให้แน่ใจว่าโค้ดทั้งหมดสามารถนำมารวมกันได้สำเร็จ และไม่เกิดปัญหาขึ้นในระหว่างกระบวนการ**
+
+**การ** **build** **นี้อาจรวมถึงการติดตั้ง** **dependencies,** **การคอมไพล์ไฟล์ หรือกระบวนการอื่นๆ ที่เกี่ยวข้อง**
+**- script: |**
+        **npm install**
+      **displayName: 'npm install, build and test'**
+
+**3.** **การ** **Run Tests (Unit Tests, Integration Tests)**
+**หลังจาก** **build** **โค้ดเสร็จแล้ว ระบบจะรันการทดสอบต่างๆ เช่น** **unit tests** **เพื่อทดสอบฟังก์ชันต่างๆ หรือ** **integration tests** **เพื่อทดสอบการทำงานร่วมกันของหลายๆ ส่วนในแอปพลิเคชัน**
+
+**การทดสอบนี้จะช่วยให้แน่ใจว่าโค้ดที่เราเพิ่มหรือเปลี่ยนแปลงไปไม่ทำให้ระบบเกิดข้อผิดพลาดหรือทำงานผิดปกติ**
+
+**- script: |**
+        **npx jest test/book.test.js test/review.test.js --coverage**
+      **displayName: 'npm install, build and test'**
+
+**4.** **การตรวจสอบคุณภาพของโค้ด (****Code Quality Analysis)**
+**ในขั้นตอนนี้ ระบบจะทำการตรวจสอบคุณภาพของโค้ด เช่น การตรวจสอบ** **ESLint** **เพื่อหาข้อผิดพลาดในการเขียนโค้ด หรือใช้** **Prettier** **เพื่อจัดระเบียบรูปแบบโค้ด**
+**- script: |**
+        **npm run lint --if-present**
+      **displayName: 'npm install, build and test'**
+
+**5.** **ผลการทดสอบจะถูกส่งออกมาให้โปรแกรมเมอร์ทราบทันที**
+**เมื่อกระบวนการทั้งหมดเสร็จสิ้น ระบบจะส่งผลลัพธ์ของการทดสอบกลับไปให้กับนักพัฒนา เช่น การแสดงผลที่** **Pass** **หรือ** **Fail**
+**CD (Continuous Deployment)**
+     **การทำงาน** **CD** **จะมุ่งเน้นไปที่การ** **deploy** **ผลิตภัณฑ์ไปยังสภาพแวดล้อมต่าง ๆ โดยมีการตรวจสอบคุณภาพและทดสอบอย่างละเอียดก่อนการเผยแพร่สู่ผู้ใช้งานจริง กระบวนการนี้ช่วยให้มั่นใจได้ว่าแอปพลิเคชันสามารถปล่อยได้โดยไม่มีปัญหาส่งผลกระทบต่อผู้ใช้ และสามารถกลับไปยังเวอร์ชันก่อนหน้าได้หากเกิดปัญหาในกระบวนการ** **deploy** 
+     **เนื่องจากปัญหา** **Azure subscription** **ทำให้ไม่มีสิทธิ์ในการใช้งานบริการบางอย่างจึงไม่สามารถ** **deploy web app** **ได้**
+
+**หากมีข้อผิดพลาด ระบบจะส่งการแจ้งเตือนไปยังนักพัฒนา เพื่อให้พวกเขาทราบและสามารถแก้ไขได้อย่างรวดเร็ว**
       
 **กระบวนการในการพัฒนา** **Software ของโครงการ**
 ===============================
@@ -401,6 +461,7 @@ Testcases description 
 *   ใน **Sprint 2**, ทีมงานมุ่งเน้นไปที่ **การออกแบบ UI Design** และการกำหนดโครงสร้างของเว็บไซต์ โดยอ้างอิงจาก **User Story** หรือ **Requirement** ที่ได้วิเคราะห์ไว้ เพื่อให้เห็นภาพรวมขององค์ประกอบต่างๆ อย่างชัดเจน ก่อนเริ่มต้นพัฒนาโค้ดจริง
 *   ใน **Sprint 3**, แนวคิดและ UI Design ที่ออกแบบไว้ ถูกนำมาพัฒนาเป็น **โค้ดจริง** โดยเริ่มต้นสร้างฟังก์ชันหลักของเว็บไซต์ รวมถึงการเชื่อมต่อ **Frontend และ Backend** เพื่อให้สามารถใช้งานได้จริง
 
+
       
 
 **อธิบายการทำงานโดยใช้ Process, Methods และ Tools (Phase 3)**
@@ -426,6 +487,40 @@ Testcases description 
   - ใช้ Cygwin ในการรันคำสั่งเพื่อจัดการกับ Test และเพื่อดู Test Coverage
   - จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้คือ Microsoft Word โดยแชร์ผ่าน OneDrive
   - ประชุม Retrospective โดยใช้กล้องมือถืออัดคลิป โดยเผยแพร่วิดีโอการประชุมผ่านทาง Youtube
+**กระบวนการทำงานใน** **Sprint** **ที่** **4**  
+**เป้าหมาย:** เก็บงานที่เหลือทั้งหมดให้เสร็จสมบูรณ์ พร้อม Debug และ Testing เพื่อเตรียมส่งมอบผลงาน  
+**งานที่ดำเนินการ:**  
+         • **Code Completion:** ดำเนินการพัฒนาโค้ดส่วนที่ยังไม่เสร็จจาก Sprint 3 ให้ครบถ้วน เช่น ฟังก์ชันเสริม ระบบย่อย หรือส่วนของ UI ที่ยังค้างอยู่  
+          • **Debugging:** ตรวจสอบข้อผิดพลาดที่เกิดขึ้นในโค้ดทั้งระบบ โดยใช้การทดสอบฟังก์ชัน (Functional Testing) และการทดสอบการทำงานร่วมกัน (Integration Testing) เพื่อแก้ไขบั๊กที่พบ  
+          • **UI Testing and Improvement:** ทดสอบการแสดงผลของ UI บนอุปกรณ์และเบราว์เซอร์ต่างๆ เพื่อให้แน่ใจว่า UI มีความสมบูรณ์ ใช้งานได้จริง และสอดคล้องกับดีไซน์ที่วางไว้  
+          • **Final Integration:** ตรวจสอบการเชื่อมต่อทั้งหมดระหว่าง Frontend, Backend และ Database ว่าสามารถทำงานร่วมกันได้อย่างไม่มีปัญหา  
+ผลลัพธ์:  
+โค้ดทั้งหมดถูกพัฒนาเสร็จสมบูรณ์ และผ่านกระบวนการ Debug และ Testing ทำให้ระบบมีความเสถียร สามารถทำงานได้อย่างมีประสิทธิภาพ พร้อมสำหรับการส่งมอบและเผยแพร่ใช้งานจริง
+**สิ่งที่มีการเปลี่ยนแปลงจาก** **Sprint** **ที่** **3**  
+          • ใน Sprint 3, ทีมงานมุ่งเน้นไปที่การเริ่มพัฒนาโค้ดโดยอ้างอิงจาก UI Design และ Requirement ที่วิเคราะห์ไว้ โดยสร้างฟังก์ชันหลักต่างๆ และเชื่อมต่อส่วนประกอบของระบบให้ทำงานร่วมกันได้ แต่ยังไม่มีการทำ Testing อย่างเต็มรูปแบบ  
+          • ใน Sprint 4, ทีมงานดำเนินการเก็บรายละเอียดทุกส่วนให้สมบูรณ์ ทำการ Debug เพื่อแก้ไขข้อผิดพลาด และทำ Testing เพื่อยืนยันว่าระบบทำงานได้อย่างถูกต้อง มีความเสถียร และพร้อมสำหรับการส่งมอบในขั้นสุดท้าย
+
+**อธิบายการทำงานโดยใช้ Process, Methods และ Tools (Phase 4)**
+=============================================================
+
+·      Process
+-       การจัดทำ Report และการระบุข้อมูลใน Report
+-       การประชุม Retrospective Phase 3
+-       ตรวจสอบ code และ debug โค้ดทั้งหมด
+-       ทำหน้า moodPage เพิ่มโดยมีฟังก์ชันเลือกอารมณ์ และเรียงลำดับจากคะแนนหนังสือได้
+-       สามารถลบ หรือแก้ไขรีวิวของผู้ใช้งานได้
+-       ทำการทดสอบ UI (UI Testing) เพื่อให้แน่ใจว่าฟังก์ชันการทำงานและการแสดงผลของหน้าจอถูกต้องตามที่ออกแบบ
+·      Methods
+-       จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้
+-       ประชุม Retrospective โดยการนั่งคุยกันและอัดคลิปวิดีโอ
+-       ดำเนินการทดสอบ UI ผ่านการใช้งานจริง โดยกำหนด Test Cases ล่วงหน้า และบันทึกผลการทดสอบไว้
+-        
+·      Tools
+-       ประชุม Retrospective โดยใช้กล้องมือถืออัดคลิป โดยเผยแพร่วิดีโอการประชุมผ่านทาง Youtube
+-       ใช้ Cygwin ในการรันคำสั่งเพื่อจัดการกับ Test และเพื่อดู UI Test
+-       Coding โดยใช้ Visual Studio Code
+-       จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้คือ Microsoft Word โดยแชร์ผ่าน OneDrive
+-       วิเคราะห์และศึกษาโค้ดต้นแบบจากเว็บไซต์ที่กลุ่มของเราใช้ออกแบบ คือ Figma.com
 
       
 
@@ -438,3 +533,6 @@ Testcases description 
 - Function การทำงานอาจจะยังไม่ได้สมบูรณ์แบบ 100%
 - มีการ test code ได้เกิน 80%
 - แนวทางการแก้ไขของphaseหน้า จะแก้ไขฟังก์ชันให้ทำงานเสถียรกว่าเดิม ปรับ UI และ pop up ให้มีความใกล้เคียงกับ design ที่แบบไว้ เพิ่มการสื่อสารให้มากกว่านี้ทั้งใน dev azure ด้วย
+
+**สรุปประชุม** **Retrospective** **และ** **Link to Retrospective YouTube video (Phase 4)**
+==========================================================================================
