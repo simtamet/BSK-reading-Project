@@ -42,7 +42,9 @@
 **Data structure** **ที่ใช้**
 =============================
 
-     Data structure ที่เลือกใช้สำหรับเว็บรีวิวหนังสือคือ Priority queue เนื่องจาก Priority queue ใช้โครงสร้าง Max - Heap หรือ Min - Heap ซึ่งสามารถดึงข้อมูลที่มีความนิยมมากที่สุดเพื่อแสดงบนเว็บได้ และเมื่อมีการเพิ่มข้อมูลก็สามารถอัพเดทข้อมูลได้ทันที และเมื่อเว็บรีวิวหนังสือมีจำนวนผู้ใช้เพิ่มขึ้น การใช้ Priority Queue จะช่วยให้สามารถรองรับข้อมูลจำนวนมากและยังคงมีประสิทธิภาพในการจัดการข้อมูลและเรียงลำดับอย่างต่อเนื่อง มีการใช้ API ในการเรียกข้อมูลหนังสือจากไฟล์ JSON
+    เว็บรีวิวหนังสือเลือกใช้ Sorted Array เป็นโครงสร้างข้อมูลหลัก เนื่องจากมีความเหมาะสมกับลักษณะการใช้งานที่ต้องการ จัดเรียงหนังสือตามคะแนน (rating) ในแต่ละหมวดหมู่อารมณ์ โดยสามารถเรียงได้ทั้งจากคะแนนสูงไปต่ำ (Descending) และจากคะแนนต่ำไปสูง (Ascending)
+    Sorted Array เป็นอาเรย์ที่มีการจัดเรียงข้อมูลตามลำดับที่กำหนดอย่างมีความสัมพันธ์ เช่น จากมากไปน้อย หรือจากน้อยไปมาก ซึ่งทำให้สามารถแสดงผลลำดับหนังสือได้อย่างรวดเร็วและแม่นยำ
+    ด้วยเหตุนี้ จึงเลือกใช้ Sorted Array เพื่อรองรับประสบการณ์ผู้ใช้งานที่ราบรื่นและรวดเร็วในการเรียกดูและจัดเรียงหนังสือ
 
 **Functional Requirements**
 ===========================
@@ -220,103 +222,166 @@
 ![image.png](/.attachments/image-92eb0d0a-9d7b-4b27-bf1e-a0f1000cee48.png)
 
 
-**Unit test** 
-===============================
-
-**Implementation** 
-
-Testcases description 
-
-| <br><br>Test Suite <br><br><br><br><br> | <br><br>Describe <br><br><br><br><br> | <br><br>Test Unit <br><br><br><br><br> | <br><br>Describe <br><br><br><br><br> |
+       
+**Unit test**
+**Implementation**
+**Testcases description**
+| **Test Suite**<br> | **Describe**<br> | **Test Unit**<br> | **Describe**<br> |
 | --- | --- | --- | --- |
-| <br><br>1. Test Class BookReviewManager : getBookById <br><br><br><br><br> | <br><br>ทดสอบว่าฟังก์ชัน addBook ของ BookReviewManager ทำงานถูกต้องหรือไม่ <br><br><br><br><br> | <br><br>*   should add books correctly <br>    <br><br><br><br> | <br><br>ทดสอบว่าเมื่อเพิ่มหนังสือ 2 เล่มลงใน bookManager แล้ว จะสามารถดึงข้อมูลหนังสือออกมาได้ถูกต้อง <br><br><br><br><br> |
-| <br><br>2. Test Class BookReviewManager : summarizeByRating <br><br><br><br><br> | <br><br>ทดสอบการสรุปรีวิวตามคะแนน (rating) ของแต่ละหนังสือ <br><br><br><br><br> | <br><br>*   should summarize reviews by rating correctly <br>    <br><br><br><br> | <br><br>ช่วยให้มั่นใจว่า summarizeByRating() สามารถสรุปจำนวนรีวิวที่มีคะแนนต่าง ๆ ได้ถูกต้องตามที่คาดหวัง <br><br><br><br><br> |
-| <br><br>3. Test Class BookReviewManager : sortByRating <br><br><br><br> | <br><br>ทดสอบการจัดเรียงหนังสือตามคะแนนเฉลี่ย (average rating) ของรีวิว <br><br><br><br><br> | <br><br>*   should sort books by average rating correctly <br>    <br><br><br><br> | <br><br>ทดสอบการจัดเรียงหนังสือตามคะแนนเฉลี่ยของรีวิวจากมากไปน้อย <br><br><br><br><br> |
-| <br><br>4. Test Class BookReviewManager : searchBooks <br><br><br><br> | <br><br>ทดสอบการค้นหาหนังสือตามชื่อ (title) หรือผู้เขียน (author) <br><br><br><br><br> | <br><br>*   should search books by title or author correctly <br>    <br><br><br><br> | <br><br>ทดสอบฟังก์ชัน searchBooks() ของ BookReviewManager ซึ่งมีหน้าที่ค้นหาหนังสือตามชื่อ (title) หรือผู้เขียน (author) ที่ตรงกับคำค้นที่ผู้ใช้ระบุ <br><br><br><br><br> |
-| <br><br>5. Test Class BookReviewManager : loadBooksFromFile <br><br><br><br> | <br><br>ทดสอบกรณีที่ไฟล์ไม่สามารถโหลดได้ <br><br><br><br><br> | <br><br>*   should not load books if file does not exist <br>    <br><br>*   should load books from file correctly <br>    <br><br><br><br> | <br><br>*   ทดสอบการทำงานของฟังก์ชัน loadBooksFromFile() ในกรณีที่พยายามโหลดไฟล์ที่ไม่มีอยู่จริง <br>    <br><br>*   ทดสอบการทำงานของฟังก์ชัน loadBooksFromFile() ว่าสามารถโหลดข้อมูลจากไฟล์ที่มีข้อมูลหนังสืออยู่ได้อย่างถูกต้องหรือไม่ <br>    <br><br><br><br><br> |
-| <br><br>6. Test Class BookReviewManager : getAllBooks <br><br><br><br> | <br><br>ทดสอบฟังก์ชัน getAllBooks() เพื่อดึงหนังสือทั้งหมดจาก bookManager <br><br><br><br><br> | <br><br>*   should get all books correctly <br>    <br><br><br><br> | <br><br>ทดสอบฟังก์ชัน getAllBooks() ของ BookReviewManager ว่าสามารถดึงข้อมูลหนังสือทั้งหมดที่ถูกจัดเก็บไว้ใน bookManager ได้อย่างถูกต้องหรือไม่ <br><br><br><br><br> |
-| <br><br>7. Test Class BookReviewManager : saveBooksTofile <br><br><br><br> | <br><br>ทดสอบการบันทึกข้อมูลของหนังสือไปยังไฟล์ <br><br><br><br><br> | <br><br>*   should save books to file correctly <br>    <br><br><br><br> | <br><br>ทดสอบฟังก์ชัน saveBooksToFile() ของ BookReviewManager ว่าสามารถบันทึกข้อมูลหนังสือไปยังไฟล์ได้ถูกต้องหรือไม่ <br><br><br><br><br> |
-| <br><br>8. Test Class BookReviewManager : addBooks <br><br><br><br> | <br><br>ทดสอบกรณีที่เพิ่มหนังสือที่ไม่มีรีวิวเข้ามาในระบบ <br><br><br><br><br> | <br><br>*   should handle book with no reviews correctly <br>    <br><br><br><br><br> | <br><br>ทดสอบกรณีที่มีหนังสือที่ยังไม่ได้รับการรีวิวในระบบ และตรวจสอบว่าระบบสามารถจัดการกับหนังสือที่ไม่มีรีวิวได้ถูกต้องหรือไม่ <br><br><br><br><br> |
-| <br><br>9. Test Class BookModel : addReview and getReviews <br><br><br><br> | <br><br>ทดสอบการเพิ่มรีวิวใหม่ไปยังหนังสือที่มีอยู่แล้ว <br><br><br><br><br> | <br><br>*   should add review to existing book <br>    <br><br><br><br><br> | <br><br>ทดสอบการเพิ่มรีวิวใหม่ให้กับหนังสือที่มีอยู่ในระบบแล้ว และตรวจสอบว่ารีวิวถูกเพิ่มเข้าไปอย่างถูกต้อง <br><br><br><br><br> |
-| <br><br>10. Test Class BookModel : getAverageRating <br><br><br><br> | <br><br>ทดสอบการคำนวณคะแนนเฉลี่ยของรีวิวในหนังสือ <br><br><br><br><br> | <br><br>*   should calculate average rating correctly <br>    <br><br><br><br><br> | <br><br>ทดสอบการคำนวณคะแนนเฉลี่ย (average rating) ของรีวิวที่ถูกเพิ่มให้กับหนังสือแต่ละเล่ม ว่าถูกคำนวณอย่างถูกต้องหรือไม่ <br><br><br><br><br> |
+| Test Review Class<br><br><br> | ทดสอบสำหรับ Review Class ที่ใช้ในการบันทึกและโหลดข้อมูลรีวิวจาก localStorage โดยแบ่งออกเป็นหลายกรณีทดสอบที่ครอบคลุมฟังก์ชันการทำงานต่าง ๆ ของ Review<br> | should save a review to localStorage<br> | ทดสอบว่า Review สามารถบันทึกรีวิวลงใน localStorage ได้ถูกต้องหรือไม่<br> |
+| <br><br> | <br><br> | should load reviews from localStorage and return them<br><br><br> | ทดสอบว่า Review สามารถโหลดรีวิวจาก localStorage ได้ถูกต้อง<br> |
+| <br><br> | <br><br> | should initialize localStorage with an empty array if no reviews exist<br> | ทดสอบกรณีที่ localStorage ไม่มีข้อมูลรีวิวเลย<br> |
+| <br><br> | <br><br> | should load multiple reviews from localStorage<br> | ทดสอบว่า Review สามารถโหลดหลายรีวิวจาก localStorage ได้ถูกต้อง<br> |
+| <br><br> | <br><br> | should handle saving and loading when localStorage is empty<br> | ทดสอบการโหลดรีวิวจาก localStorage เมื่อ localStorage ถูกเคลียร์<br> |
+| <br><br> | <br><br> | should handle invalid data in localStorage gracefully<br> | ทดสอบว่า Review สามารถจัดการกับข้อมูลที่ไม่ถูกต้องใน localStorage ได้หรือไม่ (เช่น ข้อมูลที่ไม่ใช่ JSON ที่ถูกต้อง)<br> |
+| <br><br> | <br><br> | should handle corrupted data in localStorage gracefully<br><br><br> | ทดสอบการจัดการข้อมูลที่เสียหายใน localStorage<br> |
+| <br><br> | <br><br> | should allow saving multiple reviews at once<br> | ทดสอบการบันทึกรีวิวหลายรายการในครั้งเดียว<br> |
+| <br><br> | <br><br> | should update reviews correctly in localStorage<br> |  ทดสอบว่า Review สามารถอัปเดตข้อมูลรีวิวใน localStorage ได้หรือไม่<br> |
+| <br><br> | <br><br> | should not allow saving undefined or null reviews<br> | ทดสอบว่า Review จะไม่บันทึกข้อมูลรีวิวที่ไม่สมบูรณ์ (เช่น undefined หรือ null)<br> |
+| Test Book Class<br> | ทดสอบการทำงานต่าง ๆ ของระบบการจัดการหนังสือ<br> | should add books correctly<br> | ทดสอบว่าเมื่อเพิ่มหนังสือหลาย ๆ เล่มโดยใช้ addBook แล้ว จำนวนของหนังสือใน bookManager.books จะถูกต้องตามที่คาดหวัง และเนื้อหาของหนังสือที่เพิ่มเข้ามาจะถูกต้อง<br> |
+| <br><br> | <br><br> | should save books to file correctly<br> | ทดสอบว่าเมื่อใช้ saveBooksToFile จะทำการบันทึกข้อมูลหนังสือลงในไฟล์ได้ถูกต้อง โดยตรวจสอบว่า fs.writeFileSync ถูกเรียกและได้รับข้อมูลที่ถูกต้อง (คือ รายการหนังสือที่บันทึกใน bookManager.books)<br> |
+| <br><br> | <br><br> | should sort books by rating correctly in descending order<br> | ทดสอบว่าเมื่อเรียงลำดับหนังสือโดยใช้ sortBooksByRating ในลำดับจากคะแนนสูงสุดไปหาต่ำสุด (desc) จะได้ผลลัพธ์ที่ถูกต้องตามคาด โดยเปรียบเทียบกับข้อมูลที่จัดเรียงด้วยมือ<br> |
+| <br><br> | <br><br> | should sort books by rating correctly in ascending order<br> | ทดสอบว่าเมื่อเรียงลำดับหนังสือโดยใช้ sortBooksByRating ในลำดับจากคะแนนต่ำสุดไปหาสูงสุด (asc) จะได้ผลลัพธ์ที่ถูกต้องตามคาด โดยเปรียบเทียบกับข้อมูลที่จัดเรียงด้วยมือ<br> |
+| <br><br> | <br><br> | should sort books by rating correctly when ratings are the same<br><br><br> | ทดสอบการจัดเรียงหนังสือที่มีคะแนนเท่ากันทั้งสามเล่ม ว่าการเรียงลำดับจะทำงานได้ถูกต้องทั้งในลำดับจากสูงไปต่ำ (desc) และจากต่ำไปสูง (asc)<br> |
+| <br><br> | <br><br> | should handle sorting when there are no books<br> | ทดสอบกรณีที่ไม่มีหนังสือในระบบ (array ว่าง) ว่า sortBooksByRating จะคืนค่าเป็นอาร์เรย์ว่าง ๆ ตามคาด<br> |
+| <br><br> | <br><br> | should sort books correctly when ratings are a mix of integers and decimals<br> | ทดสอบกรณีที่คะแนนของหนังสือมีทั้งแบบจำนวนเต็ม (integer) และทศนิยม (decimal) ว่า sortBooksByRating จะจัดเรียงได้ถูกต้องตามลำดับ<br> |
+| <br><br> | <br><br> | should sort books correctly when ratings are mixed types (string and number)<br> | ทดสอบกรณีที่คะแนนของหนังสือมีทั้งแบบตัวเลขและสตริง (string) ว่า sortBooksByRating จะจัดเรียงได้ถูกต้องตามลำดับจากคะแนนสูงสุดไปหาต่ำสุด หรือจากต่ำสุดไปหาสูงสุด<br> |
+| <br><br> | <br><br> | should sort books correctly when ratings are negative<br> | ทดสอบกรณีที่คะแนนของหนังสือเป็นค่าลบ (negative) ว่า sortBooksByRating จะจัดเรียงได้ถูกต้องตามลำดับจากคะแนนมากไปหาน้อย หรือจากคะแนนน้อยไปหามาก<br> |
+| <br><br> | <br><br> | should sort books correctly when ratings have multiple decimal points<br> | ทดสอบกรณีที่คะแนนของหนังสือมีทศนิยมหลายตำแหน่ง ว่า sortBooksByRating จะจัดเรียงได้ถูกต้องตามลำดับจากคะแนนที่มากไปหาน้อย หรือจากคะแนนที่น้อยไปหามาก<br> |
 
-![image.png](/.attachments/image-a7b064b0-8b68-400b-9797-d96b11cad8ac.png)
-**1.Test should open BSK Readind and check title**
-![image.png](/.attachments/image-ec60c63b-716a-462c-acb1-3d0dedd603ce.png)
-**2.Test should open sidebar menu when menu button is clicked**
-![image.png](/.attachments/image-af17ccb1-9b49-4c9c-8681-f37f747505ce.png)
-**3.Test should submit form and display “Top hits This Month”**
-![image.png](/.attachments/image-034a1cd5-e6e7-4add-a12f-7e7847ad90ea.png)
-**4.Test should display correct header text**
-![image.png](/.attachments/image-2875d739-c15a-45f1-8dc6-4614c40366e1.png)
-**5.Test should navigate to signup page when “Sign up here” link is clicked**
-![image.png](/.attachments/image-ac88b972-ef42-4acb-9ef6-98988487a285.png)
 
-**Test coverage and code** 
-===============================
+## **Test coverage and code**
+<br>**Report ผลการ test ที่ได้**<br>
 
-*   Report ผลการ test ที่ได้ 
-    
+![==image_0==.png](/.attachments/==image_0==-708126ce-9e16-469e-a364-a4038070aad7.png) ** **![==image_1==.png](/.attachments/==image_1==-d00457ee-bae1-48cc-b744-5d2f050f3aae.png) **  ![==image_2==.png](/.attachments/==image_2==-39a00e7d-438b-4521-bd0a-1878d56e17eb.png)  ![==image_3==.png](/.attachments/==image_3==-e0f34f47-0530-4786-ad57-75ee4a763775.png) 
 
-![==image_0==.png](/.attachments/==image_0==-2045fcf2-8691-4ec4-875e-38f006011046.png) ![==image_1==.png](/.attachments/==image_1==-a8f8fc30-bd33-4062-9157-440dfc75739a.png) ![==image_2==.png](/.attachments/==image_2==-2c575ecf-25a5-4ed3-a246-6109b4ef306d.png) ![==image_3==.png](/.attachments/==image_3==-7269684a-dcca-4292-8785-6973fac4fc28.png) ![==image_4==.png](/.attachments/==image_4==-f1c36387-ea7b-42ed-a7c7-06150bf5dc32.png) ![==image_5==.png](/.attachments/==image_5==-eada8eff-63c7-403d-b776-8eab8f23d8f0.png)  
+**สรุป : จากการทดสอบ** **Test Coverage ทั้ง 3 ไฟล์ คือ book.test.js , review.test.js และ app.ui.test.js มีผล Test Coverage ของทั้ง 3 ไฟล์มากกว่า 80% สำหรับ Statements Coverage โดยใช้ Test cases ทั้งหมด 19 test case**
+**Review.test.js**
+1.Test should save a review to localStorage
 
-สรุป : จากการทดสอบ Test Coverage ทั้ง 2 ไฟล์ คือ bookModel.test.js และ bookReviewManager.test.js มีผล Test Coverage ของทั้ง 2 ไฟล์มากกว่า 80% สำหรับ Statements Coverage โดยใช้ Test cases ทั้งหมด 11 Cases ผ่าน 9 tests และไม่ผ่าน 2 tests
+![==image_4==.png](/.attachments/==image_4==-839b6a93-f1da-46fd-b477-a8c17a9b8613.png)
 
-**Example of test code with comments** 
+2.Test should load reviews from localStorage and return them
 
-1.  Test Class BookReviewManager : getBookById 
-    
+![==image_5==.png](/.attachments/==image_5==-c7622ef0-d0e2-48ee-a17f-81e3637aab1e.png)
 
-![==image_0==.png](/.attachments/==image_0==-1cfcc3f3-1390-4dfe-8937-92bff4b1a31f.png)  
+3.Test should initialize localStorage with an empty array if no reviews exist
 
-2.  Test Class BookReviewManager : summarizeByRating 
-    
+![==image_6==.png](/.attachments/==image_6==-203ea1d4-a415-4b0a-9f6b-f6bb0462576e.png)
 
-![==image_1==.png](/.attachments/==image_1==-d8e27ef0-e920-4d25-b7da-98f1de702024.png)  
+4.Test should load multiple reviews from localStorage
 
-3.  Test Class BookReviewManager : sortByRating 
-    
+![==image_7==.png](/.attachments/==image_7==-7816b26b-e53b-4b45-b671-57d4c04977f1.png) 
 
-![==image_2==.png](/.attachments/==image_2==-4c869fa6-f6e9-421c-ad23-e9315f84a47d.png)  
+5.Test should handle saving and loading when localStorage is empty
 
-4.  Test Class BookReviewManager : searchBooks 
-    
+![==image_8==.png](/.attachments/==image_8==-4becdfc8-f0bc-43ca-a2c3-4487f7913129.png) 
 
-![==image_3==.png](/.attachments/==image_3==-07fd1911-ec1b-486b-b4c7-f1ae80db8bb2.png)  
+6.Test should handle invalid data in localStorage gracefully
 
-5.  Test Class BookReviewManager : loadBooksFromFile 
-    
+![==image_9==.png](/.attachments/==image_9==-b868bfd1-b12a-4d08-87b5-ee7428cfda8e.png)
 
-![==image_4==.png](/.attachments/==image_4==-cade5fda-132c-4eda-b3be-18bda5b9b4a7.png)  
+7.Test should handle corrupted data in localStorage gracefully
 
-6.  Test Class BookReviewManager : getAllBooks 
-    
+![==image_10==.png](/.attachments/==image_10==-601e9119-28ea-40d6-b836-c2d67fbf550f.png) 
 
-![==image_5==.png](/.attachments/==image_5==-d3ec681d-f265-4642-b036-c8aa7f275155.png)  
+8.Test should allow saving multiple reviews at once
 
-7.  Test Class BookReviewManager : saveBooksTofile 
-    
+![==image_11==.png](/.attachments/==image_11==-69c1a94a-4c8a-4e33-9322-62eeaed689c0.png)
 
-![==image_6==.png](/.attachments/==image_6==-5cc1756d-e613-4614-8da7-627a1beb2ef5.png)  
+9.Test should update reviews correctly in localStorage
 
-8.  Test Class BookReviewManager : addBooks 
-    
+![==image_12==.png](/.attachments/==image_12==-4dfc2deb-d0fa-4db8-b354-323f6bcd2b4c.png)
 
-![==image_7==.png](/.attachments/==image_7==-1d0d339b-0b24-4368-b966-e64757c35671.png)  
+10.Test should not allow saving undefined or null reviews
 
-9.  Test Class BookModel : addReview and getReviews 
-    
+![==image_13==.png](/.attachments/==image_13==-1d6826a0-c91f-4315-92a0-3e5d04ee961b.png) 
 
-![==image_8==.png](/.attachments/==image_8==-0b47d2cf-f8ed-4b65-9072-fba54ae069f5.png)  
+**Book.test.js** <br>
 
-10.  Test Class BookModel : getAverageRating 
-    
+1.Test should add books correctly
 
-![==image_9==.png](/.attachments/==image_9==-6a026f87-c194-467d-a6ab-397545641697.png) 
+![==image_14==.png](/.attachments/==image_14==-703b3140-ede4-47f4-8d1a-d28f104a1610.png)
+
+2.Test should save books to file correctly
+
+![==image_15==.png](/.attachments/==image_15==-5030406a-fe4c-482e-a547-6975d39cc208.png)
+
+3.Test should sort books by rating correctly in descending order
+
+![==image_16==.png](/.attachments/==image_16==-61c5c6fa-f311-42cb-8c1f-e2546068b56f.png)
+
+4.Test should sort books by rating correctly in ascending order
+
+![==image_17==.png](/.attachments/==image_17==-c63b21cf-5097-4995-b35b-a13902fdcd0f.png)
+
+5.Test should sort books by rating correctly when ratings are the same
+
+![==image_18==.png](/.attachments/==image_18==-b78b052a-a874-4c4f-9b5a-3fb925db6300.png) 
+
+6.Test should handle sorting when there are no books
+
+![==image_19==.png](/.attachments/==image_19==-4e097b9c-2d26-492c-b0df-67b685de7f9f.png) 
+
+7.Test should sort books correctly when ratings are a mix of integers and decimals
+
+![==image_20==.png](/.attachments/==image_20==-13e377cb-9a3b-427c-b6bb-51a1db737d4a.png) 
+
+8.Test should sort books correctly when ratings are mixed types (string and number)
+
+![==image_21==.png](/.attachments/==image_21==-ac85ef61-9029-4f28-adb4-cd32e9baabb6.png) 
+
+9.Test should sort books correctly when ratings are negative
+
+![==image_22==.png](/.attachments/==image_22==-dc4e8387-cc51-4da3-9609-b9cc719c9caa.png) 
+
+10.Test should sort books correctly when ratings have multiple decimal points
+
+![==image_23==.png](/.attachments/==image_23==-df77c58d-4459-4175-8a9c-e776b9331105.png) 
+
+11.Test should sort books correctly when ratings are negative
+
+![==image_24==.png](/.attachments/==image_24==-b2107598-21b8-4658-8b6a-0f303ab782c0.png) 
+
+12.Test should sort books correctly when ratings have multiple decimal points
+
+![==image_25==.png](/.attachments/==image_25==-831343e5-17e9-4c66-a657-c198f3cf72e8.png) 
+
+**UI Test**
+| **Test Suite**<br> | **Describe**<br> | **Test Unit**<br> | **Describe**<br> |
+| --- | --- | --- | --- |
+| BSK Reading test<br><br><br> | การทดสอบที่ใช้ Jest ร่วมกับ Selenium WebDriver โดยมีการทดสอบหลายกรณี (tests) ที่ครอบคลุมการทำงานหลักของหน้าเว็บ "BSK Reading"<br> | should open BSK Readind and check title<br> | ตรวจสอบว่าเมื่อเปิดหน้าเว็บแล้ว ชื่อของหน้า (Title) จะต้องเป็น "BSK Reading"<br> |
+| <br><br> | <br><br> | should open sidebar menu when menu button is clicked<br> | ตรวจสอบว่าเมื่อคลิกที่ปุ่มเมนู sidebar เมนูต้องเปิดขึ้นมา<br> |
+| <br><br> | <br><br> | should submit form and display “Top hits This Month”<br><br><br> | ทดสอบการกรอกข้อมูลฟอร์มและตรวจสอบว่าหลังจากส่งฟอร์มแล้ว ระบบจะแสดงข้อความ "Top Hits This Month"<br> |
+| <br><br> | <br><br> | should display correct header text<br> | ทดสอบว่าเมื่อเข้าไปที่หน้าเว็บแล้ว ข้อความใน header ต้องเป็น "BSK READING"<br> |
+| <br><br> | <br><br> | should navigate to signup page when “Sign up here” link is clicked<br><br><br> | ทดสอบว่าเมื่อคลิกลิงก์ "Sign up here" จะพาไปที่หน้า /signup<br> |
+
+![==image_26==.png](/.attachments/==image_26==-383af27c-8fa5-46fb-ad0c-dea595d1f3be.png) 
+
+1.Test should open BSK Readind and check title
+
+![==image_27==.png](/.attachments/==image_27==-9e33890e-0fb5-4d81-81d7-91cf89eedaaf.png) 
+
+2.Test should open sidebar menu when menu button is clicked
+
+![==image_28==.png](/.attachments/==image_28==-0409c968-fe5c-436e-8816-7c125794a55f.png)
+
+3.Test should submit form and display “Top hits This Month”
+
+![==image_29==.png](/.attachments/==image_29==-85765229-ff6b-43d5-9fa3-65c234f06f88.png) 
+
+4.Test should display correct header text
+
+![==image_30==.png](/.attachments/==image_30==-f053f804-aad8-42c5-a2e3-7651e4d05174.png) 
+
+5.Test should navigate to signup page when “Sign up here” link is clicked
+
+![==image_31==.png](/.attachments/==image_31==-124cb7c4-619f-4894-b85a-614ea6ffc225.png) 
 
        
-**Static(phase 3)**
-===============================
+## **Static(phase 3)**
+
+
 
 ![==image_0==.png](/.attachments/==image_0==-eac8a1ff-b434-4069-8976-d5bcfc4c4dda.png) 
 
@@ -367,58 +432,58 @@ Testcases description 
 ![==image_7==.png](/.attachments/==image_7==-5fb8ea06-02d1-4ece-b964-9bbfe677c73d.png)
 ใส่ console.time(“…”) เพื่อเริ่มจับเวลา และ console.timeEnd(“…”) เพื่อปิดการจับเวลา
 
-**Dynamic (Phase 4)**
+## **Dynamic (Phase 4)**
+
 ![image.png](/.attachments/image-18a8188d-916e-46f4-bb07-6f8bd1826d7f.png)
-**สรุป** **:** **แสดงให้เห็นว่าต้องใช้เวลานานแค่ไหน สำหรับการรันเว็บในแต่ละหน้าตั้งแต่เริ่มใช้งาน เราได้มีการบันทึกเป็นตัวอย่างในการใช้งาน และผลที่ได้ใช้เวลา**
--       **system : 6,620 ms**
--       **scripting : 5,284 ms**
--       **rendering : 2,718 ms**
--       **painting : 2,203 ms**
--       **loading : 143 ms**
+สรุป :แสดงให้เห็นว่าต้องใช้เวลานานแค่ไหน สำหรับการรันเว็บในแต่ละหน้าตั้งแต่เริ่มใช้งาน เราได้มีการบันทึกเป็นตัวอย่างในการใช้งาน และผลที่ได้ใช้เวลา
+- system : 6,620 ms
+- scripting : 5,284 ms
+- rendering : 2,718 ms
+- painting : 2,203 ms
+- loading : 143 ms
+
 ![image.png](/.attachments/image-04b9b767-750c-453f-920b-823043d19a10.png)
 **ใส่** **console.time(“…”)** **เพื่อเริ่มจับเวลา และ** **console.timeEnd(“…”)** **เพื่อปิดการจับเวลา**
 
-**อธิบายการทำ** **CI/CD** **ที่ใช้ในการทำ** **Product**
-**CI: Continuous Integration**
+## **อธิบายการทำ** **CI/CD** **ที่ใช้ในการทำ** **Product**
+### **CI: Continuous Integration**
+
 ![image.png](/.attachments/image-92b8ba01-5cac-46c0-818c-e89d8c8c8805.png)
-**1.** **โค้ดถูกดึงเข้ามาจาก** **Version Control System (VCS)** **เช่น** **Git**
-**ทุกครั้งที่มีการ** **commit** **หรือ** **push** **โค้ดไปที่** **repository** **ระบบ** **CI** **จะเริ่มทำงานโดยอัตโนมัติ**
+1.โค้ดถูกดึงเข้ามาจาก Version Control System (VCS) เช่น Git ทุกครั้งที่มีการ commit หรือ push โค้ดไปที่ repository ระบบ CI จะเริ่มทำงานโดยอัตโนมัติ
 
-**เครื่องมือ** **CI** **จะตรวจสอบว่าโค้ดใน** **repository** **มีการเปลี่ยนแปลงหรือไม่**
+เครื่องมือ CI จะตรวจสอบว่าโค้ดใน repository มีการเปลี่ยนแปลงหรือไม่
 
-**trigger:**
-**- main #** **ทุกครั้งที่มีการ** **push** **ไปที่** **branch 'main'**
+trigger:<br>
+   -main #ทุกครั้งที่มีการ push ไปที่ branch 'main'
 
-**2.** **การ** **Build** **โค้ดจะทำงานอัตโนมัติ**
-**ระบบจะทำการ** **build** **โค้ด เพื่อให้แน่ใจว่าโค้ดทั้งหมดสามารถนำมารวมกันได้สำเร็จ และไม่เกิดปัญหาขึ้นในระหว่างกระบวนการ**
+2.การ Build โค้ดจะทำงานอัตโนมัติ
+ระบบจะทำการ build โค้ด เพื่อให้แน่ใจว่าโค้ดทั้งหมดสามารถนำมารวมกันได้สำเร็จ และไม่เกิดปัญหาขึ้นในระหว่างกระบวนการ
 
-**การ** **build** **นี้อาจรวมถึงการติดตั้ง** **dependencies,** **การคอมไพล์ไฟล์ หรือกระบวนการอื่นๆ ที่เกี่ยวข้อง**
-**- script: |**
-        **npm install**
-      **displayName: 'npm install, build and test'**
+การ build นี้อาจรวมถึงการติดตั้ง dependencies, การคอมไพล์ไฟล์ หรือกระบวนการอื่นๆ ที่เกี่ยวข้อง
+- script: |<br>
+        npm install<br>
+      displayName: 'npm install, build and test'**
 
-**3.** **การ** **Run Tests (Unit Tests, Integration Tests)**
-**หลังจาก** **build** **โค้ดเสร็จแล้ว ระบบจะรันการทดสอบต่างๆ เช่น** **unit tests** **เพื่อทดสอบฟังก์ชันต่างๆ หรือ** **integration tests** **เพื่อทดสอบการทำงานร่วมกันของหลายๆ ส่วนในแอปพลิเคชัน**
+3.การ Run Tests (Unit Tests, Integration Tests)
+หลังจาก build โค้ดเสร็จแล้ว ระบบจะรันการทดสอบต่างๆ เช่น unit tests เพื่อทดสอบฟังก์ชันต่างๆ หรือ integration tests เพื่อทดสอบการทำงานร่วมกันของหลายๆ ส่วนในแอปพลิเคชัน
 
-**การทดสอบนี้จะช่วยให้แน่ใจว่าโค้ดที่เราเพิ่มหรือเปลี่ยนแปลงไปไม่ทำให้ระบบเกิดข้อผิดพลาดหรือทำงานผิดปกติ**
+การทดสอบนี้จะช่วยให้แน่ใจว่าโค้ดที่เราเพิ่มหรือเปลี่ยนแปลงไปไม่ทำให้ระบบเกิดข้อผิดพลาดหรือทำงานผิดปกติ
 
-**- script: |**
-        **npx jest test/book.test.js test/review.test.js --coverage**
-      **displayName: 'npm install, build and test'**
+- script: |<br>
+        npx jest test/book.test.js test/review.test.js --coverage<br>
+      displayName: 'npm install, build and test'
 
-**4.** **การตรวจสอบคุณภาพของโค้ด (****Code Quality Analysis)**
-**ในขั้นตอนนี้ ระบบจะทำการตรวจสอบคุณภาพของโค้ด เช่น การตรวจสอบ** **ESLint** **เพื่อหาข้อผิดพลาดในการเขียนโค้ด หรือใช้** **Prettier** **เพื่อจัดระเบียบรูปแบบโค้ด**
-**- script: |**
-        **npm run lint --if-present**
-      **displayName: 'npm install, build and test'**
+4.การตรวจสอบคุณภาพของโค้ด (Code Quality Analysis)
+ในขั้นตอนนี้ ระบบจะทำการตรวจสอบคุณภาพของโค้ด เช่น การตรวจสอบ ESLint เพื่อหาข้อผิดพลาดในการเขียนโค้ด หรือใช้ Prettier เพื่อจัดระเบียบรูปแบบโค้ด
+- script: |<br>
+        npm run lint --if-present<br>
+      displayName: 'npm install, build and test'<br>
 
-**5.** **ผลการทดสอบจะถูกส่งออกมาให้โปรแกรมเมอร์ทราบทันที**
-**เมื่อกระบวนการทั้งหมดเสร็จสิ้น ระบบจะส่งผลลัพธ์ของการทดสอบกลับไปให้กับนักพัฒนา เช่น การแสดงผลที่** **Pass** **หรือ** **Fail**
-**CD (Continuous Deployment)**
-     **การทำงาน** **CD** **จะมุ่งเน้นไปที่การ** **deploy** **ผลิตภัณฑ์ไปยังสภาพแวดล้อมต่าง ๆ โดยมีการตรวจสอบคุณภาพและทดสอบอย่างละเอียดก่อนการเผยแพร่สู่ผู้ใช้งานจริง กระบวนการนี้ช่วยให้มั่นใจได้ว่าแอปพลิเคชันสามารถปล่อยได้โดยไม่มีปัญหาส่งผลกระทบต่อผู้ใช้ และสามารถกลับไปยังเวอร์ชันก่อนหน้าได้หากเกิดปัญหาในกระบวนการ** **deploy** 
-     **เนื่องจากปัญหา** **Azure subscription** **ทำให้ไม่มีสิทธิ์ในการใช้งานบริการบางอย่างจึงไม่สามารถ** **deploy web app** **ได้**
+5.ผลการทดสอบจะถูกส่งออกมาให้โปรแกรมเมอร์ทราบทันที
+เมื่อกระบวนการทั้งหมดเสร็จสิ้น ระบบจะส่งผลลัพธ์ของการทดสอบกลับไปให้กับนักพัฒนา เช่น การแสดงผลที่ Pass หรือ Fail
+### **CD (Continuous Deployment)**
+     การทำงาน CD ะมุ่งเน้นไปที่การ deploy ผลิตภัณฑ์ไปยังสภาพแวดล้อมต่าง ๆ โดยมีการตรวจสอบคุณภาพและทดสอบอย่างละเอียดก่อนการเผยแพร่สู่ผู้ใช้งานจริง กระบวนการนี้ช่วยให้มั่นใจได้ว่าแอปพลิเคชันสามารถปล่อยได้โดยไม่มีปัญหาส่งผลกระทบต่อผู้ใช้ และสามารถกลับไปยังเวอร์ชันก่อนหน้าได้หากเกิดปัญหาในกระบวนการ deploy เนื่องจากปัญหา Azure subscription ทำให้ไม่มีสิทธิ์ในการใช้งานบริการบางอย่างจึงไม่สามารถ deploy web app ได้
 
-**หากมีข้อผิดพลาด ระบบจะส่งการแจ้งเตือนไปยังนักพัฒนา เพื่อให้พวกเขาทราบและสามารถแก้ไขได้อย่างรวดเร็ว**
       
 **กระบวนการในการพัฒนา** **Software ของโครงการ**
 ===============================
@@ -487,40 +552,43 @@ Testcases description 
   - ใช้ Cygwin ในการรันคำสั่งเพื่อจัดการกับ Test และเพื่อดู Test Coverage
   - จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้คือ Microsoft Word โดยแชร์ผ่าน OneDrive
   - ประชุม Retrospective โดยใช้กล้องมือถืออัดคลิป โดยเผยแพร่วิดีโอการประชุมผ่านทาง Youtube
+
 **กระบวนการทำงานใน** **Sprint** **ที่** **4**  
 **เป้าหมาย:** เก็บงานที่เหลือทั้งหมดให้เสร็จสมบูรณ์ พร้อม Debug และ Testing เพื่อเตรียมส่งมอบผลงาน  
 **งานที่ดำเนินการ:**  
-         • **Code Completion:** ดำเนินการพัฒนาโค้ดส่วนที่ยังไม่เสร็จจาก Sprint 3 ให้ครบถ้วน เช่น ฟังก์ชันเสริม ระบบย่อย หรือส่วนของ UI ที่ยังค้างอยู่  
-          • **Debugging:** ตรวจสอบข้อผิดพลาดที่เกิดขึ้นในโค้ดทั้งระบบ โดยใช้การทดสอบฟังก์ชัน (Functional Testing) และการทดสอบการทำงานร่วมกัน (Integration Testing) เพื่อแก้ไขบั๊กที่พบ  
-          • **UI Testing and Improvement:** ทดสอบการแสดงผลของ UI บนอุปกรณ์และเบราว์เซอร์ต่างๆ เพื่อให้แน่ใจว่า UI มีความสมบูรณ์ ใช้งานได้จริง และสอดคล้องกับดีไซน์ที่วางไว้  
-          • **Final Integration:** ตรวจสอบการเชื่อมต่อทั้งหมดระหว่าง Frontend, Backend และ Database ว่าสามารถทำงานร่วมกันได้อย่างไม่มีปัญหา  
-ผลลัพธ์:  
+- **Code Completion:** ดำเนินการพัฒนาโค้ดส่วนที่ยังไม่เสร็จจาก Sprint 3 ให้ครบถ้วน เช่น ฟังก์ชันเสริม ระบบย่อย หรือส่วนของ UI ที่ยังค้างอยู่  
+- **Debugging:** ตรวจสอบข้อผิดพลาดที่เกิดขึ้นในโค้ดทั้งระบบ โดยใช้การทดสอบฟังก์ชัน (Functional Testing) และการทดสอบการทำงานร่วมกัน (Integration Testing) เพื่อแก้ไขบั๊กที่พบ  
+- **UI Testing and Improvement:** ทดสอบการแสดงผลของ UI บนอุปกรณ์และเบราว์เซอร์ต่างๆ เพื่อให้แน่ใจว่า UI มีความสมบูรณ์ ใช้งานได้จริง และสอดคล้องกับดีไซน์ที่วางไว้  
+- **Final Integration:** ตรวจสอบการเชื่อมต่อทั้งหมดระหว่าง Frontend, Backend และ Database ว่าสามารถทำงานร่วมกันได้อย่างไม่มีปัญหา  
+**ผลลัพธ์:**  
 โค้ดทั้งหมดถูกพัฒนาเสร็จสมบูรณ์ และผ่านกระบวนการ Debug และ Testing ทำให้ระบบมีความเสถียร สามารถทำงานได้อย่างมีประสิทธิภาพ พร้อมสำหรับการส่งมอบและเผยแพร่ใช้งานจริง
+
 **สิ่งที่มีการเปลี่ยนแปลงจาก** **Sprint** **ที่** **3**  
-          • ใน Sprint 3, ทีมงานมุ่งเน้นไปที่การเริ่มพัฒนาโค้ดโดยอ้างอิงจาก UI Design และ Requirement ที่วิเคราะห์ไว้ โดยสร้างฟังก์ชันหลักต่างๆ และเชื่อมต่อส่วนประกอบของระบบให้ทำงานร่วมกันได้ แต่ยังไม่มีการทำ Testing อย่างเต็มรูปแบบ  
-          • ใน Sprint 4, ทีมงานดำเนินการเก็บรายละเอียดทุกส่วนให้สมบูรณ์ ทำการ Debug เพื่อแก้ไขข้อผิดพลาด และทำ Testing เพื่อยืนยันว่าระบบทำงานได้อย่างถูกต้อง มีความเสถียร และพร้อมสำหรับการส่งมอบในขั้นสุดท้าย
+- ใน Sprint 3, ทีมงานมุ่งเน้นไปที่การเริ่มพัฒนาโค้ดโดยอ้างอิงจาก UI Design และ Requirement ที่วิเคราะห์ไว้ โดยสร้างฟังก์ชันหลักต่างๆ และเชื่อมต่อส่วนประกอบของระบบให้ทำงานร่วมกันได้ แต่ยังไม่มีการทำ Testing อย่างเต็มรูปแบบ  
+- ใน Sprint 4, ทีมงานดำเนินการเก็บรายละเอียดทุกส่วนให้สมบูรณ์ ทำการ Debug เพื่อแก้ไขข้อผิดพลาด และทำ Testing เพื่อยืนยันว่าระบบทำงานได้อย่างถูกต้อง มีความเสถียร และพร้อมสำหรับการส่งมอบในขั้นสุดท้าย
 
 **อธิบายการทำงานโดยใช้ Process, Methods และ Tools (Phase 4)**
 =============================================================
 
-·      Process
--       การจัดทำ Report และการระบุข้อมูลใน Report
--       การประชุม Retrospective Phase 3
--       ตรวจสอบ code และ debug โค้ดทั้งหมด
--       ทำหน้า moodPage เพิ่มโดยมีฟังก์ชันเลือกอารมณ์ และเรียงลำดับจากคะแนนหนังสือได้
--       สามารถลบ หรือแก้ไขรีวิวของผู้ใช้งานได้
--       ทำการทดสอบ UI (UI Testing) เพื่อให้แน่ใจว่าฟังก์ชันการทำงานและการแสดงผลของหน้าจอถูกต้องตามที่ออกแบบ
-·      Methods
--       จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้
--       ประชุม Retrospective โดยการนั่งคุยกันและอัดคลิปวิดีโอ
--       ดำเนินการทดสอบ UI ผ่านการใช้งานจริง โดยกำหนด Test Cases ล่วงหน้า และบันทึกผลการทดสอบไว้
--        
-·      Tools
--       ประชุม Retrospective โดยใช้กล้องมือถืออัดคลิป โดยเผยแพร่วิดีโอการประชุมผ่านทาง Youtube
--       ใช้ Cygwin ในการรันคำสั่งเพื่อจัดการกับ Test และเพื่อดู UI Test
--       Coding โดยใช้ Visual Studio Code
--       จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้คือ Microsoft Word โดยแชร์ผ่าน OneDrive
--       วิเคราะห์และศึกษาโค้ดต้นแบบจากเว็บไซต์ที่กลุ่มของเราใช้ออกแบบ คือ Figma.com
+**Process**
+- การจัดทำ Report และการระบุข้อมูลใน Report
+- การประชุม Retrospective Phase 3
+- ตรวจสอบ code และ debug โค้ดทั้งหมด
+- ทำหน้า moodPage เพิ่มโดยมีฟังก์ชันเลือกอารมณ์ และเรียงลำดับจากคะแนนหนังสือได้
+- สามารถลบ หรือแก้ไขรีวิวของผู้ใช้งานได้
+- ทำการทดสอบ UI (UI Testing) เพื่อให้แน่ใจว่าฟังก์ชันการทำงานและการแสดงผลของหน้าจอถูกต้องตามที่ออกแบบ
+
+**Methods**
+- จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้
+- ประชุม Retrospective โดยการนั่งคุยกันและอัดคลิปวิดีโอ
+- ดำเนินการทดสอบ UI ผ่านการใช้งานจริง โดยกำหนด Test Cases ล่วงหน้า และบันทึกผลการทดสอบไว้
+
+**Tools**
+- ประชุม Retrospective โดยใช้กล้องมือถืออัดคลิป โดยเผยแพร่วิดีโอการประชุมผ่านทาง Youtube
+- ใช้ Cygwin ในการรันคำสั่งเพื่อจัดการกับ Test และเพื่อดู UI Test
+- Coding โดยใช้ Visual Studio Code
+- จัดทำ Report โดยใช้โปรแกรมเอกสารที่สามารถทำงานร่วมกันได้คือ Microsoft Word โดยแชร์ผ่าน OneDrive
+- วิเคราะห์และศึกษาโค้ดต้นแบบจากเว็บไซต์ที่กลุ่มของเราใช้ออกแบบ คือ Figma.com
 
       
 
