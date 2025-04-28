@@ -432,6 +432,60 @@
 ![==image_7==.png](/.attachments/==image_7==-5fb8ea06-02d1-4ece-b964-9bbfe677c73d.png)
 ใส่ console.time(“…”) เพื่อเริ่มจับเวลา และ console.timeEnd(“…”) เพื่อปิดการจับเวลา
 
+## **Static (Phase 4)**
+
+ ![==image_0==.png](/.attachments/==image_0==-1255cd42-ecf2-46e5-95b3-a1c23d84cb6d.png) 
+
+สรุป : จำนวนบรรทัดทั้งหมด 70 บรรทัด และมีจำนวนลรรทัดโดยเฉลี่ย 35 บรรทัด และมีค่าบำรุงรักษาเฉลี่ยเท่ากับ 83.53
+
+![==image_1==.png](/.attachments/==image_1==-10cbc38a-15b4-486e-914a-ac45ece88d05.png) 
+
+สรุป : index.js มีค่าการบำรุงรักษาอยู่ที่  94.52 และ util.js มีค่าการบำรุงรักษาอยู่ที่ 72.55 และมีจำนวนบรรทัดในการเขียนจะเห็นได้ว่าไฟล์ index.js มีจำนวนบรรทัดในการเขียนโค้ด 55 บรรทัด และ util.js มีการเขียน 15 บรรทัด
+
+ ![==image_2==.png](/.attachments/==image_2==-4125ecbc-0ad4-4380-bd04-c7e86b5a96dd.png) 
+
+![==image_3==.png](/.attachments/==image_3==-9725deec-9e07-4c7c-bc0d-26335714fa00.png) 
+
+สรุป : ข้อผิดพลาดโดยประมาณในการใช้งาน จะเห็นได้ว่า index.js  มีข้อผิดพลาดโดยประมาณในการใช้งาน 0.59 และ util.js มีข้อผิดพลาดโดยประมาณในการใช้งาน 0.07 และจากการตรวจสอบ code ว่ามีโอกาส ความผิดพลาดแค่ไหนโดยไม่ต้อง run web จะเห็นได้ว่า index.js มีข้อผิดพลาดโดยประมาณในการใช้งาน 12 และ util.js มีข้อผิดพลาดโดยประมาณในการใช้งานอยู่ 7
+
+![==image_4==.png](/.attachments/==image_4==-30ccc6d8-d348-4a3c-870a-beaa0dae8756.png) 
+
+สรุป :
+      
+- Complexity : ไฟล์ review.js มีความซับซ้อนมากที่สุดรองลงมาคือ  book.js และ index.js ที่มีค่า complexity เท่ากัน และ uti ตามลำดับ
+- SLOC (Source lines of code) : ไฟล์ index.js มีจำนวนบรรทัดโค้ด 59 บรรทัด , util.js มีจำนวนบรรทัดโค้ด 15 บรรทัด , book.js มีจำนวนบรรทัดโค้ด 33 บรรทัด , review.js มีจำนวนบรรทัดโค้ด 51 บรรทัด
+- est errors : ข้อผิดพลาดโดยประมาณในการใช้งาน  ไฟล์ index.js 0.64 , ไฟล์ util.js 0.07 ,ไฟล์ review.js 0.39 ,ไฟล์ book.js 0.21
+- lint errors : ตรวจสอบว่า code มีโอกาสความผิดพลาดแค่ไหน ไฟล์ util.js 7 , ไฟล์ index.js 12 , ไฟล์ book.js  9 , ไฟล์ review.js 10
+
+| File name<br> | Maintainability<br> | Lines of code<br> | Difficulty<br> | Estimated Errors<br> |
+| --- | --- | --- | --- | --- |
+| index.js<br> | 94.52<br> | 59<br> | 8.65<br> | 0.64<br> |
+| util.js<br> | 72.55<br> | 15<br> | 4.79<br> | 0.07<br> |
+| Book.js<br> | 82.40<br> | 33<br> | 12.37<br> | 0.21<br> |
+| Review.js<br> | 73.53<br> | 51<br> | 23.40<br> | 0.39<br> |
+
+Book.js
+
+  ![==image_5==.png](/.attachments/==image_5==-8b6cdae4-99f1-4035-ad40-4a96214969d3.png)  ![==image_6==.png](/.attachments/==image_6==-341f0398-815f-4212-8508-4cb78f886723.png)  ![==image_7==.png](/.attachments/==image_7==-77c8c1de-7928-436c-a33d-906810462203.png) 
+
+สรุป : book.js สามารถบำรุงรักษาได้ง่ายเนื่องจากมีค่าบำรุงรักษา 82.40 มีจำนวนบรรทัด 33 บรรทัด มีค่าความยากอยู่ที่ 12.37 และมีข้อผิดพลาดโดยประมาณอยู่ที่ 0.21
+Review.js
+
+![==image_8==.png](/.attachments/==image_8==-0eb20be6-7b84-4326-b548-162fac3f38a9.png)  ![==image_9==.png](/.attachments/==image_9==-086e09ef-c4ff-4e5a-8258-b84f829e4305.png)  ![==image_10==.png](/.attachments/==image_10==-96fa4649-20b8-4123-a337-d3dae013b1b8.png) 
+
+สรุป : review.js สามารถบำรุงรักษาได้ง่ายเนื่องจากมีค่าบำรุงรักษา 73.53 มีจำนวนบรรทัด 51 บรรทัด มีค่าความยากอยู่ที่ 23.40 และมีข้อผิดพลาดโดยประมาณอยู่ที่ 0.39
+Index.js
+
+        ![==image_11==.png](/.attachments/==image_11==-dacdf260-c883-4d40-ab53-71604c36f736.png)  ![==image_12==.png](/.attachments/==image_12==-92269c14-a80a-4707-bff4-6f7c100d3fec.png)   ![==image_13==.png](/.attachments/==image_13==-8692c6d4-4244-4e60-bfb0-0414860364d4.png)  ![==image_14==.png](/.attachments/==image_14==-c0d85788-9784-408d-9579-dec9c86e4975.png) 
+
+สรุป : index.js สามารถบำรุงรักษาได้ง่ายเนื่องจากมีค่าบำรุงรักษา 94.52 มีจำนวนบรรทัด 59 บรรทัด มีค่าความยากอยู่ที่ 8.65 และมีข้อผิดพลาดโดยประมาณอยู่ที่ 0.64
+
+Util.js
+
+  ![==image_15==.png](/.attachments/==image_15==-bb717248-630d-4cf4-b236-c76ff994893b.png)  ![==image_16==.png](/.attachments/==image_16==-b07864b3-c123-4dbb-8918-1c4f45bd1966.png)  ![==image_17==.png](/.attachments/==image_17==-5ac709fb-dd8c-46b6-9d6d-a8e061eee1da.png) 
+
+สรุป : util.js สามารถบำรุงรักษาได้ง่ายเนื่องจากมีค่าบำรุงรักษา 72.55 มีจำนวนบรรทัด 15 บรรทัด มีค่าความยากอยู่ที่ 4.79 และมีข้อผิดพลาดโดยประมาณอยู่ที่ 0.07
+
 ## **Dynamic (Phase 4)**
 
 ![image.png](/.attachments/image-18a8188d-916e-46f4-bb07-6f8bd1826d7f.png)
@@ -605,5 +659,5 @@ trigger:<br>
 **สรุปประชุม** **Retrospective** **และ** **Link to Retrospective YouTube video (Phase 4)**
 ==========================================================================================
 https://youtu.be/dfMW2MEtJmQ
-·      ทำโค้ดส่วนที่เหลือ ui test dynamic static test ของ phase ที่ 4
-·      ใน phase นี้พบเจอปัญหาคือ lack of communication ไม่ค่อยได้สื่อสารกัน เพราะภาระหน้าที่จากงานของวิชาอื่นเลยทำให้มีเวลาคุยกันน้อย ต่างคนต่างทำ แต่งานก็สามารถเสร็จออกมาลุล่วงด้วยดี
+- ทำโค้ดส่วนที่เหลือ ui test dynamic static test ของ phase ที่ 4
+- ใน phase นี้พบเจอปัญหาคือ lack of communication ไม่ค่อยได้สื่อสารกัน เพราะภาระหน้าที่จากงานของวิชาอื่นเลยทำให้มีเวลาคุยกันน้อย ต่างคนต่างทำ แต่งานก็สามารถเสร็จออกมาลุล่วงด้วยดี
