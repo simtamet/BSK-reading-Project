@@ -205,6 +205,15 @@ describe('Book Class', () => {
         console.timeEnd('SortBooksMultipleDecimals'); // จบการวัดเวลา
     });
 
+    test('sorts books by rating descending (default)', () => {
+        const books = [
+            { title: "Book A", rating: "4.0" },
+            { title: "Book B", rating: "5.0" },
+            { title: "Book C", rating: "3.0" }
+        ];
+        const sorted = sortBooksByRating(books); // ไม่ใส่ order
+        expect(sorted.map(b => b.title)).toEqual(["Book B", "Book A", "Book C"]);
+    });
 
 
 });
