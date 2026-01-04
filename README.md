@@ -72,13 +72,19 @@ This project was used to practice **Azure DevOps Dev practices**, including:
    git clone https://github.com/simtamet/BSK-reading-Project.git
    ```
 2. Navigate to the project directory:
+   ```bash
    cd BSK-reading-Project
+   ```
 
-4. Install dependencies:
+3. Install dependencies:
+   ```bash
    npm install
+   ```
    
-5. Start the application:
+4. Start the application:
+   ```bash
    npm start
+   ```
 
 ## 📁 Project Structure
 ├── controllers/      # Application logic
@@ -89,6 +95,7 @@ This project was used to practice **Azure DevOps Dev practices**, including:
 ├── util.js           # Utility functions
 ├── index.js          # Application entry point
 └── README.md
+
 
 
 
