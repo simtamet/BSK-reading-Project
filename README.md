@@ -1,20 +1,94 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# 📚 BSK Reading Project
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+**BSK Reading Project** is a web application developed as part of an academic course project.
+The project aimed to practice software development and DevOps workflows using Azure DevOps, including version control, team collaboration, and basic CI/CD concepts.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+---
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## 🎯 Project Objectives
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+- Develop a web-based reading and book tracking application
+- Practice real-world **software development lifecycle (SDLC)**
+- Gain hands-on experience with **Azure DevOps**
+- Learn team collaboration through Git-based workflows
+- Prepare for Cooperative Education / Internship in software development
+
+---
+
+## 🚀 Features
+
+- 🔍 **Book Discovery & Recommendations**  
+  Browse and explore books of interest
+
+- 📝 **Reviews & Ratings**  
+  Users can write reviews and rate books
+
+- 📊 **Reading Progress Tracking**  
+  Track reading history and reading habits
+
+- 👥 **Community Interaction**  
+  Share reviews and interact with other users
+
+---
+
+## 🛠️ Technologies & Tools
+
+- **Frontend / Backend**: JavaScript (Node.js, Express)
+- **Database**: (Specify if applicable, e.g. MongoDB / MySQL)
+- **Version Control**: Git
+- **DevOps Platform**: **Azure DevOps**
+  - Repositories
+  - Boards (Task & Sprint Management)
+  - Pipelines (CI/CD practice)
+- **Project Management**: Agile / Scrum (basic practice)
+
+---
+
+## 🧑‍💻 Azure DevOps Practice
+
+This project was used to practice **Azure DevOps Dev practices**, including:
+
+- Managing source code using **Azure Repos**
+- Creating and managing work items (Tasks, Bugs, User Stories)
+- Using branches and pull requests for collaboration
+- Practicing CI/CD pipelines for build and deployment
+- Tracking progress using Azure Boards
+
+---
+
+## 🛠️ Getting Started
+
+### 📦 Prerequisites
+
+- Node.js
+- npm or yarn
+
+---
+
+### 🚀 Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/simtamet/BSK-reading-Project.git
+   ```
+2. Navigate to the project directory:
+   cd BSK-reading-Project
+
+4. Install dependencies:
+   npm install
+   
+5. Start the application:
+   npm start
+
+## 📁 Project Structure
+├── controllers/      # Application logic
+├── models/           # Data models
+├── views/            # UI templates
+├── public/           # Static assets
+├── test/             # Test files
+├── util.js           # Utility functions
+├── index.js          # Application entry point
+└── README.md
+
+
+
