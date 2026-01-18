@@ -87,6 +87,7 @@ This project was used to practice **Azure DevOps Dev practices**, including:
    ```
 
 ## 📁 Project Structure
+   ```
 ├── controllers/      # Application logic
 ├── models/           # Data models
 ├── views/            # UI templates
@@ -95,6 +96,8 @@ This project was used to practice **Azure DevOps Dev practices**, including:
 ├── util.js           # Utility functions
 ├── index.js          # Application entry point
 └── README.md
+   ```
+
 
 
 
